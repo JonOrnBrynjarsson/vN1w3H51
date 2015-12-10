@@ -16,17 +16,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
 {
-    qDebug() << "Add_New_Computer_Scientist";
+    //qDebug() << "Add_New_Computer_Scientist";
+    addNewScientist newscientist;
+    newscientist.setModal(true);
+    newscientist.exec();
+
 }
 
 void MainWindow::on_actionAdd_New_Computer_triggered()
 {
-    qDebug() << "Add_New_Computer";
+    //qDebug() << "Add_New_Computer";
+    addnewcomputer newcomputer;
+    newcomputer.setModal(true);
+    newcomputer.exec();
 }
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()
 {
-    qDebug() << "Add New Computer Type";
+    //qDebug() << "Add_New_Computer";
+    addnewcomputertype computerype;
+    computerype.setModal(true);
+    computerype.exec();
 
 }
 

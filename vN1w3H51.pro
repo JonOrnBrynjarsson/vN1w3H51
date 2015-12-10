@@ -29,7 +29,10 @@ SOURCES += main.cpp\
     UI/computertypeui.cpp \
     UI/helpui.cpp \
     UI/displayui.cpp \
-    UI/removeui.cpp
+    UI/removeui.cpp \
+    UI/addnewscientist.cpp \
+    UI/addnewcomputer.cpp \
+    UI/addnewcomputertype.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
 			models/scientist.h \
@@ -43,7 +46,10 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/computertypeui.h \
     UI/helpui.h \
     UI/displayui.h \
-    UI/removeui.h
+    UI/removeui.h \
+    UI/addnewscientist.h \
+    UI/addnewcomputer.h \
+    UI/addnewcomputertype.h
 
 
 FORMS    += \
@@ -53,4 +59,9 @@ FORMS    += \
     UI/computertypeui.ui \
     UI/helpui.ui \
     UI/displayui.ui \
-    UI/removeui.ui
+    UI/removeui.ui \
+    UI/addnewscientist.ui \
+    UI/addnewcomputer.ui \
+    UI/addnewcomputertype.ui
+
+DISTFILES +=

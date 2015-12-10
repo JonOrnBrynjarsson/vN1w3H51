@@ -2,6 +2,8 @@
 #define SCIENTISTUI_H
 
 #include <QWidget>
+#include <QDebug>
+
 
 namespace Ui {
 class scientistUI;
