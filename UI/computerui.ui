@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>computerIU</class>
- <widget name="computerIU" class="QWidget">
+ <class>computerUI</class>
+ <widget name="computerUI" class="QWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
