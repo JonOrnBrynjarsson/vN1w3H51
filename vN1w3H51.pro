@@ -18,14 +18,16 @@ SOURCES += main.cpp\
 			services/service.cpp \
 			models/computer.cpp \
 			models/computertype.cpp \
-			UI/mainwindow.cpp
+			UI/mainwindow.cpp \
+    UI/infodisplay.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
 			models/scientist.h \
 			services/service.h \
 			models/computer.h \
 			models/computertype.h \
-			UI/mainwindow.h
+			UI/mainwindow.h \
+    UI/infodisplay.h
 
 
 FORMS    += UI/mainwindow.ui
