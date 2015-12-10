@@ -87,6 +87,10 @@ void workingclass::readSqlCompTypes()
 */
 bool workingclass::addscientist(scientist& s)
 {
+    //QDebug << "adding scientist in workingclass";
+
+
+
     QSqlQuery query;
 
     query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link) "

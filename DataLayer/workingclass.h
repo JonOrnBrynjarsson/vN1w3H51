@@ -9,12 +9,13 @@
 #include <qfile.h>
 #include <string>
 #include <vector>
+#include <QDebug>
 
 
 using namespace std;
 
 
-const string DBASE = "../vN1H51/database/Group51_verklegt_1.sqlite";
+const string DBASE = "../vN1w3H51/database/Group51_verklegt_1.sqlite";
 // Locaton of the database file
 const int MAXNAMELENGTH = 44;
 

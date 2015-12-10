@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <sstream>
+
 
 const int CURRENTYEAR = 2015;
 
@@ -37,6 +39,9 @@ class service
         int genderCorrection(string gender);
         //  Precondition:   Takes in a string for the gender correction process.
         //  Postcondition:  Returns 0 if female, 1 if male, 2 otherwise.
+        int inputNumberToFunction(string input);    //TEKIÐ ÚR INFODISPLAY!!!
+        //  Precondition:   Takes in a string for the number
+        //  Postcondition:  Returns integer.
 
         /*
         ##  Read functions

@@ -14,16 +14,6 @@
    <string>Add new Computer Scientist to Database</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="6" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
    <item row="5" column="2">
     <widget class="QLineEdit" name="lineEdit_link">
      <property name="toolTip">
@@ -34,6 +24,48 @@
      </property>
      <property name="placeholderText">
       <string>http://www...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QComboBox" name="comboBox_gender">
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>This is a selection input, you can use it to enter the gender of the computer scientist.</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Female</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Male</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Unspecified</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelEntGender">
+     <property name="text">
+      <string>Gender:</string>
      </property>
     </widget>
    </item>
@@ -64,38 +96,6 @@
      <property name="placeholderText">
       <string>Enter the name of the new Computer Scientist.</string>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="labelEntGender">
-     <property name="text">
-      <string>Gender:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QComboBox" name="comboBox_gender">
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="whatsThis">
-      <string>This is a selection input, you can use it to enter the gender of the computer scientist.</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Male</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Female</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Unspecified</string>
-      </property>
-     </item>
     </widget>
    </item>
    <item row="3" column="0">
@@ -140,38 +140,16 @@
     </widget>
    </item>
    <item row="2" column="2">
-    <widget class="QDateEdit" name="dateEdit_yob">
-     <property name="whatsThis">
-      <string>This is a year input, you can use it to enter the year of birth of the computer scientist.</string>
-     </property>
-     <property name="currentSection">
-      <enum>QDateTimeEdit::YearSection</enum>
-     </property>
-     <property name="displayFormat">
-      <string>yyyy</string>
-     </property>
-     <property name="calendarPopup">
-      <bool>false</bool>
-     </property>
-     <property name="date">
-      <date>
-       <year>1960</year>
-       <month>1</month>
-       <day>1</day>
-      </date>
+    <widget class="QLineEdit" name="lineEdit_yob">
+     <property name="placeholderText">
+      <string>Enter the Computer Scientists Year of Birth.</string>
      </property>
     </widget>
    </item>
    <item row="3" column="2">
-    <widget class="QDateEdit" name="dateEdit_yod">
-     <property name="whatsThis">
-      <string>This is a year input, you can use it to enter the year of death of the computer scientist, you can also leave it blank.</string>
-     </property>
-     <property name="displayFormat">
-      <string>yyyy</string>
-     </property>
-     <property name="calendarPopup">
-      <bool>false</bool>
+    <widget class="QLineEdit" name="lineEdit_yod">
+     <property name="placeholderText">
+      <string>Leave blank if Computer Scientist is still alive.</string>
      </property>
     </widget>
    </item>
