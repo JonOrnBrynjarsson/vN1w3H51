@@ -1,4 +1,4 @@
-#include "Console_UI_Layer/infodisplay.h"
+#include "Console_UI/infodisplay.h"
 
 using namespace std;
 
@@ -142,9 +142,9 @@ void infoDisplay::mainMenu()
 }
 void infoDisplay::splashScreen()
 {
-    opengreeting greet;
+    //opengreeting greet;
 
-    greet.greetingPost();
+    //greet.greetingPost();
 }
 
 /*

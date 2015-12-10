@@ -20,7 +20,7 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
     addNewScientist newscientist;
     newscientist.setModal(true);
     newscientist.exec();
-    newscientist.
+    //newscientist.
 
 }
 
