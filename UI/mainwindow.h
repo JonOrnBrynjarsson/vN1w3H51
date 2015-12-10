@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include "addnewscientist.h"
+#include "addnewcomputer.h"
+#include "addnewcomputertype.h"
 
 namespace Ui {
 class MainWindow;
