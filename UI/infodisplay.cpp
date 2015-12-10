@@ -141,9 +141,9 @@ void infoDisplay::mainMenu()
 }
 void infoDisplay::splashScreen()
 {
-    opengreeting greet;
+   // opengreeting greet;
 
-    greet.greetingPost();
+   // greet.greetingPost();
 }
 
 /*

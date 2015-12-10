@@ -5,6 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += sql
+QT += widgets
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,16 +21,17 @@ SOURCES += main.cpp\
 			services/service.cpp \
 			models/computer.cpp \
 			models/computertype.cpp \
-			UI/mainwindow.cpp \
-    UI/infodisplay.cpp
+			UI/infodisplay.cpp \
+    UI/mainwindow.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
 			models/scientist.h \
 			services/service.h \
 			models/computer.h \
 			models/computertype.h \
-			UI/mainwindow.h \
-    UI/infodisplay.h
+			UI/infodisplay.h \
+    UI/mainwindow.h
 
 
-FORMS    += UI/mainwindow.ui
+FORMS    += \
+    UI/mainwindow.ui

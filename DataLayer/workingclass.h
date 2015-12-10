@@ -5,8 +5,8 @@
 #include "Models/computer.h"
 #include "Models/computertype.h"
 
-#include <QtSql>
-#include<qfile.h>
+#include <QtSql/QtSql>
+#include <qfile.h>
 #include <string>
 #include <vector>
 

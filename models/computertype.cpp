@@ -1,4 +1,4 @@
-#include "Models/computertype.h"
+#include "models/computertype.h"
 
 /*
 ##  Constructors

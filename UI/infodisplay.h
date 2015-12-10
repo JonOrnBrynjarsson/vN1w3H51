@@ -1,7 +1,7 @@
 #ifndef INFODISPLAY_H
 #define INFODISPLAY_H
 #include "services/service.h"
-#include "opengreeting.h"
+//#include "opengreeting.h"
 
 #include <iostream>
 #include <cstdlib>
