@@ -32,7 +32,6 @@ SOURCES += main.cpp\
     UI/addnewcomputer.cpp \
     UI/addnewcomputertype.cpp \
 	UI/addrelations.cpp\
-	UI/computerui.cpp \
 	Console_UI/infodisplay.cpp \
     services/scientistserviceclass.cpp
 
@@ -51,7 +50,6 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/addnewcomputer.h \
     UI/addnewcomputertype.h \
 	UI/addrelations.h \
-	UI/computerui.h \
 	Console_UI/infodisplay.h \
     services/scientistserviceclass.h
 

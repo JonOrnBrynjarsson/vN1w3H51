@@ -7,6 +7,7 @@
 #include <string>
 #include <unistd.h>
 #include <sstream>
+#include <QMessageBox>
 
 
 const int CURRENTYEAR = 2015;
@@ -42,6 +43,8 @@ class service
         int inputNumberToFunction(string input);    //TEKIÐ ÚR INFODISPLAY!!!
         //  Precondition:   Takes in a string for the number
         //  Postcondition:  Returns integer.
+        void errorMessage(string errorMessage);
+        void completeMessage(string completeMessage);
 
         /*
         ##  Read functions

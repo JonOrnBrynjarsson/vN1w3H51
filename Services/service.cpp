@@ -119,6 +119,31 @@ int service::inputNumberToFunction(string input)
 
     return temp;
 }
+
+void service::errorMessage(string errorMessage)
+{
+    QString qstr = QString::fromStdString(errorMessage);
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Warning");
+    msgBox.setText(qstr);
+//    msgBox.setStandardButtons(QMessageBox::Yes);
+//    msgBox.addButton(QMessageBox::No);
+//    msgBox.setDefaultButton(QMessageBox::No);
+    msgBox.exec();
+}
+
+void service::completeMessage(string completeMessage)
+{
+    QString qstr = QString::fromStdString(completeMessage);
+     QMessageBox msgBox;
+     msgBox.setWindowTitle("Success");
+     msgBox.setText(qstr);
+ //    msgBox.setStandardButtons(QMessageBox::Yes);
+ //    msgBox.addButton(QMessageBox::No);
+ //    msgBox.setDefaultButton(QMessageBox::No);
+     msgBox.exec();
+
+}
 int service::yearCorrection(int year, bool &errorInYear)
 {
 

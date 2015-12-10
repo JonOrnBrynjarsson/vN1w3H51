@@ -28,16 +28,6 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
-    void on_lineEdit_name_editingFinished();
-
-    void on_lineEdit_name_textChanged(const QString &arg1);
-
-    void on_buttonBox_rejected();
-
-    void on_lineEdit_name_cursorPositionChanged(int arg1, int arg2);
-
-    void on_lineEdit_name_selectionChanged();
-
 private:
     Ui::addNewScientist *ui;
     void addScientistToDatabase(scientist &s);

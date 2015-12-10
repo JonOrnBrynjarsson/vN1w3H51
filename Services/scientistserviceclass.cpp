@@ -1,6 +1,5 @@
 #include "scientistserviceclass.h"
 #include "UI/addnewscientist.h"
-#include <iostream>
 
 
 using namespace std;
@@ -20,13 +19,11 @@ void scientistserviceclass::getScientistData(string name, string descr, string l
     sc.setYearOfDeath(serviceobject.inputNumberToFunction(yod));
 
     addScientistErrorCorrection(sc);
-
 }
 
 void scientistserviceclass::addScientistToDatabase(scientist &sc)
 {
-    workingclass worker;
-    worker.startDatabase();
+    serviceobject.servStartDatabase();
     serviceobject.servAddscientist(sc);
 }
 
@@ -42,11 +39,21 @@ void scientistserviceclass::addScientistErrorCorrection(scientist &sc)
     if (badName||errorInYOB||errorInYOD)
     {
         qDebug () << "ERROR IN NAME!" ;
+
+        if (badName)
+        {
+            serviceobject.errorMessage("Name not correctly formatted. Please enter letters only.");
+        }
+        if (errorInYOB||errorInYOD)
+        {
+            serviceobject.errorMessage("Year not correctly formatted. Please enter valid years only.");
+        }
     }
     else
     {
         addScientistToDatabase(sc);
         qDebug () << "NAME ADDED TO DATABASE!" ;
+        serviceobject.completeMessage("Name was successfully added to the Database!");
     }
 
 }

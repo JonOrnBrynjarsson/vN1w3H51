@@ -8,6 +8,7 @@
 //#include <QDebug>
 #include "models/scientist.h"
 #include "Services/service.h"
+#include <iostream>
 
 
 class scientistserviceclass

@@ -94,7 +94,7 @@
       <string/>
      </property>
      <property name="placeholderText">
-      <string>Enter the name of the new Computer Scientist.</string>
+      <string>Enter letters, no numbers allowed.</string>
      </property>
     </widget>
    </item>
@@ -142,7 +142,7 @@
    <item row="2" column="2">
     <widget class="QLineEdit" name="lineEdit_yob">
      <property name="placeholderText">
-      <string>Enter the Computer Scientists Year of Birth.</string>
+      <string>Enter year of birth, ex. 1984 or 69</string>
      </property>
     </widget>
    </item>
