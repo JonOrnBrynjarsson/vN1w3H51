@@ -1,24 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>MainWindow</class>
- <widget name="MainWindow" class="QMainWindow">
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>692</width>
+    <height>459</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
   </property>
-  <widget name="menubar" class="QMenuBar"/>
-  <widget name="centralwidget" class="QWidget"/>
-  <widget name="statusbar" class="QStatusBar"/>
+  <property name="windowTitle">
+   <string>Computers and Scientists Database</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>692</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAdd_Data">
+    <property name="title">
+     <string>Add Data</string>
+    </property>
+    <addaction name="actionAdd_New_Computer_Scientist"/>
+    <addaction name="actionAdd_New_Computer"/>
+    <addaction name="actionAdd_New_Computer_Type"/>
+    <addaction name="separator"/>
+    <addaction name="actionAdd_Relations"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit_Data">
+    <property name="title">
+     <string>Edit Data</string>
+    </property>
+    <addaction name="actionEdit_a_Computer_Scientist"/>
+    <addaction name="actionEdit_a_Computer"/>
+    <addaction name="actionEdit_a_Computer_Type"/>
+   </widget>
+   <widget class="QMenu" name="menuRemove_Data">
+    <property name="title">
+     <string>Remove Data</string>
+    </property>
+    <addaction name="actionRemove_a_Computer_Scientist"/>
+    <addaction name="actionRemove_a_Computer"/>
+    <addaction name="actionRemove_a_Computer_Type"/>
+    <addaction name="separator"/>
+    <addaction name="actionRemove_Relations"/>
+   </widget>
+   <widget class="QMenu" name="menuDisplay_a_List">
+    <property name="title">
+     <string>Display a List</string>
+    </property>
+    <addaction name="actionDisplay_a_List_of_Computer_Scientists"/>
+    <addaction name="actionDisplay_a_List_of_Computers"/>
+    <addaction name="actionDisplay_a_List_of_Computer_Types"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout_Computers_and_Scientists_Database"/>
+   </widget>
+   <addaction name="menuAdd_Data"/>
+   <addaction name="menuEdit_Data"/>
+   <addaction name="menuRemove_Data"/>
+   <addaction name="menuDisplay_a_List"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAdd_New_Computer_Scientist">
+   <property name="text">
+    <string>Add New Computer Scientist</string>
+   </property>
+  </action>
+  <action name="actionAdd_New_Computer">
+   <property name="text">
+    <string>Add New Computer</string>
+   </property>
+  </action>
+  <action name="actionAdd_New_Computer_Type">
+   <property name="text">
+    <string>Add New Computer Type</string>
+   </property>
+  </action>
+  <action name="actionAdd_Relations">
+   <property name="text">
+    <string>Add Relations</string>
+   </property>
+  </action>
+  <action name="actionEdit_a_Computer_Scientist">
+   <property name="text">
+    <string>Edit a Computer Scientist</string>
+   </property>
+  </action>
+  <action name="actionEdit_a_Computer">
+   <property name="text">
+    <string>Edit a Computer</string>
+   </property>
+  </action>
+  <action name="actionEdit_a_Computer_Type">
+   <property name="text">
+    <string>Edit a Computer Type</string>
+   </property>
+  </action>
+  <action name="actionRemove_a_Computer_Scientist">
+   <property name="text">
+    <string>Remove a Computer Scientist</string>
+   </property>
+  </action>
+  <action name="actionRemove_a_Computer">
+   <property name="text">
+    <string>Remove a Computer</string>
+   </property>
+  </action>
+  <action name="actionRemove_a_Computer_Type">
+   <property name="text">
+    <string>Remove a Computer Type</string>
+   </property>
+  </action>
+  <action name="actionRemove_Relations">
+   <property name="text">
+    <string>Remove Relations</string>
+   </property>
+  </action>
+  <action name="actionDisplay_a_List_of_Computer_Scientists">
+   <property name="text">
+    <string>Display a List of Computer Scientists</string>
+   </property>
+  </action>
+  <action name="actionDisplay_a_List_of_Computers">
+   <property name="text">
+    <string>Display a List of Computers</string>
+   </property>
+  </action>
+  <action name="actionDisplay_a_List_of_Computer_Types">
+   <property name="text">
+    <string>Display a List of Computer Types</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionAbout_Computers_and_Scientists_Database">
+   <property name="text">
+    <string>About Computers and Scientists Database</string>
+   </property>
+  </action>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>
