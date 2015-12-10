@@ -8,6 +8,8 @@ QT       += core gui
 QT += sql
 QT += widgets
 
+RC_FILE = myapp.rc
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
