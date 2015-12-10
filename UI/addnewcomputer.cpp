@@ -12,3 +12,8 @@ addnewcomputer::~addnewcomputer()
 {
     delete ui;
 }
+
+void addnewcomputer::on_buttonBox_accepted()
+{
+
+}

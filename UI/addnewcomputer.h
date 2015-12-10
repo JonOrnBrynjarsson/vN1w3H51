@@ -15,6 +15,9 @@ public:
     explicit addnewcomputer(QWidget *parent = 0);
     ~addnewcomputer();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::addnewcomputer *ui;
 };

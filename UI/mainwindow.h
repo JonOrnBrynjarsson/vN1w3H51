@@ -6,6 +6,7 @@
 #include "addnewscientist.h"
 #include "addnewcomputer.h"
 #include "addnewcomputertype.h"
+#include "addrelations.h"
 
 namespace Ui {
 class MainWindow;
@@ -54,6 +55,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    addNewScientist *anscientist;
 };
 
 #endif // MAINWINDOW_H

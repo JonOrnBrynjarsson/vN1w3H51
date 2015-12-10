@@ -20,6 +20,7 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
     addNewScientist newscientist;
     newscientist.setModal(true);
     newscientist.exec();
+    newscientist.
 
 }
 
@@ -42,7 +43,10 @@ void MainWindow::on_actionAdd_New_Computer_Type_triggered()
 
 void MainWindow::on_actionAdd_Relations_triggered()
 {
-    qDebug() << "Add New Relations";
+    //qDebug() << "Add New Relations";
+    addrelations relations;
+    relations.setModal(true);
+    relations.exec();
 }
 
 void MainWindow::on_actionEdit_a_Computer_Scientist_triggered()
