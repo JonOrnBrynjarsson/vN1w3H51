@@ -23,7 +23,6 @@ SOURCES += main.cpp\
 			models/computer.cpp \
 			models/computertype.cpp \
     UI/mainwindow.cpp \
-    UI/scientistui.cpp \
     UI/computertypeui.cpp \
     UI/helpui.cpp \
     UI/displayui.cpp \
@@ -33,7 +32,7 @@ SOURCES += main.cpp\
     UI/addnewcomputertype.cpp \
 	UI/addrelations.cpp\
 	Console_UI/infodisplay.cpp \
-    services/scientistserviceclass.cpp
+    UI/scientistuiclass.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
 			models/scientist.h \
@@ -41,7 +40,6 @@ HEADERS  +=	DataLayer/workingclass.h \
 			models/computer.h \
 			models/computertype.h \
     UI/mainwindow.h \
-    UI/scientistui.h \
     UI/computertypeui.h \
     UI/helpui.h \
     UI/displayui.h \
@@ -51,11 +49,10 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/addnewcomputertype.h \
 	UI/addrelations.h \
 	Console_UI/infodisplay.h \
-    services/scientistserviceclass.h
+    UI/scientistuiclass.h
 
 FORMS    += \
     UI/mainwindow.ui \
-    UI/scientistui.ui \
     UI/computertypeui.ui \
     UI/helpui.ui \
     UI/displayui.ui \

@@ -1,20 +1,17 @@
-#ifndef SCIENTISTSERVICECLASS_H
-#define SCIENTISTSERVICECLASS_H
+#ifndef SCIENTISTUICLASS_H
+#define SCIENTISTUICLASS_H
 
 #include "UI/addnewscientist.h"
 #include "ui_addnewscientist.h"
-//#include <QDateEdit>
-//#include <sstream>
-//#include <QDebug>
 #include "models/scientist.h"
 #include "Services/service.h"
 #include <iostream>
+#include <string>
 
-
-class scientistserviceclass
+class scientistuiclass
 {
 public:
-    scientistserviceclass();
+    scientistuiclass();
     void getScientistData(string name, string descr, string link, string yob, string yod, int gender);
     void addScientistToDatabase(scientist &sc);
     void addScientistErrorCorrection(scientist &sc);
@@ -25,4 +22,4 @@ private:
     service serviceobject;
 };
 
-#endif // SCIENTISTSERVICECLASS_H
+#endif // SCIENTISTUICLASS_H

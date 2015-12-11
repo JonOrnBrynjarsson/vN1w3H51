@@ -7,7 +7,7 @@
 #include <QTextStream>
 #include "models/scientist.h"
 #include "Services/service.h"
-#include "Services/scientistserviceclass.h"
+#include "scientistuiclass.h"
 
 namespace Ui {
 class addNewScientist;

@@ -1,4 +1,5 @@
 #include "services/service.h"
+#include <QDebug>
 
 using namespace std;
 
@@ -253,6 +254,7 @@ bool service::servDeleteRelationSciComp(int sciID, int compID)
 vector<scientist> service::servGetSciVector()
 {
     return workingObject.getSciVector();
+    qDebug () << "getting vector..";
 }
 vector<computer> service::servGetComVector()
 {

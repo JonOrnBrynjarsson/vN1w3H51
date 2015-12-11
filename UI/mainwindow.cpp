@@ -7,11 +7,64 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    printScientists();
+
+}
+
+void MainWindow::printScientists()
+{
+    vector<string> temp;
+    temp.push_back("name1");
+    temp.push_back("name2");
+    serviceobject.servStartDatabase();
+    serviceobject.servReadSqlScientists("NAME");
+    vector<scientist> tempSci = serviceobject.servGetSciVector();
+    qDebug () << "something...";
+
+    for (int i = 0; i < tempSci.size(); i++)
+    {
+
+        ui->databasePrint->setRowCount(tempSci.size());
+        QString name = QString::fromStdString(serviceobject.servGetSciVector().at(i).getName());
+        ui->databasePrint->setItem(i, 0, new QTableWidgetItem(name));
+
+        QString gender;
+        if (serviceobject.servGetSciVector().at(i).getGender() == 0)
+        {
+            gender = "Female";
+        }
+        else if (serviceobject.servGetSciVector().at(i).getGender() == 1)
+        {
+            gender = "Male";
+        }
+        else if (serviceobject.servGetSciVector().at(i).getGender() == 2)
+        {
+            gender = "Unspecified";
+        }
+        ui->databasePrint->setItem(i, 1, new QTableWidgetItem(gender));
+        QString yob = QString::number(serviceobject.servGetSciVector().at(i).getYearOfBirth());
+        ui->databasePrint->setItem(i, 2, new QTableWidgetItem(yob));
+        QString yod = QString::number(serviceobject.servGetSciVector().at(i).getYearOfDeath());
+        ui->databasePrint->setItem(i, 3, new QTableWidgetItem(yod));
+        QString descr = QString::fromStdString(serviceobject.servGetSciVector().at(i).getDescription());
+        ui->databasePrint->setItem(i, 4, new QTableWidgetItem(descr));
+        QString link = QString::fromStdString(serviceobject.servGetSciVector().at(i).getLink());
+        ui->databasePrint->setItem(i, 5, new QTableWidgetItem(link));
+    }
+}
+
+
+vector<scientist> MainWindow::returnSciVector()
+{
+    serviceobject.servStartDatabase();
+    return serviceobject.servGetSciVector();
+    qDebug () << "fetching...";
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
 
 void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
@@ -20,6 +73,8 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
     addNewScientist newscientist;
     newscientist.setModal(true);
     newscientist.exec();
+    ui->statusbar->showMessage("Add new scientist", 5000);
+
 
 }
 

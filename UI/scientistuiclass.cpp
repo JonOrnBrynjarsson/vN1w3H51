@@ -1,15 +1,14 @@
-#include "scientistserviceclass.h"
-#include "UI/addnewscientist.h"
-
+#include "scientistuiclass.h"
 
 using namespace std;
 
-scientistserviceclass::scientistserviceclass()
+
+scientistuiclass::scientistuiclass()
 {
 
 }
 
-void scientistserviceclass::getScientistData(string name, string descr, string link, string yob, string yod, int gender)
+void scientistuiclass::getScientistData(string name, string descr, string link, string yob, string yod, int gender)
 {
     sc.setName(name);
     sc.setDescription(descr);
@@ -21,13 +20,13 @@ void scientistserviceclass::getScientistData(string name, string descr, string l
     addScientistErrorCorrection(sc);
 }
 
-void scientistserviceclass::addScientistToDatabase(scientist &sc)
+void scientistuiclass::addScientistToDatabase(scientist &sc)
 {
     serviceobject.servStartDatabase();
     serviceobject.servAddscientist(sc);
 }
 
-void scientistserviceclass::addScientistErrorCorrection(scientist &sc)
+void scientistuiclass::addScientistErrorCorrection(scientist &sc)
 {
     bool badName = false;
     bool errorInYOB = false;
@@ -55,6 +54,5 @@ void scientistserviceclass::addScientistErrorCorrection(scientist &sc)
         qDebug () << "NAME ADDED TO DATABASE!" ;
         serviceobject.completeMessage("Name was successfully added to the Database!");
     }
-
 }
 

@@ -8,6 +8,8 @@
 #include "addnewcomputertype.h"
 #include "addrelations.h"
 
+#include <QTableWidget>
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,6 +20,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void printScientists();
     ~MainWindow();
 
 private slots:
@@ -56,6 +59,13 @@ private slots:
 private:
     Ui::MainWindow *ui;
     addNewScientist *anscientist;
+    vector<scientist> returnSciVector();
+    service serviceobject;
+
+    QTableWidget* m_pTableWidget;
+
+    QStringList m_TableHeader;
+
 };
 
 #endif // MAINWINDOW_H

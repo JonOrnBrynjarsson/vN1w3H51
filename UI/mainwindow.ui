@@ -16,7 +16,74 @@
   <property name="windowTitle">
    <string>Computers and Scientists Database</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="MainMenuSelection">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="computerSci">
+       <property name="accessibleName">
+        <string>Computer Scientists</string>
+       </property>
+       <attribute name="title">
+        <string>List of Computer Scientists</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="databasePrint">
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Age</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year of Birth</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year of Death</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Description</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Link</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Computers">
+       <property name="accessibleName">
+        <string/>
+       </property>
+       <attribute name="title">
+        <string>List of Computers</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="ComputerTypes">
+       <attribute name="title">
+        <string>List of Computer Types</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>

@@ -22,10 +22,9 @@ addNewScientist::~addNewScientist()
 
 void addNewScientist::on_buttonBox_accepted()
 {
-    scientistserviceclass ssc;
+    scientistuiclass ssc;
 
     ssc.getScientistData((ui->lineEdit_name->text().toStdString()),(ui->textEdit_descr->toPlainText().toStdString()),
                          (ui->lineEdit_link->text().toStdString()), (ui->lineEdit_yob->text().toStdString()),
                         (ui->lineEdit_yod->text().toStdString()), (ui->comboBox_gender->currentIndex()));
-
 }
