@@ -21,7 +21,7 @@
     <item>
      <widget class="QTabWidget" name="MainMenuSelection">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="computerSci">
        <property name="accessibleName">
@@ -83,6 +83,11 @@
             <string>Computer Type</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>Scientist ID</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -132,6 +137,11 @@
           <column>
            <property name="text">
             <string>Description</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>ComputerID</string>
            </property>
           </column>
          </widget>
@@ -244,6 +254,9 @@
   <action name="actionAdd_New_Computer_Scientist">
    <property name="text">
     <string>Add New Computer Scientist</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
   <action name="actionAdd_New_Computer">

@@ -14,15 +14,8 @@
    <string>Add new Computer to Database</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="labelEntName">
-     <property name="text">
-      <string>Enter Name:</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="1" colspan="3">
-    <widget class="QLineEdit" name="lineEdit_Name">
+    <widget class="QLineEdit" name="lineEdit_insertName">
      <property name="toolTip">
       <string/>
      </property>
@@ -35,19 +28,39 @@
     </widget>
    </item>
    <item row="1" column="0" colspan="2">
-    <widget class="QLabel" name="labelEntyoc">
+    <widget class="QLabel" name="label_enterYear">
      <property name="text">
       <string>Enter Year of Creation:</string>
      </property>
     </widget>
    </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_enterName">
+     <property name="text">
+      <string>Enter Name:</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="2" colspan="2">
-    <widget class="QDateEdit" name="dateEdit_yoc">
+    <widget class="QDateEdit" name="dateEdit_year">
      <property name="toolTip">
       <string/>
      </property>
      <property name="whatsThis">
       <string>This is a year selection, you can use it to enter the year the computer was built.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="minimumDateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>1752</year>
+       <month>9</month>
+       <day>14</day>
+      </datetime>
      </property>
      <property name="currentSection">
       <enum>QDateTimeEdit::YearSection</enum>
@@ -57,10 +70,10 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QLabel" name="labelEntComType">
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_enterDescription">
      <property name="text">
-      <string>Select Computer Type:</string>
+      <string>Description:</string>
      </property>
     </widget>
    </item>
@@ -74,46 +87,18 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="labelEntBuilt">
-     <property name="text">
-      <string>Was this Computer built?</string>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="2">
-    <widget class="QRadioButton" name="radioButton_builtYes">
+    <widget class="QCheckBox" name="checkBox_built">
+     <property name="accessibleName">
+      <string/>
+     </property>
      <property name="text">
-      <string>Yes</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3">
-    <widget class="QRadioButton" name="radioButton_builtNo">
-     <property name="text">
-      <string>No</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="labelEntDescr">
-     <property name="text">
-      <string>Description:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="4">
-    <widget class="QTextEdit" name="textEdit_Descr">
-     <property name="whatsThis">
-      <string>This is a text input, you can use it to enter the description of the computer.</string>
-     </property>
-     <property name="placeholderText">
-      <string>Enter a detailed description of the computer.</string>
+      <string notr="true">Built</string>
      </property>
     </widget>
    </item>
    <item row="6" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="buttonBox_addNewComputerFinished">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -122,12 +107,43 @@
      </property>
     </widget>
    </item>
+   <item row="5" column="0" colspan="4">
+    <widget class="QTextEdit" name="textEdit_insertDescription">
+     <property name="whatsThis">
+      <string>This is a text input, you can use it to enter the description of the computer.</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter a detailed description of the computer.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QLabel" name="label_chooseType">
+     <property name="text">
+      <string>Select Computer Type:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="label_chooseBuilt">
+     <property name="text">
+      <string>Was this Computer built?</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_insertName</tabstop>
+  <tabstop>dateEdit_year</tabstop>
+  <tabstop>comboBox_type</tabstop>
+  <tabstop>checkBox_built</tabstop>
+  <tabstop>textEdit_insertDescription</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>buttonBox_addNewComputerFinished</sender>
    <signal>accepted()</signal>
    <receiver>addnewcomputer</receiver>
    <slot>accept()</slot>
@@ -143,7 +159,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>buttonBox_addNewComputerFinished</sender>
    <signal>rejected()</signal>
    <receiver>addnewcomputer</receiver>
    <slot>reject()</slot>

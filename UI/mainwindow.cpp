@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include <QModelIndex>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,9 +14,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     ui->setupUi(this);
+    //ui->tableView->setColumnHidden(5, true);
     printScientists();
     printComputers();
     printComputerTypes();
+    ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
+    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
+
 
 
 }
@@ -89,6 +94,9 @@ void MainWindow::printScientists()
         }
         linkedComputers = QString::fromStdString(outoffunc);
         ui->databaseDisplayComSci->setItem(i, 6, new QTableWidgetItem(linkedComputers));
+
+        QString sciID = QString::number(serviceobject.servGetSciVector().at(i).getID());
+        ui->databaseDisplayComSci->setItem(i, 7, new QTableWidgetItem(sciID));
     }
 }
 
@@ -124,6 +132,9 @@ void MainWindow::printComputers()
 
         QString comDescr = QString::fromStdString(serviceobject.servGetComVector().at(i).getComDescription());
         ui->databaseDisplayComputers->setItem(i, 4, new QTableWidgetItem(comDescr));
+
+        QString comID = QString::number(serviceobject.servGetComVector().at(i).getId());
+        ui->databaseDisplayComputers->setItem(i, 5, new QTableWidgetItem(comID));
 
     }
 }
@@ -182,10 +193,10 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
 
 void MainWindow::on_actionAdd_New_Computer_triggered()
 {
-    //qDebug() << "Add_New_Computer";
-    addnewcomputer newcomputer;
-    newcomputer.setModal(true);
-    newcomputer.exec();
+    qDebug() << "Add_New_Computer";
+    //addnewcomputer newcomputer;
+    //newcomputer.setModal(true);
+    //newcomputer.exec();
 }
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()
@@ -280,9 +291,35 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 
 void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
 {
-    qDebug () << row << column;
+
+    //qDebug () << index.row();
+    //qDebug () << row << column;
     bool itt = true;
     QString name = "jonson";
-    addnewcomputer newcomputer;
-    newcomputer.editcomputer(row,column, itt, name);
+    //addnewcomputer newcomputer;
+    //newcomputer.editcomputer(row,column, itt, name);
+}
+
+void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
+{
+    int i = index.internalId();
+    int row = ui->databaseDisplayComputers->currentRow();
+
+    QStringList list;
+    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+
+    model->rowCount();
+
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 5);
+        qDebug () << (index.data().toString());
+        qDebug () << " ";
+    }
+
+
+    //QString test = QString::fromStdString(serviceobject.servGetComVector().at(i).getComName());
+
+    //qDebug () << test;
+
 }
