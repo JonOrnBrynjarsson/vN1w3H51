@@ -3,10 +3,14 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QMenu>
+#include <QMouseEvent>
 #include "addnewscientist.h"
 #include "addnewcomputer.h"
 #include "addnewcomputertype.h"
 #include "addrelations.h"
+#include "editcomputer.h"
+#include "Services/service.h"
 
 #include <QTableWidget>
 
@@ -62,9 +66,13 @@ private slots:
 
     void on_databaseDisplayComSci_cellClicked(int row, int column);
 
-    void on_databaseDisplayComputers_doubleClicked(const QModelIndex &index);
+
+    void on_pushButon_addNewCompuer_clicked();
+
+    void on_pushButton_removeCompuer_clicked();
 
 private:
+    //service service;
     Ui::MainWindow *ui;
     addNewScientist *anscientist;
     vector<scientist> returnSciVector();

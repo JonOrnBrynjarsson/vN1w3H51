@@ -137,6 +137,7 @@ void MainWindow::printComputers()
         ui->databaseDisplayComputers->setItem(i, 5, new QTableWidgetItem(comID));
 
     }
+
 }
 
 void MainWindow::printComputerTypes()
@@ -197,6 +198,10 @@ void MainWindow::on_actionAdd_New_Computer_triggered()
     addnewcomputer newcomputer;
     newcomputer.setModal(true);
     newcomputer.exec();
+    ui->databaseDisplayComputers->clear();
+    serviceobject.servReadSqlComputers();
+    printComputers();
+
 }
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()
@@ -300,26 +305,39 @@ void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
     //newcomputer.editcomputer(row,column, itt, name);
 }
 
-void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
+
+
+void MainWindow::on_pushButon_addNewCompuer_clicked()
 {
-    int i = index.internalId();
-    int row = ui->databaseDisplayComputers->currentRow();
+    addnewcomputer newcomputer;
+    newcomputer.setModal(true);
+    newcomputer.exec();
+    serviceobject.servReadSqlComputers();
+    printComputers();
+}
 
-    QStringList list;
-    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+void MainWindow::on_pushButton_removeCompuer_clicked()
+{
+    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
 
-    model->rowCount();
 
-    for (int i = 0; i < 1; i++)
+    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
+    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
+
+    if(toDelete == 1024)
     {
-        QModelIndex index = model->index(row, 5);
-        qDebug () << (index.data().toString());
-        qDebug () << " ";
+        serviceobject.servDeleteComputer(selctedComputer.getId());
+        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "deleted!");
+
+        ui->databaseDisplayComputers->clear();
+        serviceobject.servReadSqlComputers();
+        printComputers();
     }
-
-
-    //QString test = QString::fromStdString(serviceobject.servGetComVector().at(i).getComName());
-
-    //qDebug () << test;
-
+    else
+    {
+        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "Still here!");
+        ui->databaseDisplayComputers->clear();
+        serviceobject.servReadSqlComputers();
+        printComputers();
+    }
 }
