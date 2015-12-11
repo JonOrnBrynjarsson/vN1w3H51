@@ -6,27 +6,31 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    serviceobject.servStartDatabase();
+    serviceobject.servReadSqlScientists("NAME");
+    serviceobject.servReadSqlComputers("NAME");
+    serviceobject.servReadSqlCompTypes();
+
+
     ui->setupUi(this);
     printScientists();
+    printComputers();
+    printComputerTypes();
+
 
 }
 
 void MainWindow::printScientists()
 {
-    vector<string> temp;
-    temp.push_back("name1");
-    temp.push_back("name2");
-    serviceobject.servStartDatabase();
-    serviceobject.servReadSqlScientists("NAME");
-    vector<scientist> tempSci = serviceobject.servGetSciVector();
-    qDebug () << "something...";
+    //serviceobject.servStartDatabase();
+    //serviceobject.servReadSqlScientists("NAME");
 
-    for (int i = 0; i < tempSci.size(); i++)
+    ui->databaseDisplayComSci->setRowCount(serviceobject.servGetSciVector().size());
+
+    for (unsigned int i = 0; i < serviceobject.servGetSciVector().size(); i++)
     {
-
-        ui->databasePrint->setRowCount(tempSci.size());
         QString name = QString::fromStdString(serviceobject.servGetSciVector().at(i).getName());
-        ui->databasePrint->setItem(i, 0, new QTableWidgetItem(name));
+        ui->databaseDisplayComSci->setItem(i, 0, new QTableWidgetItem(name));
 
         QString gender;
         if (serviceobject.servGetSciVector().at(i).getGender() == 0)
@@ -41,24 +45,122 @@ void MainWindow::printScientists()
         {
             gender = "Unspecified";
         }
-        ui->databasePrint->setItem(i, 1, new QTableWidgetItem(gender));
+        ui->databaseDisplayComSci->setItem(i, 1, new QTableWidgetItem(gender));
         QString yob = QString::number(serviceobject.servGetSciVector().at(i).getYearOfBirth());
-        ui->databasePrint->setItem(i, 2, new QTableWidgetItem(yob));
-        QString yod = QString::number(serviceobject.servGetSciVector().at(i).getYearOfDeath());
-        ui->databasePrint->setItem(i, 3, new QTableWidgetItem(yod));
+        ui->databaseDisplayComSci->setItem(i, 2, new QTableWidgetItem(yob));
+
+        QString yod;
+        if (serviceobject.servGetSciVector().at(i).getYearOfDeath() == 0)
+        {
+            yod = QString::null;
+        }
+        else
+        {
+            yod = QString::number(serviceobject.servGetSciVector().at(i).getYearOfDeath());
+        }
+        ui->databaseDisplayComSci->setItem(i, 3, new QTableWidgetItem(yod));
         QString descr = QString::fromStdString(serviceobject.servGetSciVector().at(i).getDescription());
-        ui->databasePrint->setItem(i, 4, new QTableWidgetItem(descr));
+        ui->databaseDisplayComSci->setItem(i, 4, new QTableWidgetItem(descr));
         QString link = QString::fromStdString(serviceobject.servGetSciVector().at(i).getLink());
-        ui->databasePrint->setItem(i, 5, new QTableWidgetItem(link));
+        ui->databaseDisplayComSci->setItem(i, 5, new QTableWidgetItem(link));
+
+        int currentID = serviceobject.servGetSciVector().at(i).getID();
+
+        vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
+
+        //qDebug() << "doinit i is: " << " " << i+1 ;
+
+        QString linkedComputers;
+        string outoffunc;
+        for (unsigned int x = 0; x < sciLinkedToCom.size(); x++)
+        {
+            string space = " ";
+            string temp;
+            temp = sciLinkedToCom.at(x).getComName();
+
+            if (sciLinkedToCom.size() > 1)
+            {
+                outoffunc += temp + space;
+            }
+            else
+            {
+                outoffunc = temp;
+            }
+        }
+        linkedComputers = QString::fromStdString(outoffunc);
+        ui->databaseDisplayComSci->setItem(i, 6, new QTableWidgetItem(linkedComputers));
     }
 }
 
+void MainWindow::printComputers()
+{
+
+    ui->databaseDisplayComputers->setRowCount(serviceobject.servGetComVector().size());
+
+    for (unsigned int i = 0; i < serviceobject.servGetComVector().size(); i++)
+    {
+
+        //name+ year type+ built+ description
+        QString comName = QString::fromStdString(serviceobject.servGetComVector().at(i).getComName());
+        ui->databaseDisplayComputers->setItem(i, 0, new QTableWidgetItem(comName));
+        QString comBuilt;
+        if (serviceobject.servGetComVector().at(i).getComBuilt() == true)
+        {
+            comBuilt = "Yes";
+        }
+        else if (serviceobject.servGetComVector().at(i).getComBuilt() == false)
+        {
+            comBuilt = "No";
+        }
+        ui->databaseDisplayComputers->setItem(i, 3, new QTableWidgetItem(comBuilt));
+
+        int comTypeInt = serviceobject.servGetComVector().at(i).getComType();
+        QString ComType;
+        ComType = QString::fromStdString(serviceobject.servGetCompTypeVector().at(comTypeInt-1).getName());
+        ui->databaseDisplayComputers->setItem(i, 2, new QTableWidgetItem(ComType));
+
+        QString comYear = QString::number(serviceobject.servGetComVector().at(i).getComYear());
+        ui->databaseDisplayComputers->setItem(i, 1, new QTableWidgetItem(comYear));
+
+        QString comDescr = QString::fromStdString(serviceobject.servGetComVector().at(i).getComDescription());
+        ui->databaseDisplayComputers->setItem(i, 4, new QTableWidgetItem(comDescr));
+
+    }
+}
+
+void MainWindow::printComputerTypes()
+{
+    ui->databaseDisplayComTypes->setRowCount(serviceobject.servGetCompTypeVector().size());
+
+    for (unsigned int i = 0; i < serviceobject.servGetCompTypeVector().size(); i++)
+    {
+        QString comTName = QString::fromStdString(serviceobject.servGetCompTypeVector().at(i).getName());
+        ui->databaseDisplayComTypes->setItem(i, 0, new QTableWidgetItem(comTName));
+
+        QString comTDescr = QString::fromStdString(serviceobject.servGetCompTypeVector().at(i).getDesc());
+        ui->databaseDisplayComTypes->setItem(i, 1, new QTableWidgetItem(comTDescr));
+    }
+}
 
 vector<scientist> MainWindow::returnSciVector()
 {
     serviceobject.servStartDatabase();
     return serviceobject.servGetSciVector();
-    qDebug () << "fetching...";
+    //qDebug () << "fetching...";
+}
+
+vector<computer> MainWindow::returnComVector()
+{
+    serviceobject.servStartDatabase();
+    return serviceobject.servGetComVector();
+    //qDebug () << "fetching...";
+}
+
+vector<computertype> MainWindow::returnComTypeVector()
+{
+    serviceobject.servStartDatabase();
+    return serviceobject.servGetCompTypeVector();
+    //qDebug () << "fetching...";
 }
 
 MainWindow::~MainWindow()
@@ -161,4 +263,22 @@ void MainWindow::on_actionHelp_triggered()
 void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()
 {
     qDebug() << "About_Computers_and_Scientists_Database";
+}
+
+void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
+{
+    if (index == 0)
+    {
+        printScientists();
+    }
+    if (index == 1)
+    {
+        printComputers();
+    }
+
+}
+
+void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
+{
+    qDebug () << row << column;
 }

@@ -53,6 +53,7 @@ void scientistuiclass::addScientistErrorCorrection(scientist &sc)
         addScientistToDatabase(sc);
         qDebug () << "NAME ADDED TO DATABASE!" ;
         serviceobject.completeMessage("Name was successfully added to the Database!");
+        //FÆRA ÚR SERVICE CLASS.
     }
 }
 

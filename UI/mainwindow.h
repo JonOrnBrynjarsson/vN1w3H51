@@ -21,6 +21,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     void printScientists();
+    void printComputers();
+    void printComputerTypes();
     ~MainWindow();
 
 private slots:
@@ -56,11 +58,17 @@ private slots:
 
     void on_actionAbout_Computers_and_Scientists_Database_triggered();
 
+    void on_MainMenuSelection_tabBarClicked(int index);
+
+    void on_databaseDisplayComSci_cellClicked(int row, int column);
+
 private:
     Ui::MainWindow *ui;
     addNewScientist *anscientist;
     vector<scientist> returnSciVector();
     service serviceobject;
+    vector<computer> returnComVector();
+    vector<computertype> returnComTypeVector();
 
     QTableWidget* m_pTableWidget;
 
