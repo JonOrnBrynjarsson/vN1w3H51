@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     serviceobject.servStartDatabase();
-    serviceobject.servReadSqlScientists("NAME");
-    serviceobject.servReadSqlComputers("NAME");
+    serviceobject.servReadSqlScientists();
+    serviceobject.servReadSqlComputers();
     serviceobject.servReadSqlCompTypes();
 
 
@@ -194,9 +194,9 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
 void MainWindow::on_actionAdd_New_Computer_triggered()
 {
     qDebug() << "Add_New_Computer";
-    //addnewcomputer newcomputer;
-    //newcomputer.setModal(true);
-    //newcomputer.exec();
+    addnewcomputer newcomputer;
+    newcomputer.setModal(true);
+    newcomputer.exec();
 }
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()

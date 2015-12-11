@@ -37,6 +37,7 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
     string name = ui->lineEdit_insertName->text().toStdString();
     int year = ui->dateEdit_year->text().toInt();
     int type = ui->comboBox_type->currentIndex();
+    type = service.servGetCompTypeVector().at(type).getid();
     bool built = ui->checkBox_built->checkState();
     string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
 
