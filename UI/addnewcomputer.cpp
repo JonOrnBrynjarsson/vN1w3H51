@@ -26,6 +26,10 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
 
 
 }
+addnewcomputer::~addnewcomputer()
+{
+
+}
 
 
 void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()

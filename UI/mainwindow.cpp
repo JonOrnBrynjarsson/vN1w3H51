@@ -193,10 +193,10 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
 
 void MainWindow::on_actionAdd_New_Computer_triggered()
 {
-    //qDebug() << "Add_New_Computer";
-    addnewcomputer newcomputer;
-    newcomputer.setModal(true);
-    newcomputer.exec();
+    qDebug() << "Add_New_Computer";
+    //addnewcomputer newcomputer;
+    //newcomputer.setModal(true);
+    //newcomputer.exec();
 }
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()
@@ -296,8 +296,8 @@ void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
     //qDebug () << row << column;
     bool itt = true;
     QString name = "jonson";
-    addnewcomputer newcomputer;
-    newcomputer.editcomputer(row,column, itt, name);
+    //addnewcomputer newcomputer;
+    //newcomputer.editcomputer(row,column, itt, name);
 }
 
 void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
