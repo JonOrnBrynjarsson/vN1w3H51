@@ -3,8 +3,9 @@
 
 #include <QWidget>
 
-namespace Ui {
-class computertypeUI;
+namespace Ui
+{
+    class computertypeUI;
 }
 
 class computertypeUI : public QWidget
