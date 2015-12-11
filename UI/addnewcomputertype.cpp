@@ -1,5 +1,6 @@
 #include "addnewcomputertype.h"
 #include "ui_addnewcomputertype.h"
+#include "computertypeuiclass.h"
 //#include "DataLayer/workingclass.h"
 //#include <QDateEdit>
 //#include <sstream>
