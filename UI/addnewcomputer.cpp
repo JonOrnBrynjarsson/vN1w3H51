@@ -1,11 +1,18 @@
 #include "addnewcomputer.h"
 #include "ui_addnewcomputer.h"
+#include <QDebug>
+#include "mainwindow.h"
 
 addnewcomputer::addnewcomputer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addnewcomputer)
 {
+    int i, x;
+    bool itt;
+    QString name;
+
     ui->setupUi(this);
+
     service.servReadSqlCompTypes();
 
     for( unsigned int row = 0; row < service.servGetCompTypeVector().size(); row++)
@@ -16,11 +23,8 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
                          service.servGetCompTypeVector().at(row).getName());
         //ui->buttonBox_addNewComputerFinished->
     }
-}
 
-addnewcomputer::~addnewcomputer()
-{
-    delete ui;
+
 }
 
 

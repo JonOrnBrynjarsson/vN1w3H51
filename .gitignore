@@ -32,3 +32,4 @@
 *.pro.user
 *.user.*
 *.autosave
+*.sqlite
