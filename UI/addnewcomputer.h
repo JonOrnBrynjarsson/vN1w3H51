@@ -13,6 +13,7 @@ class addnewcomputer : public QDialog
 
 public:
     explicit addnewcomputer(QWidget *parent = 0);
+    void editcomputer(int i, int x, bool &itt, QString name);
     ~addnewcomputer();
 
 private slots:

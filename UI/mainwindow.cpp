@@ -281,4 +281,8 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
 {
     qDebug () << row << column;
+    bool itt = true;
+    QString name = "jonson";
+    addnewcomputer newcomputer;
+    newcomputer.editcomputer(row,column, itt, name);
 }
