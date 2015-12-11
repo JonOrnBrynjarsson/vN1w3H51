@@ -62,6 +62,8 @@ private slots:
 
     void on_databaseDisplayComSci_cellClicked(int row, int column);
 
+    void on_databaseDisplayComputers_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     addNewScientist *anscientist;
