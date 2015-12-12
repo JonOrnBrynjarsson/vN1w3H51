@@ -34,7 +34,8 @@ SOURCES += main.cpp\
 	UI/addrelations.cpp\
 	Console_UI/infodisplay.cpp \
     UI/scientistuiclass.cpp \
-    UI/editcomputer.cpp
+    UI/editcomputer.cpp \
+    UI/editcomptype.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
 			models/scientist.h \
@@ -53,7 +54,8 @@ HEADERS  +=	DataLayer/workingclass.h \
 	UI/addrelations.h \
 	Console_UI/infodisplay.h \
     UI/scientistuiclass.h \
-    UI/editcomputer.h
+    UI/editcomputer.h \
+    UI/editcomptype.h
 
 FORMS    += \
     UI/mainwindow.ui \
@@ -65,7 +67,8 @@ FORMS    += \
     UI/addnewcomputer.ui \
     UI/addnewcomputertype.ui \
     UI/addrelations.ui \
-    UI/editcomputer.ui
+    UI/editcomputer.ui \
+    UI/editcomptype.ui
 
 DISTFILES +=
     UI/computerui.ui
