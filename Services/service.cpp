@@ -188,6 +188,11 @@ void service::servReadSqlCompTypes()
     workingObject.readSqlCompTypes();
 }
 
+void service::servReadSqlRelations()
+{
+    workingObject.readSqlRelations();
+}
+
 /*
 ##  Add functions
 ##---------------------------------------------------------------------------------------##
@@ -263,6 +268,11 @@ vector<computer> service::servGetComVector()
 vector<computertype> service::servGetCompTypeVector()
 {
     return workingObject.getCompTypeVector();
+}
+
+vector<relation> service::servGetRelationshipVector()
+{
+    return workingObject.getRelationshipVector();
 }
 vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
 {

@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     serviceobject.servReadSqlScientists();
     serviceobject.servReadSqlComputers();
     serviceobject.servReadSqlCompTypes();
+    serviceobject.servReadSqlRelations();
 
 
     ui->setupUi(this);
@@ -18,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     printScientists();
     printComputers();
     printComputerTypes();
+    displayRelations();
+
     ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
    // ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
 
@@ -345,3 +348,32 @@ void MainWindow::on_pushButton_removeCompuer_clicked()
         printComputers();
     }
 }
+
+void MainWindow::displayRelations()
+{
+
+    ui-> tableWidget_displayRelations->setRowCount(serviceobject.servGetRelationshipVector().size());
+    ui->tableWidget_displayRelations->setSortingEnabled(false); // To be able to display headers and all column data - bugfix for qt.
+
+    for (unsigned int i = 0; i < serviceobject.servGetRelationshipVector().size(); i++)
+    {
+        QString sciID = QString::number(serviceobject.servGetRelationshipVector().at(i).scientistID);
+        QString compID = QString::number(serviceobject.servGetRelationshipVector().at(i).computerID);
+        QString sciName = QString::fromStdString(serviceobject.servGetRelationshipVector().at(i).scientistName);
+        QString compName = QString::fromStdString(serviceobject.servGetRelationshipVector().at(i).computerName);
+        ui->tableWidget_displayRelations->setItem(i, 0, new QTableWidgetItem(sciID));
+        ui->tableWidget_displayRelations->setItem(i, 1, new QTableWidgetItem(sciName));
+        ui->tableWidget_displayRelations->setItem(i, 2, new QTableWidgetItem(compID));
+        ui->tableWidget_displayRelations->setItem(i, 3, new QTableWidgetItem(compName));
+
+        qDebug() << sciID << " - " << compID << " - " << sciName << " - " << compName << endl;
+
+    }
+    QStringList relationsHeader = (QStringList() << "ScientistID" << ">Scientist name" << "ComputerID" << "Computer name") ;
+    ui->tableWidget_displayRelations->setHorizontalHeaderLabels(relationsHeader);
+
+    ui->tableWidget_displayRelations->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
+    //ui->tableWidget_displayRelations->setColumnHidden(0, true);  // Hides ID column
+    //ui->tableWidget_displayRelations->setColumnHidden(2, true);  // Hides ID column
+}
+

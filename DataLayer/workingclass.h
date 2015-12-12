@@ -19,6 +19,13 @@ const string DBASE = "../vN1w3H51/database/Group51_verklegt_1.sqlite";
 // Locaton of the database file
 const int MAXNAMELENGTH = 44;
 
+struct relation{
+    int scientistID;
+    int computerID;
+    string scientistName;
+    string computerName;
+};
+
 class workingclass
 {
 public:
@@ -36,6 +43,9 @@ public:
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computers.
     void readSqlCompTypes();
+    //  Precondition:   The database is open.
+    //  Postcondition:  If data available, it is read into the private vector for computertypes.
+    void readSqlRelations();
     //  Precondition:   The database is open.
     //  Postcondition:  If data available, it is read into the private vector for computertypes.
 
@@ -111,6 +121,10 @@ public:
     vector<scientist> getScientistsLinkedToComputer(int compID);
     //  Precondition:   A scientist is selected and its ID sent in as sciID.
     //  Postcondition:  Returns a vector of computers related to the scientist.
+    vector<relation> getRelationshipVector();
+    //  Precondition:   A relationship exists between at least one scientist and one computer.
+    //  Postcondition:  Returns a vector of relationships between scientists and computers.
+
 
     /*
     ##  Erase vector functions
@@ -195,6 +209,8 @@ private:
     vector<scientist> scientistVector;
     vector<computer> computerVector;
     vector<computertype> compTypeVector;
+    vector<relation> relationVector;
+
 };
 
 #endif // WORKINGCLASS_H

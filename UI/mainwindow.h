@@ -72,6 +72,7 @@ private slots:
     void on_pushButton_removeCompuer_clicked();
 
 private:
+    void displayRelations();
     //service service;
     Ui::MainWindow *ui;
     addNewScientist *anscientist;

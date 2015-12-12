@@ -56,6 +56,9 @@ class service
         //  Calls the readSqlComputers function in workingclass.
         void servReadSqlCompTypes();
         //  Calls the readSqlCompTypes function in workingclass.
+        void servReadSqlRelations();
+        //  Calls the readSqlCompTypes function in workingclass.
+
 
         /*
         ##  Add functions
@@ -104,10 +107,13 @@ class service
         //  Calls the getVector function in workingclass.
         vector<computertype> servGetCompTypeVector();
         //  Calls the getComTypeVector function in workingclass.
+        vector<relation> servGetRelationshipVector();
+        //  Calls the getRelationshipVector function in workingclass.
         vector<scientist> servGetScientistsLinkedToComputer(int compID);
         //  Calls the getScientistsLinkedToComputer function in workingclass.
         vector<computer> servGetComputersLinkedToScientists(int sciID);
         //  Calls the getComputersLinkedToScientists function in workingclass.
+
 
         /*
         ##  Erase vector functions

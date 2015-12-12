@@ -80,6 +80,27 @@ void workingclass::readSqlCompTypes()
     }
 }
 
+void workingclass::readSqlRelations()
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT DISTINCT    s.id as sid, s.name as sname, c.id as cid, c.name as cname  "
+                  "FROM scientists AS s, computers AS c "
+                  "JOIN scientists_and_computers AS sc "
+                  "ON sc.scientist_id = s.id AND sc.computer_id = c.id;");
+    query.exec();
+    relationVector.clear();
+    while(query.next())
+    {
+        relation r;
+        r.scientistID = query.value("sid").toUInt();
+        r.computerID = query.value("cid").toUInt();
+        r.scientistName = query.value("sname").toString().toStdString();
+        r.computerName = query.value("cname").toString().toStdString();
+        relationVector.push_back(r);
+    }
+}
+
 
 /*
 ##  Add functions
@@ -345,6 +366,13 @@ vector<scientist> workingclass::getScientistsLinkedToComputer(int compID)
 
     return tempvector;
 }
+
+vector<relation> workingclass::getRelationshipVector()
+{
+    return relationVector;
+}
+
+
 
 
 /*
