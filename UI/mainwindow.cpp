@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     printComputers();
     printComputerTypes();
     ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
-    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
+   // ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
 
 
 
@@ -104,6 +104,7 @@ void MainWindow::printComputers()
 {
 
     ui->databaseDisplayComputers->setRowCount(serviceobject.servGetComVector().size());
+    ui->databaseDisplayComputers->setSortingEnabled(false); // To be able to display headers and all column data - bugfix for qt.
 
     for (unsigned int i = 0; i < serviceobject.servGetComVector().size(); i++)
     {
@@ -134,10 +135,13 @@ void MainWindow::printComputers()
         ui->databaseDisplayComputers->setItem(i, 4, new QTableWidgetItem(comDescr));
 
         QString comID = QString::number(serviceobject.servGetComVector().at(i).getId());
-        ui->databaseDisplayComputers->setItem(i, 5, new QTableWidgetItem(comID));
-
+        ui->databaseDisplayComputers->setItem(i, 5, new QTableWidgetItem(comID));    
     }
-
+    QStringList comHeader = (QStringList() << "Name" << "Created" << "Type" << "Built" << "Description"  << "cID") ;
+    ui->databaseDisplayComputers->setHorizontalHeaderLabels(comHeader);
+    //ui->databaseDisplayComputers->horizontalHeader()-
+    ui->databaseDisplayComputers->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
+    ui->databaseDisplayComputers->setColumnHidden(5, true);  // Hides ID column
 }
 
 void MainWindow::printComputerTypes()
