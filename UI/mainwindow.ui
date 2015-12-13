@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="MainMenuSelection">
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="computerSci">
        <property name="accessibleName">
@@ -292,8 +292,14 @@
           <height>321</height>
          </rect>
         </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        </property>
         <property name="alternatingRowColors">
          <bool>true</bool>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
         <property name="showGrid">
          <bool>false</bool>
@@ -301,6 +307,29 @@
         <property name="sortingEnabled">
          <bool>true</bool>
         </property>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>50</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Scientist ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Scientist Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Computer ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Computer Name</string>
+         </property>
+        </column>
        </widget>
        <widget class="QPushButton" name="pushButton_addRelation">
         <property name="geometry">

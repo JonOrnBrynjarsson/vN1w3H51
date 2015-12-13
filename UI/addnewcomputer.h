@@ -18,6 +18,7 @@ class addnewcomputer : public QDialog
 public:
     explicit addnewcomputer(QWidget *parent = 0);
     void editcomputer(int i, int x, bool &itt, QString name);
+    void neweditcomputer(QString id);
     ~addnewcomputer();
 
 private slots:
@@ -25,9 +26,8 @@ private slots:
     void on_dateEdit_year_userDateChanged(const QDate &date);
 
 private:
-
-    service service;
     Ui::addnewcomputer *ui;
+    service service;
 };
 
 #endif // ADDNEWCOMPUTER_H

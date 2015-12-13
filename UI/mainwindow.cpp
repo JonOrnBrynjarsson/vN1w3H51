@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 #include <QModelIndex>
+#include <math.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -304,8 +305,9 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
 {
 
+    qDebug () << "ComSci_cellClicked";
     //qDebug () << index.row();
-    //qDebug () << row << column;
+    qDebug () << row << column;
     bool itt = true;
     QString name = "jonson";
     //addnewcomputer newcomputer;
@@ -316,6 +318,7 @@ void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
 
 void MainWindow::on_pushButon_addNewCompuer_clicked()
 {
+    qDebug () << "addnnewcomputerclicked";
     addnewcomputer newcomputer;
     newcomputer.setModal(true);
     newcomputer.exec();
@@ -325,6 +328,7 @@ void MainWindow::on_pushButon_addNewCompuer_clicked()
 
 void MainWindow::on_pushButton_removeCompuer_clicked()
 {
+        qDebug () << "on_pushButton_removeCompuer_clicked";
     int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
 
 
@@ -366,14 +370,48 @@ void MainWindow::displayRelations()
         ui->tableWidget_displayRelations->setItem(i, 2, new QTableWidgetItem(compID));
         ui->tableWidget_displayRelations->setItem(i, 3, new QTableWidgetItem(compName));
 
-        qDebug() << sciID << " - " << compID << " - " << sciName << " - " << compName << endl;
+        //qDebug() << sciID << " - " << compID << " - " << sciName << " - " << compName << endl;
 
     }
-    QStringList relationsHeader = (QStringList() << "ScientistID" << ">Scientist name" << "ComputerID" << "Computer name") ;
-    ui->tableWidget_displayRelations->setHorizontalHeaderLabels(relationsHeader);
+    //QStringList relationsHeader = (QStringList() << "ScientistID" << ">Scientist name" << "ComputerID" << "Computer name") ;
+    //ui->tableWidget_displayRelations->setHorizontalHeaderLabels(relationsHeader);
 
     ui->tableWidget_displayRelations->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
-    //ui->tableWidget_displayRelations->setColumnHidden(0, true);  // Hides ID column
-    //ui->tableWidget_displayRelations->setColumnHidden(2, true);  // Hides ID column
+    ui->tableWidget_displayRelations->setColumnHidden(0, true);  // Hides ID column
+    ui->tableWidget_displayRelations->setColumnHidden(2, true);  // Hides ID column
 }
 
+
+void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
+{
+    int i = index.internalId();
+    int row = ui->databaseDisplayComputers->currentRow();
+
+    QStringList list;
+    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 5);
+        qDebug () << (index.data().toString());
+        qDebug () << " ";
+        QString temp = (index.data().toString());
+        returnID = index.data().toString();
+    }
+    addnewcomputer newcomputer;
+    newcomputer.neweditcomputer(returnID);
+    //newcomputer.setModal(true);
+    //ui->setupUi(this);
+    //newcomputer.exec();
+    //serviceobject.servReadSqlComputers();
+    //printComputers();
+    //serviceobject.servReadSqlComputers();
+    //printComputers();
+
+
+    //QString test = QString::fromStdString(serviceobject.servGetComVector().at(i).getComName());
+
+    //qDebug () << test;
+}

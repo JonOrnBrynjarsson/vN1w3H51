@@ -19,12 +19,45 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
     {
         ui->comboBox_type->insertItem(row+1, QString::fromStdString(
                                         service.servGetCompTypeVector().at(row).getName()), 0);
-        qDebug () << QString::fromStdString(
-                         service.servGetCompTypeVector().at(row).getName());
+        //qDebug () << QString::fromStdString(
+        //                 service.servGetCompTypeVector().at(row).getName());
         //ui->buttonBox_addNewComputerFinished->
     }
 
 
+}
+
+void addnewcomputer::neweditcomputer(QString id)
+{
+    int n = id.toInt(0,10);
+    service.servReadSqlCompTypes();
+    service.servReadSqlComputers("NAME");
+
+    QString name, descr;
+    bool built;
+    int yoc, type;
+    for (unsigned int i = 0; i  < service.servGetComVector().size(); i++)
+    {
+        if(service.servGetComVector().at(i).getId() == n)
+        {
+            name = QString::fromStdString(service.servGetComVector().at(i).getComName());
+            yoc = service.servGetComVector().at(i).getComYear();
+            type = service.servGetComVector().at(i).getComType();
+            built = service.servGetComVector().at(i).getComBuilt();
+            descr = QString::fromStdString(service.servGetComVector().at(i).getComDescription());
+            qDebug () << name;
+        }
+    }
+    QDate qdat;
+    qdat.setDate(yoc,1,1);
+    ui->lineEdit_insertName->setText(name);
+    ui->dateEdit_year->setDate(qdat);
+    ui->comboBox_type->setCurrentIndex(type-1);
+    ui->checkBox_built->setChecked(built);
+    ui->textEdit_insertDescription->setText(descr);
+    //ui->
+    setModal(true);
+    exec();
 }
 addnewcomputer::~addnewcomputer()
 {

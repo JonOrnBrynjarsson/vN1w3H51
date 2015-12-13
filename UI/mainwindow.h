@@ -71,6 +71,8 @@ private slots:
 
     void on_pushButton_removeCompuer_clicked();
 
+    void on_databaseDisplayComputers_doubleClicked(const QModelIndex &index);
+
 private:
     void displayRelations();
     //service service;
