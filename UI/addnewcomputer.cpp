@@ -14,14 +14,16 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
     ui->setupUi(this);
     ui->buttonBox_editComputerFinished->setHidden(true);
     ui->label_computerID->setHidden(true);
+    ui->label_relations->setHidden(true);
+    ui->textBrowser_relations->setHidden(true);
 
 
-    service.servReadSqlCompTypes();
+    serviceObject.servReadSqlCompTypes();
 
-    for( unsigned int row = 0; row < service.servGetCompTypeVector().size(); row++)
+    for( unsigned int row = 0; row < serviceObject.servGetCompTypeVector().size(); row++)
     {
         ui->comboBox_type->insertItem(row+1, QString::fromStdString(
-                                        service.servGetCompTypeVector().at(row).getName()), 0);
+                                        serviceObject.servGetCompTypeVector().at(row).getName()), 0);
     }
 
 
@@ -29,26 +31,36 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
 
 void addnewcomputer::neweditcomputer(QString id, bool edit)
 {
+    //qDebug () << "neweditcomputer, crash 0";
     int n = id.toInt(0,10);
-    service.servReadSqlCompTypes();
-    service.servReadSqlComputers("NAME");
-
+    serviceObject.servReadSqlCompTypes();
+    serviceObject.servReadSqlComputers("NAME");
+    int currentID = 0;
     QString name, descr, comid;
     bool built;
     int yoc, type;
-    for (unsigned int i = 0; i  < service.servGetComVector().size(); i++)
+    //qDebug () << "neweditcomputer, crash 1";
+
+    for (unsigned int i = 0; i  < serviceObject.servGetComVector().size(); i++)
     {
-        if(service.servGetComVector().at(i).getId() == n)
+        if(serviceObject.servGetComVector().at(i).getId() == n)
         {
-            name = QString::fromStdString(service.servGetComVector().at(i).getComName());
-            yoc = service.servGetComVector().at(i).getComYear();
-            type = service.servGetComVector().at(i).getComType();
-            built = service.servGetComVector().at(i).getComBuilt();
-            descr = QString::fromStdString(service.servGetComVector().at(i).getComDescription());
-            comid = QString::number(service.servGetComVector().at(i).getId());
-            qDebug () << name;
+            //qDebug () << "neweditcomputer, crash 2";
+
+            name = QString::fromStdString(serviceObject.servGetComVector().at(i).getComName());
+            yoc = serviceObject.servGetComVector().at(i).getComYear();
+            type = serviceObject.servGetComVector().at(i).getComType();
+            built = serviceObject.servGetComVector().at(i).getComBuilt();
+            descr = QString::fromStdString(serviceObject.servGetComVector().at(i).getComDescription());
+            comid = QString::number(serviceObject.servGetComVector().at(i).getId());
+            currentID = serviceObject.servGetComVector().at(i).getId();
+            //qDebug () << name;
+            //qDebug () << "neweditcomputer, crash 3";
+
         }
     }
+    //qDebug () << "neweditcomputer, crash 4";
+
     QDate qdat;
     qdat.setDate(yoc,1,1);
     ui->lineEdit_insertName->setText(name);
@@ -57,9 +69,12 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
     ui->checkBox_built->setChecked(built);
     ui->textEdit_insertDescription->setText(descr);
     ui->label_computerID->setText(comid);
+    //qDebug () << "neweditcomputer, crash 5";
+
     this->setWindowTitle("Edit Computer in the Database");
     ui->buttonBox_editComputerFinished->setHidden(false);
     ui->buttonBox_addNewComputerFinished->setHidden(true);
+    //qDebug () << "neweditcomputer, crash 6";
 
     if (edit == false)
     {
@@ -76,10 +91,42 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
         ui->checkBox_built->setEnabled(false);
         ui->label_enterDescription->setText("Description:");
         ui->textEdit_insertDescription->setReadOnly(true);
+
+        vector<scientist> comLinkedToSci = serviceObject.servGetScientistsLinkedToComputer(currentID);
+
+        if (comLinkedToSci.size() > 0)
+        {
+            ui->label_relations->setHidden(false);
+            ui->textBrowser_relations->setHidden(false);
+            QString linkedScientists;
+            string outoffunc;
+            for (unsigned int x = 0; x < comLinkedToSci.size(); x++)
+            {
+                string space = "\n";
+                string temp;
+                temp = comLinkedToSci.at(x).getName();
+
+                if (comLinkedToSci.size() > 1)
+                {
+                    outoffunc += temp + space;
+                }
+                else
+                {
+                    outoffunc = temp;
+                }
+            }
+
+            linkedScientists = QString::fromStdString(outoffunc);
+            ui->textBrowser_relations->setText(linkedScientists);
+        }
+
     }
+    //qDebug () << "neweditcomputer, crash 7";
 
     setModal(true);
     exec();
+    //qDebug () << "neweditcomputer, crash 8";
+
 
 }
 addnewcomputer::~addnewcomputer()
@@ -93,15 +140,15 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
     string name = ui->lineEdit_insertName->text().toStdString();
     int year = ui->dateEdit_year->text().toInt();
     int type = ui->comboBox_type->currentIndex();
-    type = service.servGetCompTypeVector().at(type).getid();
+    type = serviceObject.servGetCompTypeVector().at(type).getid();
     bool built = ui->checkBox_built->checkState();
     string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
 
     if(name != "")
     {
         computer c(name, year, type, built, descr);
-        service.servAddcomputer(c);
-        service.servReadSqlComputers();
+        serviceObject.servAddcomputer(c);
+        serviceObject.servReadSqlComputers();
     }
     else
     {
@@ -114,7 +161,7 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 void addnewcomputer::on_dateEdit_year_userDateChanged(const QDate &date)
 {
     int year = ui->dateEdit_year->date().year();
-    qDebug () << ui->dateEdit_year->date();
+    //qDebug () << ui->dateEdit_year->date();
     if (year > CURRENTYEAR)
     {
 
@@ -125,23 +172,23 @@ void addnewcomputer::on_dateEdit_year_userDateChanged(const QDate &date)
 
 void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 {
-    qDebug () << "button pressed ";
+    //qDebug () << "button pressed ";
     string name = ui->lineEdit_insertName->text().toStdString();
     int year = ui->dateEdit_year->text().toInt();
     int type = ui->comboBox_type->currentIndex();
-    type = service.servGetCompTypeVector().at(type).getid();
+    type = serviceObject.servGetCompTypeVector().at(type).getid();
     bool built = ui->checkBox_built->checkState();
     string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
     int id = ui->label_computerID->text().toInt();
 
-    qDebug () << "id is : " << id ;
+    //qDebug () << "id is : " << id ;
 
     if(name != "")
     {
         computer c(name, year, type, built, descr);
         c.setComID(id);
-        service.servUpdateSqlComputer(c);
-        service.servReadSqlComputers();
+        serviceObject.servUpdateSqlComputer(c);
+        serviceObject.servReadSqlComputers();
     }
     else
     {
