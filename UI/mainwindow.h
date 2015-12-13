@@ -77,6 +77,10 @@ private slots:
 
     void on_databaseDisplayComputers_doubleClicked(const QModelIndex &index);
 
+
+    void on_comboBox_filterComputers_currentIndexChanged(int index);
+//job
+    void on_lineEdit_filterComputers_textEdited(const QString &arg1);
     void on_pushButton_editCompuer_clicked();
 
     void on_databaseDisplayComSci_doubleClicked(const QModelIndex &index);

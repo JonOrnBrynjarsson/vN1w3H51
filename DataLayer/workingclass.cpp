@@ -473,60 +473,80 @@ void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
 */
 void workingclass::searchComputerByName(string subName, bool& isFound)
 {
-    vector<computer> returnVector;
     computer c;
+    vector<computer> returnVector;
+    stringstream ss;
+    ss << "SELECT * FROM computers as c WHERE c.name LIKE '%" << subName << "%' AND deleted = 'FALSE'";
 
-    for(unsigned int i = 0; i < computerVector.size(); i++)
+    string s = ss.str() ;
+
+    QSqlQuery query;
+
+    query.exec(QString::fromStdString(ss.str()));
+    while(query.next())
     {
-        string searchstring = computerVector.at(i).getComName();
-        for (unsigned int j = 0; j < searchstring.size(); j++)
-        {
-            searchstring[j] = tolower(searchstring[j]);
-        }
-        for (unsigned int j = 0; j < subName.size(); j++)
-        {
-            subName[j] = tolower(subName[j]);
-        }
-        if( searchstring.find( subName) < 30 )
-       {
-            c = computerVector.at(i);
-            returnVector.push_back(c);
-            isFound = true;
-       }
+        computer c;
+        c.setComID(query.value("id").toUInt());
+        c.setComName(query.value("name").toString().toStdString());
+        c.setComYear(query.value("year").toUInt());
+        c.setComType(query.value("type").toUInt());
+        c.setComBuilt(query.value("built").toUInt());
+        c.setComDescription(query.value("description").toString().toStdString());
+        returnVector.push_back(c);
+        isFound = true;
     }
-    computerVector.clear();
-    computerVector = returnVector;
+    if( returnVector.size() > 0)
+    {
+        computerVector.clear();
+        computerVector = returnVector;
+    }
 }
+
+
+//    for(unsigned int i = 0; i < computerVector.size(); i++)
+//    {
+//        string searchstring = computerVector.at(i).getComName();
+//        for (unsigned int j = 0; j < searchstring.size(); j++)
+//        {
+//            searchstring[j] = tolower(searchstring[j]);
+//        }
+//        for (unsigned int j = 0; j < subName.size(); j++)
+//        {
+//            subName[j] = tolower(subName[j]);
+//        }
+//        if( searchstring.find( subName) < 30 )
+//       {
+//            c = computerVector.at(i);
+//            returnVector.push_back(c);
+//            isFound = true;
+//       }
+//    }
+//    computerVector.clear();
+//    computerVector = returnVector;
+//}
 void workingclass::searchComputerByType(string& type, bool& isFound)
 {
+
     vector<computer> returnVector;
     computer c;
-    readSqlCompTypes();
-    for (unsigned int i = 0; i < type.size(); i++)  // set inputið í lowercase
+    QSqlQuery query;
+    stringstream ss;
+
+    ss << "SELECT ct.id FROM computer_types as ct WHERE ct.name LIKE '%" << type << "%' AND deleted = 'FALSE'";
+    query.exec(QString::fromStdString(ss.str()));
+
+    readSqlComputers();
+    while(query.next())  // Hleyp í gegnum comptype sem fundust.
     {
-        type[i] = tolower(type[i]);
-    }
-    for(unsigned int i = 0; i < compTypeVector.size(); i++) // Hleyp í gegnum comptype vectorinn
-    {
-        string searchstring = compTypeVector.at(i).getName();
-        for (unsigned int j = 0; j < searchstring.size(); j++)  //set comptypename í lowercase
+        for(unsigned int item = 0; item < computerVector.size(); item++)
         {
-            searchstring[j] = tolower(searchstring[j]);
-        }
-        if( searchstring.find( type) < 30 ) //  ef type finnst í comptypename
-        {
-            int iType = compTypeVector.at(i).getid();
-            for(unsigned int k = 0; k < computerVector.size(); k++) //Hleyp í gengum computer vectorinn
+            if(computerVector.at(item).getComType() == query.value("id").toUInt())
             {
-                if(computerVector.at(k).getComType() == iType)  // Ef type == compputertype
-                {
-                    c = computerVector.at(k);
-                    returnVector.push_back(c);
-                    isFound    = true;
-                }
+                c = computerVector.at(item);
+                returnVector.push_back(c);
+                isFound    = true;
             }
         }
-
     }
     if( returnVector.size() > 0)
     {
@@ -537,18 +557,38 @@ void workingclass::searchComputerByType(string& type, bool& isFound)
 void workingclass::searchComputerByYear(int& yr, bool& isFound)
 {
     vector<computer> returnVector;
-    computer c;
-    for(unsigned int i = 0; i < computerVector.size(); i++)
-    {
-        if(computerVector.at(i).getComYear() == yr)
-        {
-            c = computerVector.at(i);
-            returnVector.push_back(c);
-            isFound = true;
-        }
-    }
+    QSqlQuery query;
+    stringstream ss;
+
+    ss << "SELECT * FROM computers as c WHERE c.year LIKE '%" << yr << "%' AND deleted = 'FALSE'";
+    query.exec(QString::fromStdString(ss.str()));
     computerVector.clear();
-    computerVector = returnVector;
+    while(query.next())
+    {
+        int i = 1;
+        computer c;
+        c.setComID(query.value("id").toUInt());
+        c.setComName(query.value("name").toString().toStdString());
+        c.setComYear(query.value("year").toUInt());
+        c.setComType(query.value("type").toUInt());
+        c.setComBuilt(query.value("built").toUInt());
+        c.setComDescription(query.value("description").toString().toStdString());
+        returnVector.push_back(c);
+
+        isFound = true;
+        qDebug() << i << " " << QString::fromStdString(c.getComName());
+        i++;
+
+    }
+    if( returnVector.size() > 0)
+    {
+        //computerVector.clear();
+        computerVector = returnVector;
+    }
+    else
+    {
+        readSqlComputers();
+    }
 }
 
 /*

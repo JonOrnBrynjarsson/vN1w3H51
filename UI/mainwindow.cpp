@@ -498,3 +498,56 @@ void MainWindow::on_pushButton_RemoveType_clicked()
         printComputerTypes();
     }
 }
+
+
+void MainWindow::on_comboBox_filterComputers_currentIndexChanged(int index)
+
+{
+    ui->lineEdit_filterComputers->setText("");
+    serviceobject.servReadSqlComputers();
+    printComputers();
+
+}
+
+void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
+
+{
+    bool isFound = false;
+    string filterText = arg1.toStdString();
+
+    if(ui->comboBox_filterComputers->currentIndex() == 0) //name
+    {
+         serviceobject.servSearchComputerByName(filterText, isFound);
+    }
+    else if(ui->comboBox_filterComputers->currentIndex() == 1) //type
+    {
+        serviceobject.servSearchComputerByType(filterText, isFound);
+    }
+    else if(ui->comboBox_filterComputers->currentIndex() == 2)
+    {
+        int yr = arg1.toUInt();
+        qDebug() << yr;
+        if(yr != 0)
+        {
+            serviceobject.servSearchComputerByYear(yr, isFound);
+        }
+        else
+        {
+            serviceobject.servReadSqlComputers();
+            printComputers();
+        }
+    }
+    if(isFound)
+    {
+        ui->databaseDisplayComputers->clear();
+        printComputers();
+    }
+    else
+    {
+        if(ui->comboBox_filterComputers->currentIndex() != 2)
+        {
+            ui->statusbar->showMessage("Nothing found", 2000);
+        }
+    }
+}
+

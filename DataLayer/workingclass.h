@@ -8,6 +8,7 @@
 #include <QtSql/QtSql>
 #include <qfile.h>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <QDebug>
 
