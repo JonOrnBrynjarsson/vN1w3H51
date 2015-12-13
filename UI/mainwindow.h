@@ -81,6 +81,10 @@ private slots:
 
     void on_databaseDisplayComSci_doubleClicked(const QModelIndex &index);
 
+    void on_pushButton_addnewType_clicked();
+
+    void on_pushButton_RemoveType_clicked();
+
 private:
     void displayRelations();
     //service service;

@@ -389,6 +389,8 @@ void MainWindow::on_pushButon_addNewCompuer_clicked()
     printComputers();
 }
 
+
+
 void MainWindow::on_pushButton_removeCompuer_clicked()
 {
         qDebug () << "on_pushButton_removeCompuer_clicked";
@@ -457,4 +459,42 @@ void MainWindow::on_databaseDisplayComSci_doubleClicked(const QModelIndex &index
 {
     addNewScientist newscientist;
     newscientist.neweditscientist(getCurrentSciRowPos(), false);
+}
+
+void MainWindow::on_pushButton_addnewType_clicked()
+{
+       qDebug () << "addnnewcomputertypeclicked";
+       addnewcomputertype newtype;
+       newtype.setModal(true);
+       newtype.exec();
+       serviceobject.servReadSqlCompTypes();
+       printComputerTypes();
+}
+
+
+void MainWindow::on_pushButton_RemoveType_clicked()
+{
+    qDebug () << "on_pushButton_removeComptype_clicked";
+    int currentType = ui->databaseDisplayComTypes->currentIndex().row();
+
+
+    computertype selctedType = serviceobject.servGetCompTypeVector().at(currentType);
+    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
+
+    if(toDelete == 1024)
+    {
+       serviceobject.servDeleteComputerType(selctedType.getid());
+       QMessageBox::information(this, QString::fromStdString(selctedType.getName()), "deleted!");
+
+       ui->databaseDisplayComTypes->clear();
+       serviceobject.servReadSqlCompTypes();
+       printComputerTypes();
+    }
+    else
+    {
+        QMessageBox::information(this, QString::fromStdString(selctedType.getName()), "Still here!");
+        ui->databaseDisplayComTypes->clear();
+        serviceobject.servReadSqlCompTypes();
+        printComputerTypes();
+    }
 }
