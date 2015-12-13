@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="MainMenuSelection">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="computerSci">
        <property name="accessibleName">
@@ -526,6 +526,11 @@
         <column>
          <property name="text">
           <string>Description</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>comtypeid</string>
          </property>
         </column>
        </widget>

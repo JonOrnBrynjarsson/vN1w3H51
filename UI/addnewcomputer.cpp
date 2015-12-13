@@ -7,9 +7,6 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addnewcomputer)
 {
-    int i, x;
-    bool itt;
-    QString name;
 
     ui->setupUi(this);
     ui->buttonBox_editComputerFinished->setHidden(true);

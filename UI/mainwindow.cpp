@@ -186,20 +186,18 @@ void MainWindow::printComputerTypes()
 
 QString MainWindow::getCurrentSciRowPos()
 {
-    //ui->databaseDisplayComputers->sortByColumn(0);
     int row = ui->databaseDisplayComSci->currentRow();
-
 
     QStringList list;
     QAbstractItemModel *model = ui->databaseDisplayComSci->model();
+
+
 
     model->rowCount();
     QString returnID;
     for (int i = 0; i < 1; i++)
     {
         QModelIndex index = model->index(row, 7);
-        //qDebug () << (index.data().toString());
-        //qDebug () << " ";
         QString temp = (index.data().toString());
         returnID = index.data().toString();
     }
@@ -231,7 +229,6 @@ QString MainWindow::getCurrentComRowPos()
 QString MainWindow::getCurrentComTypeRowPos()
 {
     int row = ui->databaseDisplayComTypes->currentRow();
-
     QStringList list;
     QAbstractItemModel *model = ui->databaseDisplayComTypes->model();
 
@@ -244,6 +241,7 @@ QString MainWindow::getCurrentComTypeRowPos()
         qDebug () << " ";
         QString temp = (index.data().toString());
         returnID = index.data().toString();
+
     }
 
     return returnID;
@@ -591,6 +589,8 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
 
 void MainWindow::on_databaseDisplayComTypes_doubleClicked(const QModelIndex &index)
 {
+    qDebug () << "on_databaseDisplayComTypes_doubleClicked" << index;
+    qDebug () << "getCurrentComTypeRowPos() is " << getCurrentComTypeRowPos();
     addnewcomputertype newcomputertype;
     newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
 }
