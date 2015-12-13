@@ -15,6 +15,10 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->setupUi(this);
     ui->buttonBox_editScientist->setHidden(true);
     ui->labelSciid->setHidden(true);
+    ui->labelCurrentAge->setHidden(true);
+    ui->lineEdit_currentAge->setHidden(true);
+    ui->labelAgeAtDeath->setHidden(true);
+    ui->lineEdit_AgeAtDeath->setHidden(true);
 
 }
 
@@ -106,6 +110,12 @@ void addNewScientist::neweditscientist(QString id, bool edit)
     ui->buttonBox->setHidden(true);
     ui->buttonBox_editScientist->setHidden(false);
 
+    bool dead = true;
+    if (yod.toInt() == 0)
+    {
+        dead = false;
+    }
+
     if (edit == false)
     {
         this->setWindowTitle("More information about the Scientist");
@@ -115,8 +125,37 @@ void addNewScientist::neweditscientist(QString id, bool edit)
         ui->lineEdit_name->setReadOnly(true);
         ui->labelEntBirth->setText("Year of Birth: ");
         ui->lineEdit_yob->setReadOnly(true);
-        ui->labelEntDeath->setText("Year of Death: ");
-        ui->lineEdit_yod->setReadOnly(true);
+
+        if (dead)
+        {
+            int ageAtDeath = yod.toInt() - yob.toInt();
+
+            ui->lineEdit_AgeAtDeath->setHidden(false);
+            ui->lineEdit_AgeAtDeath->setText(QString::number(ageAtDeath));
+            ui->lineEdit_AgeAtDeath->setReadOnly(true);
+            ui->labelAgeAtDeath->setHidden(false);
+            ui->lineEdit_yod->setReadOnly(true);
+
+        }
+        else
+        {
+            QDate date;
+            date.currentDate();
+            int currentYear = 2015;
+            int currentAge = currentYear - yob.toInt();
+
+            ui->labelEntDeath->setText("Year of Death: ");
+            ui->lineEdit_yod->setReadOnly(true);
+            ui->lineEdit_currentAge->setHidden(false);
+            ui->lineEdit_currentAge->setText(QString::number(currentAge));
+            ui->lineEdit_currentAge->setReadOnly(true);
+            ui->labelCurrentAge->setHidden(false);
+            ui->labelEntDeath->setHidden(true);
+            ui->lineEdit_yod->setHidden(true);
+        }
+
+
+
         ui->labelEntDescr->setText("Description: ");
         ui->textEdit_descr->setReadOnly(true);
         ui->labelEntGender->setText("Gender: ");

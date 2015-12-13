@@ -14,7 +14,7 @@
    <string>Add new Computer Scientist to Database</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="6" column="2">
+   <item row="9" column="2">
     <widget class="QLineEdit" name="lineEdit_link">
      <property name="toolTip">
       <string/>
@@ -27,17 +27,7 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
+   <item row="1" column="2">
     <widget class="QLineEdit" name="lineEdit_name">
      <property name="toolTip">
       <string>sdfdsr</string>
@@ -59,21 +49,31 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="11" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QLabel" name="labelEntGender">
      <property name="text">
       <string>Gender:</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QLabel" name="labelEntName">
      <property name="text">
       <string>Enter Name:</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="2">
+   <item row="2" column="2">
     <widget class="QComboBox" name="comboBox_gender">
      <property name="toolTip">
       <string/>
@@ -98,28 +98,56 @@
      </item>
     </widget>
    </item>
-   <item row="3" column="0">
+   <item row="4" column="0">
     <widget class="QLabel" name="labelEntDeath">
      <property name="text">
       <string>Year of Death:</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="labelEntBirth">
      <property name="text">
       <string>Year of Birth:</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
+   <item row="8" column="0">
     <widget class="QLabel" name="labelEntDescr">
      <property name="text">
       <string>Description:</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
+   <item row="4" column="2">
+    <widget class="QLineEdit" name="lineEdit_yod">
+     <property name="placeholderText">
+      <string>Leave blank if Computer Scientist is still alive.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2">
+    <widget class="QDialogButtonBox" name="buttonBox_editScientist">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QLineEdit" name="lineEdit_yob">
+     <property name="placeholderText">
+      <string>Enter year of birth, ex. 1984 or 69</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="labelEntLink">
+     <property name="text">
+      <string>Website Link:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="2">
     <widget class="QTextEdit" name="textEdit_descr">
      <property name="toolTip">
       <string>SSSS</string>
@@ -132,40 +160,32 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="labelEntLink">
+   <item row="5" column="0">
+    <widget class="QLabel" name="labelCurrentAge">
      <property name="text">
-      <string>Website Link:</string>
+      <string>Current Age:</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="2">
-    <widget class="QLineEdit" name="lineEdit_yod">
-     <property name="placeholderText">
-      <string>Leave blank if Computer Scientist is still alive.</string>
+   <item row="5" column="2">
+    <widget class="QLineEdit" name="lineEdit_currentAge"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelAgeAtDeath">
+     <property name="text">
+      <string>Age at Death:</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QLineEdit" name="lineEdit_yob">
-     <property name="placeholderText">
-      <string>Enter year of birth, ex. 1984 or 69</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="2">
-    <widget class="QDialogButtonBox" name="buttonBox_editScientist">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2">
+   <item row="0" column="0">
     <widget class="QLabel" name="labelSciid">
      <property name="text">
       <string>SciID</string>
      </property>
     </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QLineEdit" name="lineEdit_AgeAtDeath"/>
    </item>
   </layout>
  </widget>
