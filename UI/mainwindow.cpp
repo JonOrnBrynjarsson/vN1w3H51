@@ -326,7 +326,7 @@ void MainWindow::on_actionEdit_a_Computer_triggered()
 void MainWindow::on_actionEdit_a_Computer_Type_triggered()
 {
     addnewcomputertype newcomputertype;
-    newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), true);
+    //newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), true);
     serviceobject.servReadSqlCompTypes();
     printComputerTypes();
 }
@@ -636,10 +636,11 @@ void MainWindow::on_lineEdit_filterComputerTypes_textEdited(const QString &arg1)
             printComputerTypes();
         }
     }
+}
 
 void MainWindow::on_databaseDisplayComTypes_doubleClicked(const QModelIndex &index)
 {
     addnewcomputertype newcomputertype;
-    newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
+    //newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
 
 }

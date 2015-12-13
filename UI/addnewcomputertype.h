@@ -7,7 +7,7 @@
 #include <QTextStream>
 #include "models/computertype.h"
 #include "Services/service.h"
-#include "computertypeuiclass.h"
+//#include "computertypeuiclass.h"
 
 namespace Ui
 {

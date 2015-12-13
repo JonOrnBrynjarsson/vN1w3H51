@@ -1,6 +1,6 @@
 #include "addnewcomputertype.h"
 #include "ui_addnewcomputertype.h"
-#include "computertypeuiclass.h"
+//#include "computertypeuiclass.h"
 //#include "DataLayer/workingclass.h"
 //#include <QDateEdit>
 //#include <sstream>
@@ -19,7 +19,7 @@ addnewcomputertype::~addnewcomputertype()
 
 void addnewcomputertype::on_buttonBox_accepted()
 {
-    computertypeuiclass ctc;
+//    computertypeuiclass ctc;
 
-    ctc.getComputerTypeData((ui->lineEdit_name->text().toStdString()),(ui->textEdit_descr->toPlainText().toStdString()));
+//    ctc.getComputerTypeData((ui->lineEdit_name->text().toStdString()),(ui->textEdit_descr->toPlainText().toStdString()));
 }
