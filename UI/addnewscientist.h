@@ -22,15 +22,21 @@ public:
     scientist s;
     service serviceobject;
     int inputNumberToFunction(string input);
+    void addScientistToDatabase(scientist &sc);
+    void neweditscientist(QString id, bool edit);
 
     ~addNewScientist();
 
 private slots:
     void on_buttonBox_accepted();
 
+    void on_buttonBox_editScientist_accepted();
+
+    void on_buttonBox_editScientist_rejected();
+
 private:
     Ui::addNewScientist *ui;
-    void addScientistToDatabase(scientist &s);
+
     void addScientistErrorCorrection(scientist &s);
 };
 

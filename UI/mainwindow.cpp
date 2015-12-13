@@ -162,7 +162,28 @@ void MainWindow::printComputerTypes()
     }
 }
 
-QString MainWindow::getCurrentRowPos()
+QString MainWindow::getCurrentSciRowPos()
+{
+    int row = ui->databaseDisplayComSci->currentRow();
+
+    QStringList list;
+    QAbstractItemModel *model = ui->databaseDisplayComSci->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 7);
+        qDebug () << (index.data().toString());
+        qDebug () << " ";
+        QString temp = (index.data().toString());
+        returnID = index.data().toString();
+    }
+
+    return returnID;
+}
+
+QString MainWindow::getCurrentComRowPos()
 {
     int row = ui->databaseDisplayComputers->currentRow();
 
@@ -181,7 +202,28 @@ QString MainWindow::getCurrentRowPos()
     }
 
     return returnID;
+}
+
+QString MainWindow::getCurrentComTypeRowPos()
+{
+    int row = ui->databaseDisplayComputers->currentRow();
+
+    QStringList list;
+    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 5);
+        qDebug () << (index.data().toString());
+        qDebug () << " ";
+        QString temp = (index.data().toString());
+        returnID = index.data().toString();
     }
+
+    return returnID;
+}
 
 vector<scientist> MainWindow::returnSciVector()
 {
@@ -252,12 +294,19 @@ void MainWindow::on_actionAdd_Relations_triggered()
 
 void MainWindow::on_actionEdit_a_Computer_Scientist_triggered()
 {
-    qDebug() << "Edit_a_Computer_Scientist";
+    addNewScientist newscientist;
+    newscientist.neweditscientist(getCurrentSciRowPos(), true);
+    qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
+    serviceobject.servReadSqlScientists("NAME");
+    printScientists();
 }
 
 void MainWindow::on_actionEdit_a_Computer_triggered()
 {
-    qDebug() << "Edit_a_Computer";
+    addnewcomputer newcomputer;
+    newcomputer.neweditcomputer(getCurrentComRowPos(), true);
+    serviceobject.servReadSqlComputers("NAME");
+    printComputers();
 }
 
 void MainWindow::on_actionEdit_a_Computer_Type_triggered()
@@ -326,13 +375,6 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
 {
 
-    qDebug () << "ComSci_cellClicked";
-    //qDebug () << index.row();
-    qDebug () << row << column;
-    bool itt = true;
-    QString name = "jonson";
-    //addnewcomputer newcomputer;
-    //newcomputer.editcomputer(row,column, itt, name);
 }
 
 
@@ -390,13 +432,7 @@ void MainWindow::displayRelations()
         ui->tableWidget_displayRelations->setItem(i, 1, new QTableWidgetItem(sciName));
         ui->tableWidget_displayRelations->setItem(i, 2, new QTableWidgetItem(compID));
         ui->tableWidget_displayRelations->setItem(i, 3, new QTableWidgetItem(compName));
-
-        //qDebug() << sciID << " - " << compID << " - " << sciName << " - " << compName << endl;
-
     }
-    //QStringList relationsHeader = (QStringList() << "ScientistID" << ">Scientist name" << "ComputerID" << "Computer name") ;
-    //ui->tableWidget_displayRelations->setHorizontalHeaderLabels(relationsHeader);
-
     ui->tableWidget_displayRelations->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
     ui->tableWidget_displayRelations->setColumnHidden(0, true);  // Hides ID column
     ui->tableWidget_displayRelations->setColumnHidden(2, true);  // Hides ID column
@@ -406,45 +442,19 @@ void MainWindow::displayRelations()
 void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
 {
 
-    QString currentpos = getCurrentRowPos();
     addnewcomputer newcomputer;
-    newcomputer.neweditcomputer(getCurrentRowPos(), false);
+    newcomputer.neweditcomputer(getCurrentComTypeRowPos(), false);
 
-//    int i = index.internalId();
-//    int row = ui->databaseDisplayComputers->currentRow();
-
-//    QStringList list;
-//    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
-
-//    model->rowCount();
-//    QString returnID;
-//    for (int i = 0; i < 1; i++)
-//    {
-//        QModelIndex index = model->index(row, 5);
-//        //qDebug () << (index.data().toString());
-//        //qDebug () << " ";
-//        QString temp = (index.data().toString());
-//        returnID = index.data().toString();
-//    }
 }
 
 void MainWindow::on_pushButton_editCompuer_clicked()
 {
-
-    addnewcomputer newcomputer;
-    newcomputer.neweditcomputer(getCurrentRowPos(), true);
-
-    //newcomputer.setModal(true);
-    //ui->setupUi(this);
-    //newcomputer.exec();
-    //serviceobject.servReadSqlComputers();
-    //printComputers();
-    //serviceobject.servReadSqlComputers();
-    //printComputers();
-
-
-    //QString test = QString::fromStdString(serviceobject.servGetComVector().at(i).getComName());
-
-    //qDebug () << test;
+    on_actionEdit_a_Computer_triggered();
 }
 
+
+void MainWindow::on_databaseDisplayComSci_doubleClicked(const QModelIndex &index)
+{
+    addNewScientist newscientist;
+    newscientist.neweditscientist(getCurrentSciRowPos(), false);
+}

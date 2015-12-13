@@ -63,7 +63,7 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
 
     if (edit == false)
     {
-        this->setWindowTitle("More information about the Database");
+        this->setWindowTitle("More information about the Computer");
         ui->buttonBox_editComputerFinished->setHidden(true);
 
         ui->label_enterName->setText("Name: ");

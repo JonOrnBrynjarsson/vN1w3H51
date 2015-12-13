@@ -27,7 +27,10 @@ public:
     void printScientists();
     void printComputers();
     void printComputerTypes();
-    QString getCurrentRowPos();
+    QString getCurrentSciRowPos();
+    QString getCurrentComRowPos();
+    QString getCurrentComTypeRowPos();
+
     ~MainWindow();
 
 private slots:
@@ -75,6 +78,8 @@ private slots:
     void on_databaseDisplayComputers_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_editCompuer_clicked();
+
+    void on_databaseDisplayComSci_doubleClicked(const QModelIndex &index);
 
 private:
     void displayRelations();

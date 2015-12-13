@@ -532,8 +532,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>MainMenuSelection</tabstop>
-  <tabstop>databaseDisplayComSci</tabstop>
   <tabstop>databaseDisplayComputers</tabstop>
   <tabstop>pushButon_addNewCompuer</tabstop>
   <tabstop>pushButton_editCompuer</tabstop>
