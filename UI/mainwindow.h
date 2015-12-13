@@ -101,6 +101,10 @@ private slots:
 
     void on_databaseDisplayComTypes_doubleClicked(const QModelIndex &index);
 
+    void on_comboBox_filterScientist_currentIndexChanged(const QString &arg1);
+
+    void on_lineEdit_filterScientist_textEdited(const QString &arg1);
+
 private:
     void displayRelations();
     //service service;

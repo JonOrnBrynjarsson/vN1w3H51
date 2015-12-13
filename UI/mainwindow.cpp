@@ -40,8 +40,9 @@ void MainWindow::printScientists()
     //ui->databaseDisplayComSci->clear();
 
 
-    serviceobject.servReadSqlScientists("NAME");
+    //serviceobject.servReadSqlScientists("NAME");
 
+    ui->databaseDisplayComSci->setSortingEnabled(false);
     ui->databaseDisplayComSci->setRowCount(serviceobject.servGetSciVector().size());
 
     for (unsigned int i = 0; i < serviceobject.servGetSciVector().size(); i++)
@@ -110,7 +111,11 @@ void MainWindow::printScientists()
         QString sciID = QString::number(serviceobject.servGetSciVector().at(i).getID());
         ui->databaseDisplayComSci->setItem(i, 7, new QTableWidgetItem(sciID));
     }
-    qDebug() << "on to the next...";
+    QStringList sciHeader = (QStringList() << "Name" << "Gender" << "Year of birth" << "Year of death"
+                             << "Description" << "Link" << "computer type" << "Scientist id");
+    ui->databaseDisplayComSci->setHorizontalHeaderLabels(sciHeader);
+    ui->databaseDisplayComSci->setSortingEnabled(true);
+    //qDebug() << "on to the next...";
 
 }
 
@@ -160,6 +165,7 @@ void MainWindow::printComputers()
 
 void MainWindow::printComputerTypes()
 {
+    ui->databaseDisplayComSci->setSortingEnabled(false);
     ui->databaseDisplayComTypes->setRowCount(serviceobject.servGetCompTypeVector().size());
 
     for (unsigned int i = 0; i < serviceobject.servGetCompTypeVector().size(); i++)
@@ -173,6 +179,9 @@ void MainWindow::printComputerTypes()
         QString comTID = QString::number(serviceobject.servGetCompTypeVector().at(i).getid());
         ui->databaseDisplayComTypes->setItem(i, 2, new QTableWidgetItem(comTID));
     }
+    ui->databaseDisplayComTypes->setSortingEnabled(true);
+    QStringList compTypeHeader = (QStringList() << "Name" << "Description");
+    ui->databaseDisplayComTypes->setHorizontalHeaderLabels(compTypeHeader);
 }
 
 QString MainWindow::getCurrentSciRowPos()
@@ -460,6 +469,8 @@ void MainWindow::displayRelations()
     ui->tableWidget_displayRelations->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
     ui->tableWidget_displayRelations->setColumnHidden(0, true);  // Hides ID column
     ui->tableWidget_displayRelations->setColumnHidden(2, true);  // Hides ID column
+    QStringList relHeader = (QStringList() << ""<< "Scientist" << ""<< "Computer");
+    ui->tableWidget_displayRelations->setHorizontalHeaderLabels(relHeader);
 }
 
 
@@ -582,4 +593,139 @@ void MainWindow::on_databaseDisplayComTypes_doubleClicked(const QModelIndex &ind
 {
     addnewcomputertype newcomputertype;
     newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
+}
+void MainWindow::on_comboBox_filterRelations_currentIndexChanged(const QString &arg1)
+{
+    ui->lineEdit_filterRelations->setText("");
+    serviceobject.servReadSqlRelations();
+    displayRelations();
+
+}
+
+void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)
+{
+    bool isFound = false;
+    string filterText = arg1.toStdString();
+    serviceobject.servSearchRelations(ui->comboBox_filterRelations
+                                          ->currentIndex(), filterText, isFound);
+    if(isFound)
+    {
+        ui->tableWidget_displayRelations->clear();
+        displayRelations();
+    }
+    else
+    {
+        if(ui->comboBox_filterRelations->currentIndex() < 2)
+        {
+            ui->statusbar->showMessage("Nothing found", 2000);
+        }
+        displayRelations();
+    }
+}
+void MainWindow::on_comboBox_filterComputerTypes_currentIndexChanged(const QString &arg1)
+{
+    ui->lineEdit_filterComputerTypes->setText("");
+    serviceobject.servReadSqlCompTypes();
+    printComputerTypes();
+}
+
+void MainWindow::on_lineEdit_filterComputerTypes_textEdited(const QString &arg1)
+{
+    {
+        bool isFound = false;
+        string filterText = arg1.toStdString();
+        serviceobject.servSearchComputerTypes(ui->comboBox_filterRelations
+                                              ->currentIndex(), filterText, isFound);
+        if(isFound)
+        {
+            ui->databaseDisplayComTypes->clear();
+            printComputerTypes();
+        }
+        else
+        {
+            if(ui->comboBox_filterComputerTypes->currentIndex() < 2)
+            {
+                ui->statusbar->showMessage("Nothing found", 2000);
+            }
+            printComputerTypes();
+        }
+    }
+}
+
+
+
+void MainWindow::on_comboBox_filterScientist_currentIndexChanged(const QString &arg1)
+{
+    ui->lineEdit_filterScientist->setText("");
+    serviceobject.servReadSqlScientists();
+    printScientists();
+}
+
+
+
+void MainWindow::on_lineEdit_filterScientist_textEdited(const QString &arg1)
+{
+    bool isFound = false;
+    string filterText = arg1.toStdString();
+
+    if(ui->comboBox_filterScientist->currentIndex() == 0) //name
+    {
+         serviceobject.servSearchScientistByName(filterText, isFound);
+    }
+    else if(ui->comboBox_filterScientist->currentIndex() == 1) //gender
+    {
+        int gender = serviceobject.genderCorrection(filterText);
+        serviceobject.servSearchScientistByGender(gender, isFound);
+    }
+    else if(ui->comboBox_filterScientist->currentIndex() == 2       //yob
+            || ui->comboBox_filterScientist->currentIndex() == 3)  // yod
+    {
+        int yr = arg1.toUInt();
+        char bord;
+        if(ui->comboBox_filterScientist->currentIndex() == 2)
+        {
+            bord = 'b';
+        }
+        else
+        {
+            bord = 'd';
+        }
+        qDebug() << yr;
+        if(yr != 0)
+        {
+            serviceobject.servSearchScientistByYear(yr, bord, isFound);
+        }
+        else
+        {
+            serviceobject.servReadSqlScientists();
+            printScientists();
+        }
+    }
+//    else if(ui->comboBox_filterScientist->currentIndex() == 3)  // yod
+//    {
+//        int yr = arg1.toUInt();
+//        if(yr != 0)
+//        {
+//            serviceobject.servSearchScientistByYear(yr,'b' isFound);
+//        }
+//        else
+//        {
+//            serviceobject.servReadSqlScientists();
+//            printScientists();
+//        }
+//    }
+
+    if(isFound)
+    {
+        ui->databaseDisplayComSci->clear();
+        printScientists();
+    }
+    else
+    {
+        if(ui->comboBox_filterScientist->currentIndex() < 2)
+        {
+            ui->statusbar->showMessage("Nothing found", 2000);
+            printScientists();
+        }
+    }
 }

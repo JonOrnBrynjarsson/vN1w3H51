@@ -399,72 +399,145 @@ void workingclass::eraseCompTypeVector()
 void workingclass::searchScientistByName(string subName, bool& isFound)
 {
     vector<scientist> returnVector;
-    scientist s;
+    //scientist s;
+	QSqlQuery query;
+    stringstream ss;
+    isFound = false;
+    
+	ss << "SELECT * FROM scientists as s WHERE s.name LIKE '%" 
+	   << subName << "%' AND deleted = 'FALSE'";
+    qDebug() << QString::fromStdString(ss.str());
 
-    for(unsigned int i = 0; i < scientistVector.size(); i++)
+    query.exec(QString::fromStdString(ss.str()));
+
+    while(query.next())
     {
-        string searchstring = scientistVector.at(i).getName();
-        for (unsigned int j = 0; j < searchstring.size(); j++)
-        {
-            searchstring[j] = tolower(searchstring[j]);
-        }
-        for (unsigned int j = 0; j < subName.size(); j++)
-        {
-            subName[j] = tolower(subName[j]);
-        }
-        if( searchstring.find( subName) < 30 )
-       {
-            s = scientistVector.at(i);
-            returnVector.push_back(s);
-            isFound = true;
-       }
+        int id = query.value("id").toUInt();
+        string nam = query.value("name").toString().toStdString();
+        int gen = query.value("gender").toUInt();
+        int yob = query.value("yob").toUInt();
+        int yod = query.value("yod").toUInt();
+        string desc = query.value("description").toString().toStdString();
+        string url = query.value("link").toString().toStdString();
+
+        scientist s(id,nam,gen,yob,yod,desc,url);
+        returnVector.push_back(s);
+        isFound = true;
     }
-    scientistVector.clear();
-    scientistVector = returnVector;
+    if( returnVector.size() > 0)
+    {
+        scientistVector = returnVector;
+    }
+	else
+    {
+        readSqlScientists();
+    }
 }
 void workingclass::searchScientistByGender(int sex, bool& isFound)
 {
     vector<scientist> returnVector;
     scientist s;
-
-
-    for(unsigned int i = 0; i < scientistVector.size(); i++)
+	stringstream ss;
+    QSqlQuery query;
+	
+    isFound = false;
+    ss << "SELECT * FROM scientists as s WHERE s.gender = " <<  sex << " AND deleted = 'FALSE'";
+    query.exec(QString::fromStdString(ss.str()));
+	scientistVector.clear();
+	
+	while(query.next())
     {
-        if(scientistVector.at(i).getGender() == sex)
-       {
-            s = scientistVector.at(i);
-            returnVector.push_back(s);
-            isFound = true;
-       }
+        int id = query.value("id").toUInt();
+        string nam = query.value("name").toString().toStdString();
+        int gen = query.value("gender").toUInt();
+        int yob = query.value("yob").toUInt();
+        int yod = query.value("yod").toUInt();
+        string desc = query.value("description").toString().toStdString();
+        string url = query.value("link").toString().toStdString();
+
+        scientist s(id,nam,gen,yob,yod,desc,url);
+        returnVector.push_back(s);
+        isFound = true;
     }
-    scientistVector.clear();
-    scientistVector = returnVector;
+    if(isFound)
+    {
+        scientistVector = returnVector;
+    }
+	else
+    {
+        readSqlScientists();
+    }
 }
+
+// {
+    // vector<scientist> returnVector;
+    // scientist s;
+
+    // for(unsigned int i = 0; i < scientistVector.size(); i++)
+    // {
+        // if(scientistVector.at(i).getGender() == sex)
+       // {
+            // s = scientistVector.at(i);
+            // returnVector.push_back(s);
+            // isFound = true;
+       // }
+    // }
+    // scientistVector.clear();
+    // scientistVector = returnVector;
+// }
+
 void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
 {
+
     vector<scientist> returnVector;
     scientist s;
+    string col;
+    QSqlQuery query;
+    stringstream ss;
+	
+	if(bORd == 'b')
+	{
+         col = "yob";
+	}
+	else if(bORd == 'd')
+	{
+         col = "yod";
+	}
+	else
+	{
+        isFound = false;
+		return;
+	}
+	
 
-    for(unsigned int i = 0; i < scientistVector.size(); i++)
+    ss << "SELECT * FROM scientists as s WHERE s." <<  col
+	   <<" LIKE '%"  << yr << "%' AND deleted = 'FALSE'";
+
+    query.exec(QString::fromStdString(ss.str()));
+	scientistVector.clear();
+	
+	while(query.next())
     {
-        if(bORd == 'b')
-        {
-           if(scientistVector.at(i).getYearOfBirth() == yr)
-           {
-               s = scientistVector.at(i);
-               returnVector.push_back(s);
-               isFound = true;
-           }
-        }
-        else if(scientistVector.at(i).getYearOfDeath() == yr)
-        {
-            s = scientistVector.at(i);
-            returnVector.push_back(s);
-            isFound = true;
-        }
+        int id = query.value("id").toUInt();
+        string nam = query.value("name").toString().toStdString();
+        int gen = query.value("gender").toUInt();
+        int yob = query.value("yob").toUInt();
+        int yod = query.value("yod").toUInt();
+        string desc = query.value("description").toString().toStdString();
+        string url = query.value("link").toString().toStdString();
+
+        scientist s(id,nam,gen,yob,yod,desc,url);
+        returnVector.push_back(s);
+        isFound = true;
     }
-    scientistVector.clear();
-    scientistVector = returnVector;
+    if( returnVector.size() > 0)
+    {
+        scientistVector = returnVector;
+    }
+	else
+    {
+        readSqlScientists();
+    }
 }
 
 /*
@@ -501,29 +574,6 @@ void workingclass::searchComputerByName(string subName, bool& isFound)
         computerVector = returnVector;
     }
 }
-
-
-//    for(unsigned int i = 0; i < computerVector.size(); i++)
-//    {
-//        string searchstring = computerVector.at(i).getComName();
-//        for (unsigned int j = 0; j < searchstring.size(); j++)
-//        {
-//            searchstring[j] = tolower(searchstring[j]);
-//        }
-//        for (unsigned int j = 0; j < subName.size(); j++)
-//        {
-//            subName[j] = tolower(subName[j]);
-//        }
-//        if( searchstring.find( subName) < 30 )
-//       {
-//            c = computerVector.at(i);
-//            returnVector.push_back(c);
-//            isFound = true;
-//       }
-//    }
-//    computerVector.clear();
-//    computerVector = returnVector;
-//}
 void workingclass::searchComputerByType(string& type, bool& isFound)
 {
 
