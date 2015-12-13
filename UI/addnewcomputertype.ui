@@ -35,6 +35,13 @@
     </widget>
    </item>
    <item row="1" column="0">
+    <widget class="QLabel" name="labelComTypeID">
+     <property name="text">
+      <string>ComTypeId</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QLabel" name="labelEntDescr">
      <property name="text">
       <string>Description:</string>
@@ -42,16 +49,6 @@
     </widget>
    </item>
    <item row="3" column="0" colspan="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
     <widget class="QTextEdit" name="textEdit_descr">
      <property name="toolTip">
       <string/>
@@ -64,6 +61,23 @@
      </property>
      <property name="placeholderText">
       <string>Enter a detailed description of the computer type.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox_Editcomtype">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>

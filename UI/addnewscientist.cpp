@@ -19,6 +19,8 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->lineEdit_currentAge->setHidden(true);
     ui->labelAgeAtDeath->setHidden(true);
     ui->lineEdit_AgeAtDeath->setHidden(true);
+    ui->labelRelations->setHidden(true);
+    ui->textBrowser_relations->setHidden(true);
 
 }
 
@@ -36,11 +38,13 @@ void addNewScientist::on_buttonBox_accepted()
     sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
     sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
     sc.setGender(ui->comboBox_gender->currentIndex());
+    serviceobject.servAddscientist(sc);
+    serviceobject.servReadSqlScientists();
 }
 
 void addNewScientist::addScientistToDatabase(scientist &sc)
 {
-    serviceobject.servStartDatabase();
+
     serviceobject.servAddscientist(sc);
 }
 
@@ -82,6 +86,8 @@ void addNewScientist::neweditscientist(QString id, bool edit)
     serviceobject.servReadSqlComputers("NAME");
     serviceobject.servReadSqlCompTypes();
 
+    int currentID = 0;
+
     //name  gender  year of birth  year of death  description  link
     QString name, descr, link, sciid, yob, yod;
     int gender;
@@ -96,6 +102,7 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             gender = serviceobject.servGetSciVector().at(i).getGender();
             yob = QString::number(serviceobject.servGetSciVector().at(i).getYearOfBirth());
             yod = QString::number(serviceobject.servGetSciVector().at(i).getYearOfDeath());
+            currentID = serviceobject.servGetSciVector().at(i).getID();
             qDebug () << name;
         }
     }
@@ -164,6 +171,33 @@ void addNewScientist::neweditscientist(QString id, bool edit)
         ui->lineEdit_link->setReadOnly(true);
 
 
+        vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
+
+        if (sciLinkedToCom.size() > 0)
+        {
+            ui->labelRelations->setHidden(false);
+            ui->textBrowser_relations->setHidden(false);
+            QString linkedComputers;
+            string outoffunc;
+            for (unsigned int x = 0; x < sciLinkedToCom.size(); x++)
+            {
+                string space = "\n";
+                string temp;
+                temp = sciLinkedToCom.at(x).getComName();
+
+                if (sciLinkedToCom.size() > 1)
+                {
+                    outoffunc += temp + space;
+                }
+                else
+                {
+                    outoffunc = temp;
+                }
+            }
+
+            linkedComputers = QString::fromStdString(outoffunc);
+            ui->textBrowser_relations->setText(linkedComputers);
+        }
     }
 
     setModal(true);

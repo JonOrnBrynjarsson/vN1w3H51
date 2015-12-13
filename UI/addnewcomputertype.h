@@ -7,7 +7,7 @@
 #include <QTextStream>
 #include "models/computertype.h"
 #include "Services/service.h"
-#include "computertypeuiclass.h"
+//#include "computertypeuiclass.h"
 
 namespace Ui
 {
@@ -23,11 +23,14 @@ public:
     computertype ct;
     service serviceObject;
     int inputNumberToFunction(string input);
+    void neweditcomputertype(QString id, bool edit);
 
     ~addnewcomputertype();
 
 private slots:
     void on_buttonBox_accepted();
+    void on_buttonBox_Editcomtype_accepted();
+
 
 private:
     Ui::addnewcomputertype *ui;

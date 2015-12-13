@@ -31,7 +31,7 @@ private slots:
 
 private:
     Ui::addnewcomputer *ui;
-    service service;
+    service serviceObject;
 };
 
 #endif // ADDNEWCOMPUTER_H

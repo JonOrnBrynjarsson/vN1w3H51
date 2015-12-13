@@ -22,17 +22,25 @@ MainWindow::MainWindow(QWidget *parent) :
     printComputerTypes();
     displayRelations();
 
+    ui->databaseDisplayComSci->setColumnHidden(4, true); // FELUR auka uppl.
+    ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
+    ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
+
     ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
-   // ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
 
+    ui->databaseDisplayComputers->setColumnHidden(4, true); // // FELUR auka uppl.
 
-
+    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
+    ui->databaseDisplayComTypes->setColumnHidden(2, true);  // Hides ID column
 }
 
 void MainWindow::printScientists()
 {
     //serviceobject.servStartDatabase();
-    //serviceobject.servReadSqlScientists("NAME");
+    //ui->databaseDisplayComSci->clear();
+
+
+    serviceobject.servReadSqlScientists("NAME");
 
     ui->databaseDisplayComSci->setRowCount(serviceobject.servGetSciVector().size());
 
@@ -77,7 +85,7 @@ void MainWindow::printScientists()
 
         vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
 
-        //qDebug() << "doinit i is: " << " " << i+1 ;
+        //qDebug() << "for i: " << i << " name is "  << name;
 
         QString linkedComputers;
         string outoffunc;
@@ -102,6 +110,8 @@ void MainWindow::printScientists()
         QString sciID = QString::number(serviceobject.servGetSciVector().at(i).getID());
         ui->databaseDisplayComSci->setItem(i, 7, new QTableWidgetItem(sciID));
     }
+    qDebug() << "on to the next...";
+
 }
 
 void MainWindow::printComputers()
@@ -159,12 +169,17 @@ void MainWindow::printComputerTypes()
 
         QString comTDescr = QString::fromStdString(serviceobject.servGetCompTypeVector().at(i).getDesc());
         ui->databaseDisplayComTypes->setItem(i, 1, new QTableWidgetItem(comTDescr));
+
+        QString comTID = QString::number(serviceobject.servGetCompTypeVector().at(i).getid());
+        ui->databaseDisplayComTypes->setItem(i, 2, new QTableWidgetItem(comTID));
     }
 }
 
 QString MainWindow::getCurrentSciRowPos()
 {
+    //ui->databaseDisplayComputers->sortByColumn(0);
     int row = ui->databaseDisplayComSci->currentRow();
+
 
     QStringList list;
     QAbstractItemModel *model = ui->databaseDisplayComSci->model();
@@ -174,8 +189,8 @@ QString MainWindow::getCurrentSciRowPos()
     for (int i = 0; i < 1; i++)
     {
         QModelIndex index = model->index(row, 7);
-        qDebug () << (index.data().toString());
-        qDebug () << " ";
+        //qDebug () << (index.data().toString());
+        //qDebug () << " ";
         QString temp = (index.data().toString());
         returnID = index.data().toString();
     }
@@ -206,16 +221,16 @@ QString MainWindow::getCurrentComRowPos()
 
 QString MainWindow::getCurrentComTypeRowPos()
 {
-    int row = ui->databaseDisplayComputers->currentRow();
+    int row = ui->databaseDisplayComTypes->currentRow();
 
     QStringList list;
-    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+    QAbstractItemModel *model = ui->databaseDisplayComTypes->model();
 
     model->rowCount();
     QString returnID;
     for (int i = 0; i < 1; i++)
     {
-        QModelIndex index = model->index(row, 5);
+        QModelIndex index = model->index(row, 2);
         qDebug () << (index.data().toString());
         qDebug () << " ";
         QString temp = (index.data().toString());
@@ -249,7 +264,6 @@ vector<computertype> MainWindow::returnComTypeVector()
 MainWindow::~MainWindow()
 {
     delete ui;
-
 }
 
 void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
@@ -259,8 +273,8 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
     newscientist.setModal(true);
     newscientist.exec();
     ui->statusbar->showMessage("Add new scientist", 5000);
-
-
+    ui->databaseDisplayComSci->clear();
+    serviceobject.servReadSqlScientists();
 }
 
 void MainWindow::on_actionAdd_New_Computer_triggered()
@@ -311,7 +325,10 @@ void MainWindow::on_actionEdit_a_Computer_triggered()
 
 void MainWindow::on_actionEdit_a_Computer_Type_triggered()
 {
-    qDebug() << "Edit_a_Computer_Type";
+    addnewcomputertype newcomputertype;
+    newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), true);
+    serviceobject.servReadSqlCompTypes();
+    printComputerTypes();
 }
 
 void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
@@ -364,10 +381,15 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
     if (index == 0)
     {
         printScientists();
+        qDebug () << "index selected !";
     }
     if (index == 1)
     {
         printComputers();
+    }
+    if (index == 2)
+    {
+        printComputerTypes();
     }
 
 }
@@ -443,9 +465,11 @@ void MainWindow::displayRelations()
 
 void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
 {
-
+    qDebug () << "in display computers double click: " << getCurrentComTypeRowPos();
     addnewcomputer newcomputer;
-    newcomputer.neweditcomputer(getCurrentComTypeRowPos(), false);
+    newcomputer.neweditcomputer(getCurrentComRowPos(), false);
+    serviceobject.servReadSqlComputers("NAME");
+    printComputers();
 
 }
 
@@ -457,7 +481,9 @@ void MainWindow::on_pushButton_editCompuer_clicked()
 
 void MainWindow::on_databaseDisplayComSci_doubleClicked(const QModelIndex &index)
 {
+    qDebug () << "column is : " << index.row();
     addNewScientist newscientist;
+    qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
     newscientist.neweditscientist(getCurrentSciRowPos(), false);
 }
 
@@ -551,3 +577,9 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
     }
 }
 
+
+void MainWindow::on_databaseDisplayComTypes_doubleClicked(const QModelIndex &index)
+{
+    addnewcomputertype newcomputertype;
+    newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
+}
