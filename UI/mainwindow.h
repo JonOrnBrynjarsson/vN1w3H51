@@ -81,6 +81,7 @@ private slots:
     void on_comboBox_filterComputers_currentIndexChanged(int index);
 //job
     void on_lineEdit_filterComputers_textEdited(const QString &arg1);
+
     void on_pushButton_editCompuer_clicked();
 
     void on_databaseDisplayComSci_doubleClicked(const QModelIndex &index);
@@ -88,6 +89,14 @@ private slots:
     void on_pushButton_addnewType_clicked();
 
     void on_pushButton_RemoveType_clicked();
+
+    void on_comboBox_filterRelations_currentIndexChanged(const QString &arg1);
+
+    void on_lineEdit_filterRelations_textEdited(const QString &arg1);
+
+    void on_comboBox_filterComputerTypes_currentIndexChanged(const QString &arg1);
+
+    void on_lineEdit_filterComputerTypes_textEdited(const QString &arg1);
 
 private:
     void displayRelations();

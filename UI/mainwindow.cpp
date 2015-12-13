@@ -509,6 +509,8 @@ void MainWindow::on_comboBox_filterComputers_currentIndexChanged(int index)
 
 }
 
+//void servSearchRelations(int column, string searchstr, bool& isFound);
+
 void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
 
 {
@@ -551,3 +553,62 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
     }
 }
 
+
+void MainWindow::on_comboBox_filterRelations_currentIndexChanged(const QString &arg1)
+{
+    ui->lineEdit_filterRelations->setText("");
+    serviceobject.servReadSqlRelations();
+    displayRelations();
+
+}
+
+void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)
+{
+    bool isFound = false;
+    string filterText = arg1.toStdString();
+    serviceobject.servSearchRelations(ui->comboBox_filterRelations
+                                          ->currentIndex(), filterText, isFound);
+    if(isFound)
+    {
+        ui->tableWidget_displayRelations->clear();
+        displayRelations();
+    }
+    else
+    {
+        if(ui->comboBox_filterRelations->currentIndex() < 2)
+        {
+            ui->statusbar->showMessage("Nothing found", 2000);
+        }
+        displayRelations();
+    }
+}
+
+void MainWindow::on_comboBox_filterComputerTypes_currentIndexChanged(const QString &arg1)
+{
+    ui->lineEdit_filterComputerTypes->setText("");
+    serviceobject.servReadSqlCompTypes();
+    printComputerTypes();
+}
+
+void MainWindow::on_lineEdit_filterComputerTypes_textEdited(const QString &arg1)
+{
+    {
+        bool isFound = false;
+        string filterText = arg1.toStdString();
+        serviceobject.servSearchComputerTypes(ui->comboBox_filterRelations
+                                              ->currentIndex(), filterText, isFound);
+        if(isFound)
+        {
+            ui->databaseDisplayComTypes->clear();
+            printComputerTypes();
+        }
+        else
+        {
+            if(ui->comboBox_filterComputerTypes->currentIndex() < 2)
+            {
+                ui->statusbar->showMessage("Nothing found", 2000);
+            }
+            printComputerTypes();
+        }
+    }
+}

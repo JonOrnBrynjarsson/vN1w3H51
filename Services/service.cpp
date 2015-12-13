@@ -383,6 +383,16 @@ void service::servSearchComputerByYear(int& yr, bool& isFound)
     workingObject.searchComputerByYear(yr, isFound);
 }
 
+void service::servSearchRelations(int column, string searchstr, bool& isFound)
+{
+    workingObject.searchRelations(column, searchstr, isFound);
+}
+
+void service::servSearchComputerTypes(int column, string searchstr, bool& isFound)
+{
+    workingObject.searchComputerTypes(column, searchstr, isFound);
+}
+
 /*
 ##  Database functions
 ##---------------------------------------------------------------------------------------##

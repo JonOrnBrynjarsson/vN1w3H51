@@ -176,6 +176,8 @@ public:
     //                  to indicate if found.
     //  Postcondition:  Returns a vector of the computers matching the criteria.
 
+    void searchRelations(int column, string searchstr, bool& isFound);
+    void searchComputerTypes(int column, string searchstr, bool& isFound);
     /*
     ##  Database functions
     ##---------------------------------------------------------------------------------------##

@@ -84,7 +84,7 @@ void workingclass::readSqlRelations()
 {
     QSqlQuery query;
 
-    query.prepare("SELECT DISTINCT    s.id as sid, s.name as sname, c.id as cid, c.name as cname  "
+    query.prepare("SELECT DISTINCT s.id as sid, s.name as sname, c.id as cid, c.name as cname  "
                   "FROM scientists AS s, computers AS c "
                   "JOIN scientists_and_computers AS sc "
                   "ON sc.scientist_id = s.id AND sc.computer_id = c.id;");
@@ -588,6 +588,95 @@ void workingclass::searchComputerByYear(int& yr, bool& isFound)
     else
     {
         readSqlComputers();
+    }
+}
+
+void workingclass::searchRelations(int column, string searchstr, bool& isFound)
+{
+    QSqlQuery query;
+    vector<relation> returnVector;
+    string col;
+    if(column == 0)
+    {
+        col = "s.name";
+    }
+    else
+    {
+        col = "c.name";
+    }
+    stringstream ss;
+    ss << " SELECT DISTINCT s.id as sid, s.name as sname, c.id as cid, c.name as cname "
+       << " FROM scientists AS s, computers AS c JOIN scientists_and_computers AS sc "
+       << " ON sc.scientist_id = s.id AND sc.computer_id = c.id "
+       << " WHERE " << col << " LIKE '%" << searchstr << "%' AND sc.deleted = 'FALSE';";
+
+    qDebug() << QString::fromStdString(ss.str());
+    query.exec(QString::fromStdString(ss.str()));
+    returnVector.clear();
+    while(query.next())
+    {
+        relation r;
+        r.scientistID = query.value("sid").toUInt();
+        r.computerID = query.value("cid").toUInt();
+        r.scientistName = query.value("sname").toString().toStdString();
+        r.computerName = query.value("cname").toString().toStdString();
+        returnVector.push_back(r);
+        qDebug() << r.scientistID << " - "<< r.computerID;
+        isFound = true;
+    }
+    qDebug() << returnVector.size();
+    if( returnVector.size() > 0)
+    {
+        relationVector = returnVector;
+    }
+    else
+    {
+        readSqlRelations();
+        isFound = false;
+    }
+}
+
+void workingclass::searchComputerTypes(int column, string searchstr, bool& isFound)
+{
+    QSqlQuery query;
+    vector<computertype> returnVector;
+    string col;
+
+    if(column == 0)
+    {
+        col = "name";
+    }
+    else
+    {
+        col = "description";
+    }
+
+    stringstream ss;
+    ss << " SELECT DISTINCT * "
+       << " FROM computer_types AS ct "
+       << " WHERE " << col << " LIKE '%" << searchstr << "%' AND ct.deleted = 'FALSE';";
+
+    query.exec(QString::fromStdString(ss.str()));
+    returnVector.clear();
+    while(query.next())
+    {
+        computertype ct;
+        int tid = query.value("id").toUInt();
+        ct.setID(tid);
+        ct.setName(query.value("name").toString().toStdString());
+        ct.setDesc(query.value("description").toString().toStdString());
+        returnVector.push_back(ct);
+        isFound = true;
+    }
+    qDebug() << returnVector.size();
+    if( returnVector.size() > 0)
+    {
+        compTypeVector= returnVector;
+    }
+    else
+    {
+        readSqlCompTypes();
+        isFound = false;
     }
 }
 

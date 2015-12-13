@@ -161,6 +161,11 @@ class service
         void servSearchComputerByYear(int& yr, bool& isFound);
         //  Calls the searchComputerByYear function in workingclass.
 
+
+        void servSearchRelations(int column, string searchstr, bool& isFound);
+        void servSearchComputerTypes(int column, string searchstr, bool& isFound);
+
+
         /*
         ##  Database functions
         ##---------------------------------------------------------------------------------------##
