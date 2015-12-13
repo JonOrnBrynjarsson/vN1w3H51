@@ -145,7 +145,7 @@ void MainWindow::printComputers()
     ui->databaseDisplayComputers->setHorizontalHeaderLabels(comHeader);
     //ui->databaseDisplayComputers->horizontalHeader()-
     ui->databaseDisplayComputers->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
-    ui->databaseDisplayComputers->setColumnHidden(5, true);  // Hides ID column
+    //ui->databaseDisplayComputers->setColumnHidden(5, true);  // Hides ID column
 }
 
 void MainWindow::printComputerTypes()
@@ -161,6 +161,27 @@ void MainWindow::printComputerTypes()
         ui->databaseDisplayComTypes->setItem(i, 1, new QTableWidgetItem(comTDescr));
     }
 }
+
+QString MainWindow::getCurrentRowPos()
+{
+    int row = ui->databaseDisplayComputers->currentRow();
+
+    QStringList list;
+    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 5);
+        qDebug () << (index.data().toString());
+        qDebug () << " ";
+        QString temp = (index.data().toString());
+        returnID = index.data().toString();
+    }
+
+    return returnID;
+    }
 
 vector<scientist> MainWindow::returnSciVector()
 {
@@ -384,24 +405,35 @@ void MainWindow::displayRelations()
 
 void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
 {
-    int i = index.internalId();
-    int row = ui->databaseDisplayComputers->currentRow();
 
-    QStringList list;
-    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
-
-    model->rowCount();
-    QString returnID;
-    for (int i = 0; i < 1; i++)
-    {
-        QModelIndex index = model->index(row, 5);
-        qDebug () << (index.data().toString());
-        qDebug () << " ";
-        QString temp = (index.data().toString());
-        returnID = index.data().toString();
-    }
+    QString currentpos = getCurrentRowPos();
     addnewcomputer newcomputer;
-    newcomputer.neweditcomputer(returnID);
+    newcomputer.neweditcomputer(getCurrentRowPos(), false);
+
+//    int i = index.internalId();
+//    int row = ui->databaseDisplayComputers->currentRow();
+
+//    QStringList list;
+//    QAbstractItemModel *model = ui->databaseDisplayComputers->model();
+
+//    model->rowCount();
+//    QString returnID;
+//    for (int i = 0; i < 1; i++)
+//    {
+//        QModelIndex index = model->index(row, 5);
+//        //qDebug () << (index.data().toString());
+//        //qDebug () << " ";
+//        QString temp = (index.data().toString());
+//        returnID = index.data().toString();
+//    }
+}
+
+void MainWindow::on_pushButton_editCompuer_clicked()
+{
+
+    addnewcomputer newcomputer;
+    newcomputer.neweditcomputer(getCurrentRowPos(), true);
+
     //newcomputer.setModal(true);
     //ui->setupUi(this);
     //newcomputer.exec();
@@ -415,3 +447,4 @@ void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &in
 
     //qDebug () << test;
 }
+
