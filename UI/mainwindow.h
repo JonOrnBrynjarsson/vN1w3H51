@@ -13,6 +13,7 @@
 #include "Services/service.h"
 
 #include <QTableWidget>
+#include <QActionGroup>
 
 namespace Ui {
 class MainWindow;

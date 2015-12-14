@@ -22,18 +22,17 @@ MainWindow::MainWindow(QWidget *parent) :
     printComputerTypes();
     displayRelations();
 
-    ui->databaseDisplayComSci->setColumnHidden(4, true); // FELUR auka uppl.
-    ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
-    ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
+//    ui->databaseDisplayComSci->setColumnHidden(4, true); // FELUR auka uppl.
+//    ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
+//    ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
 
-    ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
+//    ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
 
-    ui->databaseDisplayComputers->setColumnHidden(4, true); // // FELUR auka uppl.
+//    ui->databaseDisplayComputers->setColumnHidden(4, true); // // FELUR auka uppl.
 
-    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
-    ui->databaseDisplayComTypes->setColumnHidden(2, true);  // Hides ID column
+//    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
+//    ui->databaseDisplayComTypes->setColumnHidden(2, true);  // Hides ID column
 }
-
 void MainWindow::printScientists()
 {
     //serviceobject.servStartDatabase();
@@ -116,6 +115,11 @@ void MainWindow::printScientists()
     ui->databaseDisplayComSci->setHorizontalHeaderLabels(sciHeader);
     ui->databaseDisplayComSci->setSortingEnabled(true);
     //qDebug() << "on to the next...";
+    ui->databaseDisplayComSci->setColumnHidden(4, true); // FELUR auka uppl.
+    ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
+    ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
+    ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
+
 
 }
 
@@ -161,6 +165,9 @@ void MainWindow::printComputers()
     //ui->databaseDisplayComputers->horizontalHeader()-
     ui->databaseDisplayComputers->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
     //ui->databaseDisplayComputers->setColumnHidden(5, true);  // Hides ID column
+    ui->databaseDisplayComputers->setColumnHidden(4, true); // // FELUR auka uppl.
+    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
+
 }
 
 void MainWindow::printComputerTypes()
@@ -182,6 +189,7 @@ void MainWindow::printComputerTypes()
     ui->databaseDisplayComTypes->setSortingEnabled(true);
     QStringList compTypeHeader = (QStringList() << "Name" << "Description");
     ui->databaseDisplayComTypes->setHorizontalHeaderLabels(compTypeHeader);
+    ui->databaseDisplayComTypes->setColumnHidden(2, true);  // Hides ID column
 }
 
 QString MainWindow::getCurrentSciRowPos()
