@@ -24,6 +24,9 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->textBrowser_relations->setHidden(true);
     ui->labelClickableLink->setHidden(true);
     ui->labelClickableUrlReal->setHidden(true);
+    ui->errorInName->setHidden(true);
+    ui->errorInYob->setHidden(true);
+    ui->errorInYod->setHidden(true);
 }
 
 addNewScientist::~addNewScientist()
@@ -33,6 +36,22 @@ addNewScientist::~addNewScientist()
 
 void addNewScientist::on_buttonBox_accepted()
 {
+
+    bool goodInput = false;
+
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_lineEdit_yob_editingFinished() == false)&&(on_lineEdit_yod_editingFinished() == false))
+    {
+        goodInput = true;
+    }
+//    qDebug () << "in accepted: ";
+//    qDebug () << on_lineEdit_name_editingFinished();
+//    qDebug () << on_lineEdit_yob_editingFinished();
+//    qDebug () << on_lineEdit_yod_editingFinished();
+//    qDebug () << "good name is: ";
+//    qDebug () << goodName;
+
+
+
     scientist sc;
     sc.setName(ui->lineEdit_name->text().toStdString());
     sc.setDescription(ui->textEdit_descr->toPlainText().toStdString());
@@ -41,15 +60,14 @@ void addNewScientist::on_buttonBox_accepted()
     sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
     sc.setGender(ui->comboBox_gender->currentIndex());
 
-    if (sc.getName().length() > 2)
+    if (goodInput)
     {
         serviceobject.servAddscientist(sc);
         serviceobject.servReadSqlScientists();
     }
     else
     {
-
-        QMessageBox::warning(this, "Error", "You have to include a name for the Scientist!");
+        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
     }
 
     addNewScientist::close();
@@ -276,9 +294,14 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
     string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
     int sciid = ui->labelSciid->text().toInt();
 
-    qDebug () << "im here" << sciid ;
+    bool goodInput = false;
 
-    if(name.length() > 2)
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_lineEdit_yob_editingFinished() == false)&&(on_lineEdit_yod_editingFinished() == false))
+    {
+        goodInput = true;
+    }
+
+    if(goodInput)
     {
         scientist sc(sciid, name, gender, yob, yod, descr, link);
         serviceobject.servUpdateSqlScientist(sc);
@@ -286,8 +309,7 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
     }
     else
     {
-
-        QMessageBox::warning(this, "Error", "You have to include a name for the Scientist!");
+        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
     }
 
     addNewScientist::close();
@@ -298,8 +320,7 @@ void addNewScientist::on_buttonBox_editScientist_rejected()
 {
 
 }
-
-void addNewScientist::on_lineEdit_name_editingFinished()
+bool addNewScientist::on_lineEdit_name_editingFinished()
 {
     bool badname = false;
     QString name = ui->lineEdit_name->text();
@@ -313,16 +334,21 @@ void addNewScientist::on_lineEdit_name_editingFinished()
 
     if (badname == true)
     {
-        QMessageBox::warning(this, "Error", "Bad Name!");
+        ui->errorInName->setHidden(false);
+        ui->errorInName->setText("<font color='Red'>Name is incorrectly formatted.</font>");
     }
     else
     {
         ui->lineEdit_name->setText(name);
+        ui->errorInName->setHidden(true);
+        badname = false;
     }
+
+    return badname;
 }
 
 
-void addNewScientist::on_lineEdit_yob_editingFinished()
+bool addNewScientist::on_lineEdit_yob_editingFinished()
 {
     bool badyob = false;
     QString yob = ui->lineEdit_yob->text();
@@ -331,21 +357,28 @@ void addNewScientist::on_lineEdit_yob_editingFinished()
 
     if (badyob == true)
     {
-        QMessageBox::warning(this, "Error", "Bad Year!");
+        ui->errorInYob->setHidden(false);
+        ui->errorInYob->setText("<font color='Red'>Year not properly formatted.</font>");
     }
     else
     {
         ui->lineEdit_yob->setText(yobf);
+        ui->errorInYob->setHidden(true);
+        badyob = false;
     }
+
+    return badyob;
 }
 
-void addNewScientist::on_lineEdit_yod_editingFinished()
+bool addNewScientist::on_lineEdit_yod_editingFinished()
 {
     bool badyod = false;
     QString yod = ui->lineEdit_yod->text();
+    ui->errorInYod->setHidden(true);
 
-    if (yod.length() > 1)
+    if (yod.length() != 0)
     {
+
         int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
         yod = QString::number(syod);
 
@@ -357,11 +390,15 @@ void addNewScientist::on_lineEdit_yod_editingFinished()
 
         if (badyod == true)
         {
-            QMessageBox::warning(this, "Error", "Bad Year!");
+            ui->errorInYod->setHidden(false);
+            ui->errorInYod->setText("<font color='Red'>Year not properly formatted.</font>");
         }
         else
         {
             ui->lineEdit_yod->setText(yod);
+            ui->errorInYod->setHidden(true);
+            badyod = false;
         }
     }
+    return badyod;
 }

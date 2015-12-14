@@ -34,11 +34,11 @@ private slots:
 
     void on_buttonBox_editScientist_rejected();
 
-    void on_lineEdit_name_editingFinished();
+    bool on_lineEdit_name_editingFinished();
 
-    void on_lineEdit_yob_editingFinished();
+    bool on_lineEdit_yob_editingFinished();
 
-    void on_lineEdit_yod_editingFinished();
+    bool on_lineEdit_yod_editingFinished();
 
 private:
     Ui::addNewScientist *ui;

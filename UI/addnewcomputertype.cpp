@@ -13,6 +13,7 @@ addnewcomputertype::addnewcomputertype(QWidget *parent) :QDialog(parent),ui(new 
     ui->setupUi(this);
     ui->buttonBox_Editcomtype->setHidden(true);
     ui->labelComTypeID->setHidden(true);
+    ui->errorInName->setHidden(true);
 }
 
 void addnewcomputertype::neweditcomputertype(QString id, bool edit)
@@ -64,10 +65,18 @@ addnewcomputertype::~addnewcomputertype()
 
 void addnewcomputertype::on_buttonBox_accepted()
 {
-    ct.setName(ui->lineEdit_name->text().toStdString());
-    ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
-    serviceObject.servAddcomputerType(ct);
-    serviceObject.servReadSqlCompTypes();
+    if(on_lineEdit_name_editingFinished())
+    {
+        ct.setName(ui->lineEdit_name->text().toStdString());
+        ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
+        serviceObject.servAddcomputerType(ct);
+        serviceObject.servReadSqlCompTypes();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
+    }
+
 
 }
 
@@ -105,9 +114,6 @@ void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
 void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
 {
 
-    //qDebug () << "on_buttonBox_Editcomtype_accepted()";
-
-
     string name = ui->lineEdit_name->text().toStdString();
     string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
     int id = ui->labelComTypeID->text().toInt();
@@ -116,7 +122,7 @@ void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
     QString debugdescr = QString::fromStdString(descr);
     QString debugid = QString::number(id);
 
-    if(name != "")
+    if(on_lineEdit_name_editingFinished())
     {
         //computer c(name, year, type, built, descr);
         //qDebug () << "debugname is " << debugname << "debugdescr is " << debugdescr << "debugid is "  << debugid;
@@ -126,9 +132,26 @@ void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
     }
     else
     {
-
-        QMessageBox::warning(this, "Error", "You have to include a name for the computertype!");
+        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
     }
 
     addnewcomputertype::close();
+}
+
+bool addnewcomputertype::on_lineEdit_name_editingFinished()
+{
+    bool badName = true;
+    if (ui->lineEdit_name->text().length() < 2)
+    {
+        ui->errorInName->setHidden(false);
+        ui->errorInName->setText("<font color='Red'>Name is to short!</font>");
+        badName = true;
+    }
+    else
+    {
+        ui->errorInName->setHidden(true);
+        badName = false;
+    }
+
+    return badName;
 }
