@@ -117,12 +117,13 @@ void MainWindow::printScientists()
     QStringList sciHeader = (QStringList() << "Name" << "Gender" << "Year of birth" << "Year of death"
                              << "Description" << "Link" << "computer type" << "Scientist id");
     ui->databaseDisplayComSci->setHorizontalHeaderLabels(sciHeader);
-    ui->databaseDisplayComSci->setSortingEnabled(true);
     //qDebug() << "on to the next...";
     ui->databaseDisplayComSci->setColumnHidden(4, true); // FELUR auka uppl.
     ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
     ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
     ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
+    ui->databaseDisplayComSci->setColumnWidth(0, 200);
+    ui->databaseDisplayComSci->setSortingEnabled(true);
 
 
 }
@@ -167,10 +168,11 @@ void MainWindow::printComputers()
     QStringList comHeader = (QStringList() << "Name" << "Created" << "Type" << "Built" << "Description"  << "cID") ;
     ui->databaseDisplayComputers->setHorizontalHeaderLabels(comHeader);
     //ui->databaseDisplayComputers->horizontalHeader()-
-    ui->databaseDisplayComputers->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
     //ui->databaseDisplayComputers->setColumnHidden(5, true);  // Hides ID column
     ui->databaseDisplayComputers->setColumnHidden(4, true); // // FELUR auka uppl.
     ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
+    ui->databaseDisplayComputers->setColumnWidth(0, 200);
+    ui->databaseDisplayComputers->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
 
 }
 
@@ -500,6 +502,8 @@ void MainWindow::displayRelations()
     ui->tableWidget_displayRelations->setColumnHidden(2, true);  // Hides ID column
     QStringList relHeader = (QStringList() << ""<< "Scientist" << ""<< "Computer");
     ui->tableWidget_displayRelations->setHorizontalHeaderLabels(relHeader);
+    ui->tableWidget_displayRelations->setColumnWidth(1, 200);
+    ui->tableWidget_displayRelations->setColumnWidth(3, 200);
 }
 
 
