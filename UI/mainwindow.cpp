@@ -294,6 +294,7 @@ void MainWindow::on_actionAdd_New_Computer_Scientist_triggered()
     ui->statusbar->showMessage("Add new scientist", 5000);
     ui->databaseDisplayComSci->clear();
     serviceobject.servReadSqlScientists();
+    printScientists();
 }
 
 void MainWindow::on_actionAdd_New_Computer_triggered()
@@ -353,6 +354,9 @@ void MainWindow::on_actionEdit_a_Computer_Type_triggered()
 
 void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
 {
+    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
+    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
+    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
     qDebug() << "Remove_a_Computer_Scientist";
 }
 
@@ -395,28 +399,15 @@ void MainWindow::on_actionRemove_Relations_triggered()
 
 }
 
-void MainWindow::on_actionDisplay_a_List_of_Computer_Scientists_triggered()
-{
-    qDebug() << "Display_a_List_of_Computer_Scientists";
-}
-
-void MainWindow::on_actionDisplay_a_List_of_Computers_triggered()
-{
-    qDebug() << "Display_a_List_of_Computers";
-}
-
-void MainWindow::on_actionDisplay_a_List_of_Computer_Types_triggered()
-{
-    qDebug() << "Display_a_List_of_Computer_Types";
-}
-
 void MainWindow::on_actionHelp_triggered()
 {
+    QMessageBox::information(this, "Help", "Unfortunately the help file was lost during translation - please contact one of the group member; Anna Dis, Bardi Freyr, Isak Snaer or Jon Orn");
     qDebug() << "Help";
 }
 
 void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()
 {
+    QMessageBox::information(this, "About the program", "A program created as a solution for the 3. week in the course "" T-113-VLN1, Verklegt namskeid 1."" A solution by Group 51.");
     qDebug() << "About_Computers_and_Scientists_Database";
 }
 
@@ -474,7 +465,7 @@ void MainWindow::on_pushButton_removeCompuer_clicked()
 //        serviceobject.servDeleteComputer(selctedComputer.getId());
 //        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "deleted!");
 
-//        ui->databaseDisplayComputers->clear();
+//        ui->databaseDisplayComhputers->clear();
 //        serviceobject.servReadSqlComputers();
 //        printComputers();
 //    }
@@ -801,3 +792,18 @@ void MainWindow::setAllMainMenuSelectionDisabled()
 }
 
 
+
+void MainWindow::on_pushButon_addNewScientist_clicked()
+{
+    on_actionAdd_New_Computer_Scientist_triggered();
+}
+
+void MainWindow::on_pushButton_editScientist_clicked()
+{
+    on_actionEdit_a_Computer_Scientist_triggered();
+}
+
+void MainWindow::on_pushButton_removeScientist_clicked()
+{
+    on_actionRemove_a_Computer_Scientist_triggered();
+}

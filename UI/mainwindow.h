@@ -57,12 +57,6 @@ private slots:
 
     void on_actionRemove_Relations_triggered();
 
-    void on_actionDisplay_a_List_of_Computer_Scientists_triggered();
-
-    void on_actionDisplay_a_List_of_Computers_triggered();
-
-    void on_actionDisplay_a_List_of_Computer_Types_triggered();
-
     void on_actionHelp_triggered();
 
     void on_actionAbout_Computers_and_Scientists_Database_triggered();
@@ -109,6 +103,12 @@ private slots:
     void on_MainMenuSelection_currentChanged(int index);
 
     void setAllMainMenuSelectionDisabled();
+
+    void on_pushButon_addNewScientist_clicked();
+
+    void on_pushButton_editScientist_clicked();
+
+    void on_pushButton_removeScientist_clicked();
 
 private:
     void displayRelations();
