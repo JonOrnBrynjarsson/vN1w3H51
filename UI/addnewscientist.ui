@@ -14,6 +14,20 @@
    <string>Add new Computer Scientist to Database</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="12" column="2">
+    <widget class="QDialogButtonBox" name="buttonBox_editScientist">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="labelEntLink">
+     <property name="text">
+      <string>Website Link:</string>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="0">
     <widget class="QLabel" name="labelEntBirth">
      <property name="text">
@@ -28,31 +42,10 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="labelEntLink">
-     <property name="text">
-      <string>Website Link:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="2">
-    <widget class="QDialogButtonBox" name="buttonBox_editScientist">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="2">
     <widget class="QLineEdit" name="lineEdit_yod">
      <property name="placeholderText">
       <string>Leave blank if Computer Scientist is still alive.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <widget class="QLineEdit" name="lineEdit_yob">
-     <property name="placeholderText">
-      <string>Enter year of birth, ex. 1984 or 69</string>
      </property>
     </widget>
    </item>
@@ -63,38 +56,15 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="2">
+    <widget class="QLineEdit" name="lineEdit_yob">
+     <property name="placeholderText">
+      <string>Enter year of birth, ex. 1984 or 69</string>
+     </property>
+    </widget>
+   </item>
    <item row="5" column="2">
     <widget class="QLineEdit" name="lineEdit_currentAge"/>
-   </item>
-   <item row="8" column="2">
-    <widget class="QTextEdit" name="textEdit_descr">
-     <property name="toolTip">
-      <string>SSSS</string>
-     </property>
-     <property name="whatsThis">
-      <string>This is a text input, you can use it to enter the description of the computer scientist.</string>
-     </property>
-     <property name="placeholderText">
-      <string>Enter a detailed description of the life and career the scientist.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="labelAgeAtDeath">
-     <property name="text">
-      <string>Age at Death:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="2">
-    <widget class="QLineEdit" name="lineEdit_AgeAtDeath"/>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="labelSciid">
-     <property name="text">
-      <string>SciID</string>
-     </property>
-    </widget>
    </item>
    <item row="9" column="2">
     <widget class="QLineEdit" name="lineEdit_link">
@@ -106,6 +76,36 @@
      </property>
      <property name="placeholderText">
       <string>http://www...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelAgeAtDeath">
+     <property name="text">
+      <string>Age at Death:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelSciid">
+     <property name="text">
+      <string>SciID</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QLineEdit" name="lineEdit_AgeAtDeath"/>
+   </item>
+   <item row="8" column="2">
+    <widget class="QTextEdit" name="textEdit_descr">
+     <property name="toolTip">
+      <string>SSSS</string>
+     </property>
+     <property name="whatsThis">
+      <string>This is a text input, you can use it to enter the description of the computer scientist.</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter a detailed description of the life and career the scientist.</string>
      </property>
     </widget>
    </item>
@@ -128,13 +128,6 @@
      </property>
      <property name="placeholderText">
       <string>Enter letters, no numbers allowed.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="labelEntName">
-     <property name="text">
-      <string>Enter Name:</string>
      </property>
     </widget>
    </item>
@@ -163,13 +156,10 @@
      </item>
     </widget>
    </item>
-   <item row="12" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelEntName">
+     <property name="text">
+      <string>Enter Name:</string>
      </property>
     </widget>
    </item>
@@ -180,6 +170,16 @@
      </property>
     </widget>
    </item>
+   <item row="13" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
    <item row="4" column="0">
     <widget class="QLabel" name="labelEntDeath">
      <property name="text">
@@ -187,13 +187,27 @@
      </property>
     </widget>
    </item>
-   <item row="10" column="2">
-    <widget class="QTextBrowser" name="textBrowser_relations"/>
-   </item>
-   <item row="10" column="0">
+   <item row="11" column="0">
     <widget class="QLabel" name="labelRelations">
      <property name="text">
       <string>Relations:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="2">
+    <widget class="QTextBrowser" name="textBrowser_relations"/>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="labelClickableLink">
+     <property name="text">
+      <string>Website Link:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2">
+    <widget class="QLabel" name="labelClickableUrlReal">
+     <property name="text">
+      <string>Website</string>
      </property>
     </widget>
    </item>

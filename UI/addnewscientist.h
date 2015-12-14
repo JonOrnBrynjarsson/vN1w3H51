@@ -24,7 +24,8 @@ public:
     int inputNumberToFunction(string input);
     void addScientistToDatabase(scientist &sc);
     void neweditscientist(QString id, bool edit);
-
+    void neweditscientistRelations(int currentID);
+    void neweditscientistClickableLink(QString link);
     ~addNewScientist();
 
 private slots:

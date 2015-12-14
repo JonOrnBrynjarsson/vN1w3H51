@@ -21,6 +21,9 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->lineEdit_AgeAtDeath->setHidden(true);
     ui->labelRelations->setHidden(true);
     ui->textBrowser_relations->setHidden(true);
+    ui->labelClickableLink->setHidden(true);
+    ui->labelClickableUrlReal->setHidden(true);
+
 
 }
 
@@ -161,6 +164,8 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             ui->lineEdit_yod->setHidden(true);
         }
 
+        neweditscientistRelations(currentID);
+        neweditscientistClickableLink(link);
 
 
         ui->labelEntDescr->setText("Description: ");
@@ -171,38 +176,71 @@ void addNewScientist::neweditscientist(QString id, bool edit)
         ui->lineEdit_link->setReadOnly(true);
 
 
-        vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
 
-        if (sciLinkedToCom.size() > 0)
-        {
-            ui->labelRelations->setHidden(false);
-            ui->textBrowser_relations->setHidden(false);
-            QString linkedComputers;
-            string outoffunc;
-            for (unsigned int x = 0; x < sciLinkedToCom.size(); x++)
-            {
-                string space = "\n";
-                string temp;
-                temp = sciLinkedToCom.at(x).getComName();
 
-                if (sciLinkedToCom.size() > 1)
-                {
-                    outoffunc += temp + space;
-                }
-                else
-                {
-                    outoffunc = temp;
-                }
-            }
-
-            linkedComputers = QString::fromStdString(outoffunc);
-            ui->textBrowser_relations->setText(linkedComputers);
-        }
     }
 
     setModal(true);
     exec();
 
+}
+
+void addNewScientist::neweditscientistRelations(int currentID)
+{
+    vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
+
+    if (sciLinkedToCom.size() > 0)
+    {
+        ui->labelRelations->setHidden(false);
+        ui->textBrowser_relations->setHidden(false);
+        QString linkedComputers;
+        string outoffunc;
+        for (unsigned int x = 0; x < sciLinkedToCom.size(); x++)
+        {
+            string space = "\n";
+            string temp;
+            temp = sciLinkedToCom.at(x).getComName();
+
+            if (sciLinkedToCom.size() > 1)
+            {
+                outoffunc += temp + space;
+            }
+            else
+            {
+                outoffunc = temp;
+            }
+        }
+
+        linkedComputers = QString::fromStdString(outoffunc);
+        ui->textBrowser_relations->setText(linkedComputers);
+    }
+}
+
+void addNewScientist::neweditscientistClickableLink(QString link)
+{
+    ui->labelEntLink->setHidden(true);
+    ui->lineEdit_link->setHidden(true);
+    ui->labelClickableLink->setHidden(false);
+    ui->labelClickableUrlReal->setHidden(false);
+
+    QString finalurl;
+    //QString myString = "Last Name:SomeName, Day:23";
+    QStringList myLink = link.split("//");
+    //qDebug() << "String list is:  "<< myLink.last();
+
+    QString http = "http://";
+
+    QString clickhere = "\">"+myLink.last()+"</a>";
+    QString begin = "<a href=\"";
+    //qDebug () << clickhere << " " << begin;
+    finalurl = begin + (http + myLink.last()) + clickhere;
+
+    //qDebug () << finalurl ;
+
+    ui->labelClickableUrlReal->setText(finalurl);
+    ui->labelClickableUrlReal->setTextFormat(Qt::RichText);
+    ui->labelClickableUrlReal->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    ui->labelClickableUrlReal->setOpenExternalLinks(true);
 }
 
 void addNewScientist::on_buttonBox_editScientist_accepted()
