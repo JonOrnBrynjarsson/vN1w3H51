@@ -29,6 +29,8 @@ private slots:
 
     void on_buttonBox_editComputerFinished_rejected();
 
+    void on_lineEdit_enterYear_editingFinished();
+
 private:
     Ui::addnewcomputer *ui;
     service serviceObject;

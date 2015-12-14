@@ -75,35 +75,6 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="2" colspan="2">
-    <widget class="QDateEdit" name="dateEdit_year">
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="whatsThis">
-      <string>This is a year selection, you can use it to enter the year the computer was built.</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="minimumDateTime">
-      <datetime>
-       <hour>0</hour>
-       <minute>0</minute>
-       <second>0</second>
-       <year>1752</year>
-       <month>9</month>
-       <day>14</day>
-      </datetime>
-     </property>
-     <property name="currentSection">
-      <enum>QDateTimeEdit::YearSection</enum>
-     </property>
-     <property name="displayFormat">
-      <string>yyyy</string>
-     </property>
-    </widget>
-   </item>
    <item row="16" column="0" colspan="4">
     <widget class="QDialogButtonBox" name="buttonBox_editComputerFinished">
      <property name="standardButtons">
@@ -155,11 +126,17 @@
    <item row="8" column="0" colspan="4">
     <widget class="QTextBrowser" name="textBrowser_relations"/>
    </item>
+   <item row="1" column="2" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_enterYear">
+     <property name="placeholderText">
+      <string>Enter year of creation, ex. 1984 or 69</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>lineEdit_insertName</tabstop>
-  <tabstop>dateEdit_year</tabstop>
   <tabstop>comboBox_type</tabstop>
   <tabstop>checkBox_built</tabstop>
   <tabstop>textEdit_insertDescription</tabstop>

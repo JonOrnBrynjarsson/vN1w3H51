@@ -480,7 +480,7 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 
 void MainWindow::on_pushButon_addNewCompuer_clicked()
 {
-    on_actionAdd_New_Computer_Type_triggered();
+    on_actionAdd_New_Computer_triggered();
 //    qDebug () << "addnnewcomputerclicked";
 //    addnewcomputer newcomputer;
 //    newcomputer.setModal(true);

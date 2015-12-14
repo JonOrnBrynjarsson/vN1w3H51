@@ -33,9 +33,9 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
     serviceObject.servReadSqlCompTypes();
     serviceObject.servReadSqlComputers("NAME");
     int currentID = 0;
-    QString name, descr, comid;
+    QString name, descr, comid, yoc;
     bool built;
-    int yoc, type;
+    int type;
     //qDebug () << "neweditcomputer, crash 1";
 
     for (unsigned int i = 0; i  < serviceObject.servGetComVector().size(); i++)
@@ -45,7 +45,7 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
             //qDebug () << "neweditcomputer, crash 2";
 
             name = QString::fromStdString(serviceObject.servGetComVector().at(i).getComName());
-            yoc = serviceObject.servGetComVector().at(i).getComYear();
+            yoc = QString::number(serviceObject.servGetComVector().at(i).getComYear());
             type = serviceObject.servGetComVector().at(i).getComType();
             built = serviceObject.servGetComVector().at(i).getComBuilt();
             descr = QString::fromStdString(serviceObject.servGetComVector().at(i).getComDescription());
@@ -58,10 +58,8 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
     }
     //qDebug () << "neweditcomputer, crash 4";
 
-    QDate qdat;
-    qdat.setDate(yoc,1,1);
     ui->lineEdit_insertName->setText(name);
-    ui->dateEdit_year->setDate(qdat);
+    ui->lineEdit_enterYear->setText(yoc);
     ui->comboBox_type->setCurrentIndex(type-1);
     ui->checkBox_built->setChecked(built);
     ui->textEdit_insertDescription->setText(descr);
@@ -81,7 +79,7 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
         ui->label_enterName->setText("Name: ");
         ui->lineEdit_insertName->setReadOnly(true);
         ui->label_enterYear->setText("Year: ");
-        ui->dateEdit_year->setReadOnly(true);
+        ui->lineEdit_enterYear->setReadOnly(true);
         ui->label_chooseType->setText("Type:");
         ui->comboBox_type->setEnabled(false);
         ui->label_chooseBuilt->setText("Built: ");
@@ -140,7 +138,7 @@ addnewcomputer::~addnewcomputer()
 void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 {
     string name = ui->lineEdit_insertName->text().toStdString();
-    int year = ui->dateEdit_year->text().toInt();
+    int year = ui->lineEdit_enterYear->text().toInt();
     int type = ui->comboBox_type->currentIndex();
     type = serviceObject.servGetCompTypeVector().at(type).getid();
     bool built = ui->checkBox_built->checkState();
@@ -162,9 +160,10 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 
 void addnewcomputer::on_dateEdit_year_userDateChanged(const QDate &date)
 {
-    int year = ui->dateEdit_year->date().year();
+    QString year = ui->lineEdit_enterYear->text();
+    int yearint = year.toInt();
     //qDebug () << ui->dateEdit_year->date();
-    if (year > CURRENTYEAR)
+    if (yearint > CURRENTYEAR)
     {
 
         QMessageBox::information(this,"Wrong year","It is not possible to enter a futuristic computer",0);
@@ -176,7 +175,7 @@ void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 {
     //qDebug () << "button pressed ";
     string name = ui->lineEdit_insertName->text().toStdString();
-    int year = ui->dateEdit_year->text().toInt();
+    int year = ui->lineEdit_enterYear->text().toInt();
     int type = ui->comboBox_type->currentIndex();
     type = serviceObject.servGetCompTypeVector().at(type).getid();
     bool built = ui->checkBox_built->checkState();
@@ -205,4 +204,21 @@ void addnewcomputer::on_buttonBox_editComputerFinished_rejected()
 {
     qDebug () << "close button press ";
     addnewcomputer::close();
+}
+
+void addnewcomputer::on_lineEdit_enterYear_editingFinished()
+{
+    bool badyoc = false;
+    QString yoc = ui->lineEdit_enterYear->text();
+    int syoc = serviceObject.yearCorrection(yoc.toInt(), badyoc);
+    QString yocf = QString::number(syoc);
+
+    if (badyoc == true)
+    {
+        QMessageBox::warning(this, "Error", "Bad Year!");
+    }
+    else
+    {
+        ui->lineEdit_enterYear->setText(yocf);
+    }
 }
