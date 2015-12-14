@@ -29,12 +29,14 @@ class addrelations : public QDialog
 
 public:
     explicit addrelations(QWidget *parent = 0);
+    QString getCurrentSciRowPos(QString &name);
+    QString getCurrentComRowPos(QString &name);
     ~addrelations();
 
 private slots:
-    void on_actionDisplay_a_List_of_Computer_Scientists_triggered();
-    void on_tableWidget_chooseScientist_cellClicked(int row, int column);
    // void on_actionDisplay_a_List_of_Computers_triggered();
+    void on_buttonBox_accepted();
+
 private:
     void displayAllScientists();
     void printScientists();//(std::vector<scientist> returnSciVector());
@@ -46,3 +48,4 @@ private:
 };
 
 #endif // ADDRELATIONS_H
+

@@ -31,6 +31,7 @@ public:
     QString getCurrentSciRowPos();
     QString getCurrentComRowPos();
     QString getCurrentComTypeRowPos();
+    void getCurrentRelationsRowPos(int &compos, int &scipos);
 
     ~MainWindow();
 
@@ -113,6 +114,10 @@ private slots:
 
     void on_pushButton_removeCompuerTypes_clicked();
 
+
+    void on_pushButon_addNewRelations_clicked();
+
+    void on_pushButton_removeRelations_clicked();
 
 private:
     void displayRelations();
