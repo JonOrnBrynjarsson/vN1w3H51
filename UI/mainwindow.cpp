@@ -328,26 +328,38 @@ void MainWindow::on_actionAdd_Relations_triggered()
 void MainWindow::on_actionEdit_a_Computer_Scientist_triggered()
 {
     addNewScientist newscientist;
-    newscientist.neweditscientist(getCurrentSciRowPos(), true);
-    qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
-    serviceobject.servReadSqlScientists("NAME");
-    printScientists();
+
+    if (getCurrentSciRowPos().length() > 0)
+    {
+        newscientist.neweditscientist(getCurrentSciRowPos(), true);
+        //qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
+        serviceobject.servReadSqlScientists("NAME");
+        printScientists();
+    }
+
 }
 
 void MainWindow::on_actionEdit_a_Computer_triggered()
 {
     addnewcomputer newcomputer;
-    newcomputer.neweditcomputer(getCurrentComRowPos(), true);
-    serviceobject.servReadSqlComputers("NAME");
-    printComputers();
+
+    if (getCurrentComRowPos().length() > 0)
+    {
+        newcomputer.neweditcomputer(getCurrentComRowPos(), true);
+        serviceobject.servReadSqlComputers("NAME");
+        printComputers();
+    }
 }
 
 void MainWindow::on_actionEdit_a_Computer_Type_triggered()
 {
     addnewcomputertype newcomputertype;
-    newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), true);
-    serviceobject.servReadSqlCompTypes();
-    printComputerTypes();
+    if (getCurrentComTypeRowPos().length() > 0)
+    {
+        newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), true);
+        serviceobject.servReadSqlCompTypes();
+        printComputerTypes();
+    }
 }
 
 void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
@@ -355,78 +367,79 @@ void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
 
     QString pos = getCurrentSciRowPos();
 
-    qDebug () << pos << " -  posið";
-
-    int toDelete = QMessageBox::critical(this,"About to delete",
-                                         "Are you sure you want to delete this Scientist?",0x00400000, 0x00000400);
-
-    if(toDelete == 1024)
+    if (pos.length() > 0)
     {
-        serviceobject.servDeleteScientist(pos.toUInt());
-        ui->statusbar->showMessage("Scientist deleted", 2000);
-        ui->databaseDisplayComSci->clear();
-        serviceobject.servReadSqlScientists();
-        printScientists();
-    }
-    else
-    {
-        ui->statusbar->showMessage("Canceled", 2000);
-        ui->databaseDisplayComSci->clear();
-        serviceobject.servReadSqlScientists();
-        printScientists();
+        int toDelete = QMessageBox::critical(this,"About to delete",
+                                             "Are you sure you want to delete this Scientist?",0x00400000, 0x00000400);
+
+        if(toDelete == 1024)
+        {
+            serviceobject.servDeleteScientist(pos.toUInt());
+            ui->statusbar->showMessage("Scientist deleted", 2000);
+            ui->databaseDisplayComSci->clear();
+            serviceobject.servReadSqlScientists();
+            printScientists();
+        }
+        else
+        {
+            ui->statusbar->showMessage("Canceled", 2000);
+            ui->databaseDisplayComSci->clear();
+            serviceobject.servReadSqlScientists();
+            printScientists();
+        }
     }
 }
 
 void MainWindow::on_actionRemove_a_Computer_triggered()
 {
-    //qDebug() << "Remove_a_Computer";
-    //qDebug () << "on_pushButton_removeCompuer_clicked";
-    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
-    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
-    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
 
-    if(toDelete == 1024)
-    {
-        serviceobject.servDeleteComputer(selctedComputer.getId());
-        ui->statusbar->showMessage("Computer deleted", 2000);
-        //QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "deleted!");
+    QString pos = getCurrentComRowPos();
 
-        ui->databaseDisplayComputers->clear();
-        serviceobject.servReadSqlComputers();
-        printComputers();
-    }
-    else
+    if (pos.length() > 0)
     {
-        //QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "Still here!");
-        ui->statusbar->showMessage("Canceled", 2000);
-        ui->databaseDisplayComputers->clear();
-        serviceobject.servReadSqlComputers();
-        printComputers();
+        int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
+
+        if(toDelete == 1024)
+        {
+            serviceobject.servDeleteComputer(pos.toUInt());
+            ui->statusbar->showMessage("Computer deleted", 2000);
+            ui->databaseDisplayComputers->clear();
+            serviceobject.servReadSqlComputers();
+            printComputers();
+        }
+        else
+        {
+            ui->statusbar->showMessage("Canceled", 2000);
+            ui->databaseDisplayComputers->clear();
+            serviceobject.servReadSqlComputers();
+            printComputers();
+        }
     }
 }
 
 void MainWindow::on_actionRemove_a_Computer_Type_triggered()
 {
-    qDebug () << "on_pushButton_removeComptype_clicked";
-
     QString pos = getCurrentComTypeRowPos();
 
-    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
+    if (pos.length() > 0)
+    {
+        int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
 
-    if(toDelete == 1024)
-    {
-        serviceobject.servDeleteComputerType(pos.toUInt());
-        ui->statusbar->showMessage("Computer Type deleted", 2000);
-        ui->databaseDisplayComTypes->clear();
-        serviceobject.servReadSqlCompTypes();
-        printComputerTypes();
-    }
-    else
-    {
-        ui->statusbar->showMessage("Canceled", 2000);
-        ui->databaseDisplayComTypes->clear();
-        serviceobject.servReadSqlCompTypes();
-        printComputerTypes();
+        if(toDelete == 1024)
+        {
+            serviceobject.servDeleteComputerType(pos.toUInt());
+            ui->statusbar->showMessage("Computer Type deleted", 2000);
+            ui->databaseDisplayComTypes->clear();
+            serviceobject.servReadSqlCompTypes();
+            printComputerTypes();
+        }
+        else
+        {
+            ui->statusbar->showMessage("Canceled", 2000);
+            ui->databaseDisplayComTypes->clear();
+            serviceobject.servReadSqlCompTypes();
+            printComputerTypes();
+        }
     }
 }
 
@@ -453,7 +466,6 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 //    if (index == 0)
 //    {
 //        printScientists();
-//        qDebug () << "index selected !";
 //    }
 //    if (index == 1)
 //    {
@@ -463,14 +475,7 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 //    {
 //        printComputerTypes();
 //    }
-
 }
-
-void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
-{
-
-}
-
 
 
 void MainWindow::on_pushButon_addNewCompuer_clicked()
@@ -542,14 +547,12 @@ void MainWindow::displayRelations()
 }
 
 
-void MainWindow::on_databaseDisplayComputers_doubleClicked(const QModelIndex &index)
+void MainWindow::on_databaseDisplayComputers_doubleClicked()
 {
-    qDebug () << "in display computers double click: " << getCurrentComTypeRowPos();
     addnewcomputer newcomputer;
     newcomputer.neweditcomputer(getCurrentComRowPos(), false);
     serviceobject.servReadSqlComputers("NAME");
     printComputers();
-
 }
 
 void MainWindow::on_pushButton_editCompuer_clicked()
