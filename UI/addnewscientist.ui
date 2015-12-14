@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>470</width>
-    <height>393</height>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -199,6 +199,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>comboBox_gender</tabstop>
+  <tabstop>lineEdit_yob</tabstop>
+  <tabstop>lineEdit_yod</tabstop>
+  <tabstop>lineEdit_currentAge</tabstop>
+  <tabstop>lineEdit_AgeAtDeath</tabstop>
+  <tabstop>textEdit_descr</tabstop>
+  <tabstop>lineEdit_link</tabstop>
+  <tabstop>textBrowser_relations</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

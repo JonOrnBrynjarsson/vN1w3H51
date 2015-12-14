@@ -310,10 +310,11 @@ void MainWindow::on_actionAdd_New_Computer_triggered()
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()
 {
-    //qDebug() << "Add_New_Computer";
-    addnewcomputertype computerype;
-    computerype.setModal(true);
-    computerype.exec();
+    addnewcomputer newcomputer;
+    newcomputer.setModal(true);
+    newcomputer.exec();
+    serviceobject.servReadSqlComputers();
+    printComputers();
 
 }
 
@@ -357,7 +358,30 @@ void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
 
 void MainWindow::on_actionRemove_a_Computer_triggered()
 {
-    qDebug() << "Remove_a_Computer";
+    //qDebug() << "Remove_a_Computer";
+    //qDebug () << "on_pushButton_removeCompuer_clicked";
+    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
+    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
+    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
+
+    if(toDelete == 1024)
+    {
+        serviceobject.servDeleteComputer(selctedComputer.getId());
+        ui->statusbar->showMessage("Computer deleted", 2000);
+        //QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "deleted!");
+
+        ui->databaseDisplayComputers->clear();
+        serviceobject.servReadSqlComputers();
+        printComputers();
+    }
+    else
+    {
+        //QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "Still here!");
+        ui->statusbar->showMessage("Canceled", 2000);
+        ui->databaseDisplayComputers->clear();
+        serviceobject.servReadSqlComputers();
+        printComputers();
+    }
 }
 
 void MainWindow::on_actionRemove_a_Computer_Type_triggered()
@@ -368,6 +392,7 @@ void MainWindow::on_actionRemove_a_Computer_Type_triggered()
 void MainWindow::on_actionRemove_Relations_triggered()
 {
     qDebug() << "Remove_Relations";
+
 }
 
 void MainWindow::on_actionDisplay_a_List_of_Computer_Scientists_triggered()
@@ -397,19 +422,19 @@ void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()
 
 void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 {
-    if (index == 0)
-    {
-        printScientists();
-        qDebug () << "index selected !";
-    }
-    if (index == 1)
-    {
-        printComputers();
-    }
-    if (index == 2)
-    {
-        printComputerTypes();
-    }
+//    if (index == 0)
+//    {
+//        printScientists();
+//        qDebug () << "index selected !";
+//    }
+//    if (index == 1)
+//    {
+//        printComputers();
+//    }
+//    if (index == 2)
+//    {
+//        printComputerTypes();
+//    }
 
 }
 
@@ -422,41 +447,44 @@ void MainWindow::on_databaseDisplayComSci_cellClicked(int row, int column)
 
 void MainWindow::on_pushButon_addNewCompuer_clicked()
 {
-    qDebug () << "addnnewcomputerclicked";
-    addnewcomputer newcomputer;
-    newcomputer.setModal(true);
-    newcomputer.exec();
-    serviceobject.servReadSqlComputers();
-    printComputers();
+    on_actionAdd_New_Computer_Type_triggered();
+//    qDebug () << "addnnewcomputerclicked";
+//    addnewcomputer newcomputer;
+//    newcomputer.setModal(true);
+//    newcomputer.exec();
+//    serviceobject.servReadSqlComputers();
+//    printComputers();
 }
 
 
 
 void MainWindow::on_pushButton_removeCompuer_clicked()
 {
-        qDebug () << "on_pushButton_removeCompuer_clicked";
-    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
+
+    qDebug () << "on_pushButton_removeCompuer_clicked";
+    on_actionRemove_a_Computer_triggered();
+//    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
 
 
-    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
-    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
+//    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
+//    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
 
-    if(toDelete == 1024)
-    {
-        serviceobject.servDeleteComputer(selctedComputer.getId());
-        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "deleted!");
+//    if(toDelete == 1024)
+//    {
+//        serviceobject.servDeleteComputer(selctedComputer.getId());
+//        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "deleted!");
 
-        ui->databaseDisplayComputers->clear();
-        serviceobject.servReadSqlComputers();
-        printComputers();
-    }
-    else
-    {
-        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "Still here!");
-        ui->databaseDisplayComputers->clear();
-        serviceobject.servReadSqlComputers();
-        printComputers();
-    }
+//        ui->databaseDisplayComputers->clear();
+//        serviceobject.servReadSqlComputers();
+//        printComputers();
+//    }
+//    else
+//    {
+//        QMessageBox::information(this, QString::fromStdString(selctedComputer.getComName()), "Still here!");
+//        ui->databaseDisplayComputers->clear();
+//        serviceobject.servReadSqlComputers();
+//        printComputers();
+//    }
 }
 
 void MainWindow::displayRelations()
@@ -702,7 +730,6 @@ void MainWindow::on_lineEdit_filterScientist_textEdited(const QString &arg1)
         {
             bord = 'd';
         }
-        qDebug() << yr;
         if(yr != 0)
         {
             serviceobject.servSearchScientistByYear(yr, bord, isFound);
@@ -713,19 +740,6 @@ void MainWindow::on_lineEdit_filterScientist_textEdited(const QString &arg1)
             printScientists();
         }
     }
-//    else if(ui->comboBox_filterScientist->currentIndex() == 3)  // yod
-//    {
-//        int yr = arg1.toUInt();
-//        if(yr != 0)
-//        {
-//            serviceobject.servSearchScientistByYear(yr,'b' isFound);
-//        }
-//        else
-//        {
-//            serviceobject.servReadSqlScientists();
-//            printScientists();
-//        }
-//    }
 
     if(isFound)
     {
@@ -744,7 +758,6 @@ void MainWindow::on_lineEdit_filterScientist_textEdited(const QString &arg1)
 
 void MainWindow::on_MainMenuSelection_currentChanged(int index)
 {
-    qDebug() << index;
     setAllMainMenuSelectionDisabled();
     if(index == 0)  // Scientists
     {

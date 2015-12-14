@@ -21,7 +21,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="MainMenuSelection">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="computerSci">
        <property name="accessibleName">
@@ -1001,9 +1001,30 @@
   </action>
  </widget>
  <tabstops>
+  <tabstop>MainMenuSelection</tabstop>
+  <tabstop>pushButon_addNewScientist</tabstop>
+  <tabstop>pushButton_editScientist</tabstop>
+  <tabstop>pushButton_removeScientist</tabstop>
+  <tabstop>comboBox_filterScientist</tabstop>
+  <tabstop>lineEdit_filterScientist</tabstop>
+  <tabstop>pushButon_addNewCompuer</tabstop>
+  <tabstop>pushButton_editCompuer</tabstop>
+  <tabstop>pushButton_removeCompuer</tabstop>
+  <tabstop>comboBox_filterComputers</tabstop>
+  <tabstop>lineEdit_filterComputers</tabstop>
+  <tabstop>pushButon_addNewCompuerTypes</tabstop>
+  <tabstop>pushButton_editComputerTypes</tabstop>
+  <tabstop>pushButton_removeCompuerTypes</tabstop>
+  <tabstop>comboBox_filterComputerTypes</tabstop>
+  <tabstop>lineEdit_filterComputerTypes</tabstop>
+  <tabstop>pushButon_addNewRelations</tabstop>
+  <tabstop>pushButton_removeRelations</tabstop>
+  <tabstop>comboBox_filterRelations</tabstop>
+  <tabstop>lineEdit_filterRelations</tabstop>
   <tabstop>databaseDisplayComSci</tabstop>
   <tabstop>databaseDisplayComputers</tabstop>
   <tabstop>databaseDisplayComTypes</tabstop>
+  <tabstop>tableWidget_displayRelations</tabstop>
  </tabstops>
  <resources/>
  <connections/>
