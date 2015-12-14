@@ -3,6 +3,8 @@
 #include <QDebug>
 #include "mainwindow.h"
 
+//FORCE UPDATE!
+
 addnewcomputer::addnewcomputer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addnewcomputer)

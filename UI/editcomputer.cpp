@@ -1,5 +1,6 @@
 #include "editcomputer.h"
 #include "ui_editcomputer.h"
+//FORCE UPDATE!
 
 editcomputer::editcomputer(QWidget *parent) :
     QDialog(parent),

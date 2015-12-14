@@ -1,5 +1,6 @@
 #include "editcomptype.h"
 #include "ui_editcomptype.h"
+//FORCE UPDATE!
 
 editcomptype::editcomptype(QWidget *parent) :QDialog(parent),ui(new Ui::editcomptype)
 {

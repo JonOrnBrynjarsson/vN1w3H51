@@ -6,6 +6,8 @@
 //#include <QDebug>
 
 
+//FORCE UPDATE!
+
 addnewcomputertype::addnewcomputertype(QWidget *parent) :QDialog(parent),ui(new Ui::addnewcomputertype)
 {
     ui->setupUi(this);
