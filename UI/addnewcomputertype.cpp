@@ -65,7 +65,7 @@ addnewcomputertype::~addnewcomputertype()
 
 void addnewcomputertype::on_buttonBox_accepted()
 {
-    if(on_lineEdit_name_editingFinished())
+    if(on_lineEdit_name_editingFinished() == false)
     {
         ct.setName(ui->lineEdit_name->text().toStdString());
         ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
@@ -122,7 +122,7 @@ void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
     QString debugdescr = QString::fromStdString(descr);
     QString debugid = QString::number(id);
 
-    if(on_lineEdit_name_editingFinished())
+    if(on_lineEdit_name_editingFinished() == false)
     {
         //computer c(name, year, type, built, descr);
         //qDebug () << "debugname is " << debugname << "debugdescr is " << debugdescr << "debugid is "  << debugid;
