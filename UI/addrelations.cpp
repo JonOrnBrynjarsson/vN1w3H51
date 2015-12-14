@@ -19,6 +19,53 @@ addrelations::~addrelations()
 {
     delete ui;
 }
+QString addrelations::getCurrentSciRowPos(QString &name)
+{
+    int row = ui->tableWidget_chooseScientist->currentRow();
+
+    //qDebug () <<  row;
+
+    QStringList list;
+    QAbstractItemModel *model = ui->tableWidget_chooseScientist->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 1);
+        //qDebug () << "index " << index;
+        returnID = index.data().toString();
+        //qDebug () << "return id is " << returnID;
+        QModelIndex indexName = model->index(row, 0);
+        //qDebug () << "index " << index;
+        name = indexName.data().toString();
+        //qDebug () << "return id is " << returnID;
+    }
+
+    return returnID;
+}
+
+QString addrelations::getCurrentComRowPos(QString &name)
+{
+    int row = ui->tableWidget_chooseComputer->currentRow();
+
+    QStringList list;
+    QAbstractItemModel *model = ui->tableWidget_chooseComputer->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex index = model->index(row, 1);
+        returnID = index.data().toString();
+        QModelIndex indexName = model->index(row, 0);
+        name = indexName.data().toString();
+    }
+
+    return returnID;
+}
+
+
 void addrelations::printScientists()
 {
     ui->tableWidget_chooseScientist->setSortingEnabled(false);
@@ -37,9 +84,9 @@ void addrelations::printScientists()
     QStringList sciHeader = (QStringList() << "Name" << "Scientist id");
     ui->tableWidget_chooseScientist->setHorizontalHeaderLabels(sciHeader);
     ui->tableWidget_chooseScientist->setSortingEnabled(true);
-    //qDebug() << "on to the next...";
 
-//    ui->tableWidget_chooseScientist->setColumnHidden(1, true); // FELUR ID!!!!
+    ui->tableWidget_chooseScientist->setColumnHidden(1, true); // FELUR ID!!!!
+
 }
 
 void addrelations::printComputers()
@@ -63,5 +110,27 @@ void addrelations::printComputers()
     //ui->databaseDisplayComputers->horizontalHeader()-
     ui->tableWidget_chooseComputer->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
     //ui->databaseDisplayComputers->setColumnHidden(1, true);  // Hides ID column
- //   ui->tableWidget_chooseComputer->setColumnHidden(1, true); // FELUR ID!!!!
+    ui->tableWidget_chooseComputer->setColumnHidden(1, true); // FELUR ID!!!!
 }
+
+void addrelations::on_buttonBox_accepted()
+{
+    QString sciName, comName;
+
+
+    int scipos = getCurrentSciRowPos(sciName).toInt();
+    int compos = getCurrentComRowPos(comName).toInt();
+
+    QString comformtext = "Are you sure you want to add relations "
+                          "between " + sciName + " and " + comName + " ? ";
+
+    bool yes = QMessageBox::warning(this, "Adding relations", comformtext);
+
+    if (yes)
+    {
+        serviceobject.servAddRelationSciComp(scipos,compos);
+    }
+
+    //qDebug () << sciName << comName;
+}
+

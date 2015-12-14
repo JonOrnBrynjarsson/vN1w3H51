@@ -14,13 +14,6 @@
    <string>Add relations between Computer Scientists and Computers</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="labelSelSci">
-     <property name="text">
-      <string>Select the Computer Scientist:</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="1">
     <widget class="QLabel" name="labelSelCom">
      <property name="text">
@@ -28,24 +21,14 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="labelAreYouSureRelations">
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelSelSci">
      <property name="text">
-      <string>Are you sure you want to add these Relations?</string>
+      <string>Select the Computer Scientist:</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QCheckBox" name="checkBoxRelationsYes">
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <property name="text">
-      <string>Yes</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
+   <item row="4" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -59,7 +42,12 @@
     <widget class="QTableWidget" name="tableWidget_chooseScientist">
      <column>
       <property name="text">
-       <string>id + name</string>
+       <string>Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>id</string>
       </property>
      </column>
     </widget>
@@ -68,7 +56,12 @@
     <widget class="QTableWidget" name="tableWidget_chooseComputer">
      <column>
       <property name="text">
-       <string>id + name</string>
+       <string>Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>id</string>
       </property>
      </column>
     </widget>

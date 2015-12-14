@@ -24,8 +24,6 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->textBrowser_relations->setHidden(true);
     ui->labelClickableLink->setHidden(true);
     ui->labelClickableUrlReal->setHidden(true);
-
-
 }
 
 addNewScientist::~addNewScientist()

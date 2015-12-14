@@ -258,6 +258,22 @@ QString MainWindow::getCurrentComTypeRowPos()
     return returnID;
 }
 
+void MainWindow::getCurrentRelationsRowPos(int &compos, int &scipos)
+{
+    int row = ui->tableWidget_displayRelations->currentRow();
+    QStringList list;
+    QAbstractItemModel *model = ui->tableWidget_displayRelations->model();
+
+    model->rowCount();
+    QString returnID;
+    for (int i = 0; i < 1; i++)
+    {
+        QModelIndex indexSci = model->index(row, 0);
+        scipos = indexSci.data().toInt();
+        QModelIndex indexCom = model->index(row, 2);
+        compos = indexCom.data().toInt();
+    }
+}
 vector<scientist> MainWindow::returnSciVector()
 {
     serviceobject.servStartDatabase();
@@ -338,6 +354,8 @@ void MainWindow::on_actionAdd_Relations_triggered()
     addrelations relations;
     relations.setModal(true);
     relations.exec();
+    serviceobject.servReadSqlRelations();
+    displayRelations();
 }
 
 void MainWindow::on_actionEdit_a_Computer_Scientist_triggered()
@@ -469,6 +487,27 @@ void MainWindow::on_actionRemove_Relations_triggered()
 {
     qDebug() << "Remove_Relations";
 
+    int compos, scipos;
+    getCurrentRelationsRowPos(compos, scipos);
+
+    qDebug () << compos << scipos;
+
+    int toDelete = QMessageBox::critical(this,"About to delete",
+                                         "Are you sure you want to delete these Relations?",0x00400000, 0x00000400);
+
+    if(toDelete == 1024)
+    {
+        serviceobject.servDeleteRelationSciComp(scipos,compos);
+        ui->statusbar->showMessage("Relations deleted", 2000);
+        qDebug () << "success";
+    }
+    else
+    {
+        ui->statusbar->showMessage("Canceled", 2000);
+        qDebug () << "failure";
+    }
+    serviceobject.servReadSqlRelations();
+    displayRelations();
 }
 
 void MainWindow::on_actionHelp_triggered()
@@ -863,4 +902,13 @@ void MainWindow::on_pushButton_editComputerTypes_clicked()
 void MainWindow::on_pushButton_removeCompuerTypes_clicked()
 {
     on_actionRemove_a_Computer_Type_triggered();
+}
+void MainWindow::on_pushButon_addNewRelations_clicked()
+{
+    on_actionAdd_Relations_triggered();
+}
+
+void MainWindow::on_pushButton_removeRelations_clicked()
+{
+    on_actionRemove_Relations_triggered();
 }

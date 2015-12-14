@@ -84,10 +84,12 @@ void workingclass::readSqlRelations()
 {
     QSqlQuery query;
 
-    query.prepare("SELECT DISTINCT s.id as sid, s.name as sname, c.id as cid, c.name as cname  "
-                  "FROM scientists AS s, computers AS c "
-                  "JOIN scientists_and_computers AS sc "
-                  "ON sc.scientist_id = s.id AND sc.computer_id = c.id;");
+    query.prepare(" SELECT DISTINCT s.id as sid, s.name as sname, c.id as cid, c.name as cname "
+                  " FROM scientists AS s, computers AS c "
+                  " JOIN scientists_and_computers AS sc "
+                  " ON sc.scientist_id = s.id AND sc.computer_id = c.id "
+                  " WHERE sc.deleted = 'FALSE';");
+
     query.exec();
     relationVector.clear();
     while(query.next())
