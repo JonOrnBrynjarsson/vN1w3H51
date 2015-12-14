@@ -39,7 +39,7 @@ void addrelations::printScientists()
     ui->tableWidget_chooseScientist->setSortingEnabled(true);
     //qDebug() << "on to the next...";
 
-    ui->tableWidget_chooseScientist->setColumnHidden(1, true); // FELUR ID!!!!
+//    ui->tableWidget_chooseScientist->setColumnHidden(1, true); // FELUR ID!!!!
 }
 
 void addrelations::printComputers()
@@ -63,5 +63,5 @@ void addrelations::printComputers()
     //ui->databaseDisplayComputers->horizontalHeader()-
     ui->tableWidget_chooseComputer->setSortingEnabled(true);// To be able to display headers and all column data - bugfix for qt.
     //ui->databaseDisplayComputers->setColumnHidden(1, true);  // Hides ID column
-    ui->tableWidget_chooseComputer->setColumnHidden(1, true); // FELUR ID!!!!
+ //   ui->tableWidget_chooseComputer->setColumnHidden(1, true); // FELUR ID!!!!
 }

@@ -113,6 +113,7 @@ private slots:
 
     void on_pushButton_removeCompuerTypes_clicked();
 
+
 private:
     void displayRelations();
     //service service;
@@ -122,7 +123,7 @@ private:
     service serviceobject;
     vector<computer> returnComVector();
     vector<computertype> returnComTypeVector();
-
+    bool computerTypeCanBeDeleted(int compTypeID);
     QTableWidget* m_pTableWidget;
 
     QStringList m_TableHeader;

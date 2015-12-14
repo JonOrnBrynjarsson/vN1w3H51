@@ -279,6 +279,20 @@ vector<computertype> MainWindow::returnComTypeVector()
     //qDebug () << "fetching...";
 }
 
+bool MainWindow::computerTypeCanBeDeleted(int compTypeID)
+{
+    serviceobject.servReadSqlComputers();
+
+    for(unsigned int i = 0; i < serviceobject.servGetComVector().size(); i++)
+    {
+        if (compTypeID == serviceobject.servGetComVector().at(i).getComType())
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -418,11 +432,14 @@ void MainWindow::on_actionRemove_a_Computer_triggered()
     }
 }
 
+
+
 void MainWindow::on_actionRemove_a_Computer_Type_triggered()
 {
     QString pos = getCurrentComTypeRowPos();
 
-    if (pos.length() > 0)
+
+    if (pos.length() > 0 && computerTypeCanBeDeleted(pos.toUInt()))
     {
         int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
 
@@ -441,6 +458,10 @@ void MainWindow::on_actionRemove_a_Computer_Type_triggered()
             serviceobject.servReadSqlCompTypes();
             printComputerTypes();
         }
+    }
+    else
+    {
+        ui->statusbar->showMessage("Computer type in use!", 2000);
     }
 }
 
