@@ -407,7 +407,27 @@ void MainWindow::on_actionRemove_a_Computer_triggered()
 
 void MainWindow::on_actionRemove_a_Computer_Type_triggered()
 {
-    qDebug() << "Remove_a_Computer_Type";
+    qDebug () << "on_pushButton_removeComptype_clicked";
+
+    QString pos = getCurrentComTypeRowPos();
+
+    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
+
+    if(toDelete == 1024)
+    {
+        serviceobject.servDeleteComputerType(pos.toUInt());
+        ui->statusbar->showMessage("Computer Type deleted", 2000);
+        ui->databaseDisplayComTypes->clear();
+        serviceobject.servReadSqlCompTypes();
+        printComputerTypes();
+    }
+    else
+    {
+        ui->statusbar->showMessage("Canceled", 2000);
+        ui->databaseDisplayComTypes->clear();
+        serviceobject.servReadSqlCompTypes();
+        printComputerTypes();
+    }
 }
 
 void MainWindow::on_actionRemove_Relations_triggered()
@@ -559,29 +579,7 @@ void MainWindow::on_pushButton_addnewType_clicked()
 
 void MainWindow::on_pushButton_RemoveType_clicked()
 {
-    qDebug () << "on_pushButton_removeComptype_clicked";
-    int currentType = ui->databaseDisplayComTypes->currentIndex().row();
 
-
-    computertype selctedType = serviceobject.servGetCompTypeVector().at(currentType);
-    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
-
-    if(toDelete == 1024)
-    {
-       serviceobject.servDeleteComputerType(selctedType.getid());
-       QMessageBox::information(this, QString::fromStdString(selctedType.getName()), "deleted!");
-
-       ui->databaseDisplayComTypes->clear();
-       serviceobject.servReadSqlCompTypes();
-       printComputerTypes();
-    }
-    else
-    {
-        QMessageBox::information(this, QString::fromStdString(selctedType.getName()), "Still here!");
-        ui->databaseDisplayComTypes->clear();
-        serviceobject.servReadSqlCompTypes();
-        printComputerTypes();
-    }
 }
 
 
