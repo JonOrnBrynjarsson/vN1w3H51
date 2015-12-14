@@ -13,7 +13,7 @@
 #include "Services/service.h"
 
 #include <QTableWidget>
-#include <QActionGroup>
+#include <QAction>
 
 namespace Ui {
 class MainWindow;
@@ -105,6 +105,10 @@ private slots:
     void on_comboBox_filterScientist_currentIndexChanged(const QString &arg1);
 
     void on_lineEdit_filterScientist_textEdited(const QString &arg1);
+
+    void on_MainMenuSelection_currentChanged(int index);
+
+    void setAllMainMenuSelectionDisabled();
 
 private:
     void displayRelations();

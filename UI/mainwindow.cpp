@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     printComputerTypes();
     displayRelations();
 
+    setAllMainMenuSelectionDisabled();
+    on_MainMenuSelection_currentChanged(ui->MainMenuSelection->currentIndex());
+
 //    ui->databaseDisplayComSci->setColumnHidden(4, true); // FELUR auka uppl.
 //    ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
 //    ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
@@ -33,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    ui->databaseDisplayComputers->setColumnHidden(5, true); // FELUR ID!!!!
 //    ui->databaseDisplayComTypes->setColumnHidden(2, true);  // Hides ID column
 }
+
 void MainWindow::printScientists()
 {
     //serviceobject.servStartDatabase();
@@ -737,3 +741,50 @@ void MainWindow::on_lineEdit_filterScientist_textEdited(const QString &arg1)
         }
     }
 }
+
+void MainWindow::on_MainMenuSelection_currentChanged(int index)
+{
+    qDebug() << index;
+    setAllMainMenuSelectionDisabled();
+    if(index == 0)  // Scientists
+    {
+        ui->actionAdd_New_Computer_Scientist->setEnabled(true);
+        ui->actionEdit_a_Computer_Scientist->setEnabled(true);
+        ui->actionRemove_a_Computer_Scientist->setEnabled(true);
+    }
+    else if(index == 1) // Computers
+    {
+        ui->actionAdd_New_Computer->setEnabled(true);
+        ui->actionEdit_a_Computer->setEnabled(true);
+        ui->actionRemove_a_Computer->setEnabled(true);
+    }
+    else if(index == 2) //  Computer types
+    {
+        ui->actionAdd_New_Computer_Type->setEnabled(true);
+        ui->actionEdit_a_Computer_Type->setEnabled(true);
+        ui->actionRemove_a_Computer_Type->setEnabled(true);
+    }
+    else if(index == 3) //  Relations
+    {
+        ui->actionAdd_Relations->setEnabled(true);
+        ui->actionRemove_Relations->setEnabled(true);
+    }
+
+}
+
+void MainWindow::setAllMainMenuSelectionDisabled()
+{
+    ui->actionAdd_New_Computer->setDisabled(true);
+    ui->actionAdd_New_Computer_Scientist->setDisabled(true);
+    ui->actionAdd_New_Computer_Type->setDisabled(true);
+    ui->actionAdd_Relations->setDisabled(true);
+    ui->actionEdit_a_Computer->setDisabled(true);
+    ui->actionEdit_a_Computer_Scientist->setDisabled(true);
+    ui->actionEdit_a_Computer_Type->setDisabled(true);
+    ui->actionRemove_a_Computer->setDisabled(true);
+    ui->actionRemove_a_Computer_Scientist->setDisabled(true);
+    ui->actionRemove_a_Computer_Type->setDisabled(true);
+    ui->actionRemove_Relations->setDisabled(true);
+}
+
+
