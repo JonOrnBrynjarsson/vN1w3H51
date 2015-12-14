@@ -18,10 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     //ui->tableView->setColumnHidden(5, true);
-    printScientists();
-    printComputers();
-    printComputerTypes();
-    displayRelations();
+    //on_MainMenuSelection_currentChanged(ui->MainMenuSelection->currentIndex());
+
+    //printScientists();
+    //printComputers();
+    //printComputerTypes();
+    //displayRelations();
 
     setAllMainMenuSelectionDisabled();
     on_MainMenuSelection_currentChanged(ui->MainMenuSelection->currentIndex());
@@ -522,8 +524,8 @@ void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()
     qDebug() << "About_Computers_and_Scientists_Database";
 }
 
-void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
-{
+//void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
+//{
 //    if (index == 0)
 //    {
 //        printScientists();
@@ -536,7 +538,7 @@ void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
 //    {
 //        printComputerTypes();
 //    }
-}
+//}
 
 
 void MainWindow::on_pushButon_addNewCompuer_clicked()
@@ -622,12 +624,14 @@ void MainWindow::on_pushButton_editCompuer_clicked()
 }
 
 
-void MainWindow::on_databaseDisplayComSci_doubleClicked(const QModelIndex &index)
+void MainWindow::on_databaseDisplayComSci_doubleClicked()//const QModelIndex &index)
 {
-    qDebug () << "column is : " << index.row();
+//    qDebug () << "column is : " << index.row();
     addNewScientist newscientist;
-    qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
+//    qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
     newscientist.neweditscientist(getCurrentSciRowPos(), false);
+    serviceobject.servReadSqlScientists();
+    printScientists();
 }
 
 void MainWindow::on_pushButton_addnewType_clicked()
@@ -638,12 +642,6 @@ void MainWindow::on_pushButton_addnewType_clicked()
        newtype.exec();
        serviceobject.servReadSqlCompTypes();
        printComputerTypes();
-}
-
-
-void MainWindow::on_pushButton_RemoveType_clicked()
-{
-
 }
 
 
@@ -699,12 +697,14 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
 }
 
 
-void MainWindow::on_databaseDisplayComTypes_doubleClicked(const QModelIndex &index)
+void MainWindow::on_databaseDisplayComTypes_doubleClicked()//const QModelIndex &index)
 {
-    qDebug () << "on_databaseDisplayComTypes_doubleClicked" << index;
-    qDebug () << "getCurrentComTypeRowPos() is " << getCurrentComTypeRowPos();
+//    qDebug () << "on_databaseDisplayComTypes_doubleClicked" << index;
+//    qDebug () << "getCurrentComTypeRowPos() is " << getCurrentComTypeRowPos();
     addnewcomputertype newcomputertype;
     newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
+    serviceobject.servReadSqlCompTypes();
+    displayRelations();
 }
 void MainWindow::on_comboBox_filterRelations_currentIndexChanged(const QString &arg1)
 {
@@ -836,23 +836,34 @@ void MainWindow::on_MainMenuSelection_currentChanged(int index)
         ui->actionAdd_New_Computer_Scientist->setEnabled(true);
         ui->actionEdit_a_Computer_Scientist->setEnabled(true);
         ui->actionRemove_a_Computer_Scientist->setEnabled(true);
+        ui->actionView_scientist->setEnabled(true);
+        serviceobject.servReadSqlScientists();
+        printScientists();
     }
     else if(index == 1) // Computers
     {
         ui->actionAdd_New_Computer->setEnabled(true);
         ui->actionEdit_a_Computer->setEnabled(true);
         ui->actionRemove_a_Computer->setEnabled(true);
+        ui->actionView_computer->setEnabled(true);
+        serviceobject.servReadSqlComputers();
+        printComputers();
     }
     else if(index == 2) //  Computer types
     {
         ui->actionAdd_New_Computer_Type->setEnabled(true);
         ui->actionEdit_a_Computer_Type->setEnabled(true);
         ui->actionRemove_a_Computer_Type->setEnabled(true);
+        ui->actionView_computer_type->setEnabled(true);
+        serviceobject.servReadSqlCompTypes();
+        printComputerTypes();
     }
     else if(index == 3) //  Relations
     {
         ui->actionAdd_Relations->setEnabled(true);
         ui->actionRemove_Relations->setEnabled(true);
+        serviceobject.servReadSqlRelations();
+        displayRelations();
     }
 
 }
@@ -870,6 +881,9 @@ void MainWindow::setAllMainMenuSelectionDisabled()
     ui->actionRemove_a_Computer_Scientist->setDisabled(true);
     ui->actionRemove_a_Computer_Type->setDisabled(true);
     ui->actionRemove_Relations->setDisabled(true);
+    ui->actionView_computer->setDisabled(true);
+    ui->actionView_computer_type->setDisabled(true);
+    ui->actionView_scientist->setDisabled(true);
 }
 
 
@@ -911,4 +925,66 @@ void MainWindow::on_pushButon_addNewRelations_clicked()
 void MainWindow::on_pushButton_removeRelations_clicked()
 {
     on_actionRemove_Relations_triggered();
+}
+
+void MainWindow::on_actionView_scientist_triggered()
+{
+    on_databaseDisplayComSci_doubleClicked();
+}
+
+void MainWindow::on_actionView_computer_triggered()
+{
+    on_databaseDisplayComputers_doubleClicked();
+}
+
+void MainWindow::on_actionView_computer_type_triggered()
+{
+    on_databaseDisplayComTypes_doubleClicked();
+}
+
+void MainWindow::on_databaseDisplayComSci_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu scientistMenu;
+    scientistMenu.addAction(ui->actionView_scientist);
+    scientistMenu.addSeparator();
+    scientistMenu.addAction(ui->actionAdd_New_Computer_Scientist);
+    scientistMenu.addAction(ui->actionEdit_a_Computer_Scientist);
+    scientistMenu.addAction(ui->actionRemove_a_Computer_Scientist);
+
+    scientistMenu.exec(ui->databaseDisplayComSci->viewport()->mapToGlobal(pos));
+}
+
+void MainWindow::on_databaseDisplayComputers_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu computerMenu;
+    computerMenu.addAction(ui->actionView_computer);
+    computerMenu.addSeparator();
+    computerMenu.addAction(ui->actionAdd_New_Computer);
+    computerMenu.addAction(ui->actionEdit_a_Computer);
+    computerMenu.addAction(ui->actionRemove_a_Computer);
+
+    computerMenu.exec(ui->databaseDisplayComputers->viewport()->mapToGlobal(pos));
+
+}
+
+void MainWindow::on_databaseDisplayComTypes_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu compTypeMenu;
+    compTypeMenu.addAction(ui->actionView_computer_type);
+    compTypeMenu.addSeparator();
+    compTypeMenu.addAction(ui->actionAdd_New_Computer_Type);
+    compTypeMenu.addAction(ui->actionEdit_a_Computer_Type);
+    compTypeMenu.addAction(ui->actionRemove_a_Computer_Type);
+
+    compTypeMenu.exec(ui->databaseDisplayComTypes->viewport()->mapToGlobal(pos));
+}
+
+
+
+void MainWindow::on_tableWidget_displayRelations_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu relationsMenu;
+    relationsMenu.addAction(ui->actionAdd_Relations);
+    relationsMenu.addAction(ui->actionRemove_Relations);
+    relationsMenu.exec(ui->tableWidget_displayRelations->viewport()->mapToGlobal(pos));
 }

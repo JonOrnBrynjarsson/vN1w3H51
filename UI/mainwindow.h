@@ -62,7 +62,7 @@ private slots:
 
     void on_actionAbout_Computers_and_Scientists_Database_triggered();
 
-    void on_MainMenuSelection_tabBarClicked(int index);
+    //void on_MainMenuSelection_tabBarClicked(int index);
 
     void on_pushButon_addNewCompuer_clicked();
 
@@ -77,12 +77,9 @@ private slots:
 
     void on_pushButton_editCompuer_clicked();
 
-    void on_databaseDisplayComSci_doubleClicked(const QModelIndex &index);
+    void on_databaseDisplayComSci_doubleClicked();//const QModelIndex &index);
 
     void on_pushButton_addnewType_clicked();
-
-    void on_pushButton_RemoveType_clicked();
-
 
     void on_comboBox_filterRelations_currentIndexChanged(const QString &arg1);
 
@@ -92,7 +89,7 @@ private slots:
 
     void on_lineEdit_filterComputerTypes_textEdited(const QString &arg1);
 
-    void on_databaseDisplayComTypes_doubleClicked(const QModelIndex &index);
+    void on_databaseDisplayComTypes_doubleClicked();//const QModelIndex &index);
 
     void on_comboBox_filterScientist_currentIndexChanged(const QString &arg1);
 
@@ -118,6 +115,21 @@ private slots:
     void on_pushButon_addNewRelations_clicked();
 
     void on_pushButton_removeRelations_clicked();
+
+    void on_actionView_scientist_triggered();
+
+    void on_actionView_computer_triggered();
+
+    void on_actionView_computer_type_triggered();
+
+    void on_databaseDisplayComSci_customContextMenuRequested(const QPoint &pos);
+
+    void on_databaseDisplayComputers_customContextMenuRequested(const QPoint &pos);
+
+    void on_databaseDisplayComTypes_customContextMenuRequested(const QPoint &pos);
+
+    void on_tableWidget_displayRelations_customContextMenuRequested(const QPoint &pos);
+
 
 private:
     void displayRelations();

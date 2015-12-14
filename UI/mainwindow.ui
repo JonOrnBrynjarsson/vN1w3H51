@@ -26,8 +26,11 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="MainMenuSelection">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="computerSci">
        <property name="accessibleName">
@@ -44,6 +47,9 @@
             <width>511</width>
             <height>321</height>
            </size>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -306,6 +312,9 @@
             <height>321</height>
            </size>
           </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
@@ -540,6 +549,9 @@
             <height>321</height>
            </size>
           </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
+          </property>
           <property name="sizeAdjustPolicy">
            <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
           </property>
@@ -759,6 +771,9 @@
             <width>511</width>
             <height>321</height>
            </size>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
           </property>
           <property name="sizeAdjustPolicy">
            <enum>QAbstractScrollArea::AdjustIgnored</enum>
@@ -988,9 +1003,18 @@
     <addaction name="separator"/>
     <addaction name="actionAbout_Computers_and_Scientists_Database"/>
    </widget>
+   <widget class="QMenu" name="menuDetail">
+    <property name="title">
+     <string>Detail</string>
+    </property>
+    <addaction name="actionView_scientist"/>
+    <addaction name="actionView_computer"/>
+    <addaction name="actionView_computer_type"/>
+   </widget>
    <addaction name="menuAdd_Data"/>
    <addaction name="menuEdit_Data"/>
    <addaction name="menuRemove_Data"/>
+   <addaction name="menuDetail"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAdd_New_Computer_Scientist">
@@ -1074,6 +1098,21 @@
   <action name="actionAbout_Computers_and_Scientists_Database">
    <property name="text">
     <string>About Computers and Scientists Database</string>
+   </property>
+  </action>
+  <action name="actionView_scientist">
+   <property name="text">
+    <string>View Scientist</string>
+   </property>
+  </action>
+  <action name="actionView_computer">
+   <property name="text">
+    <string>View Computer</string>
+   </property>
+  </action>
+  <action name="actionView_computer_type">
+   <property name="text">
+    <string>View Computer Type</string>
    </property>
   </action>
  </widget>

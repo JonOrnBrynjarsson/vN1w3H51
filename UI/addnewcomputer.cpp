@@ -160,7 +160,7 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 }
 
 
-void addnewcomputer::on_dateEdit_year_userDateChanged(const QDate &date)
+void addnewcomputer::on_dateEdit_year_userDateChanged()//const QDate &date)
 {
     QString year = ui->lineEdit_enterYear->text();
     int yearint = year.toInt();
