@@ -15,6 +15,9 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
     ui->label_computerID->setHidden(true);
     ui->label_relations->setHidden(true);
     ui->textBrowser_relations->setHidden(true);
+    ui->errorInName->setHidden(true);
+    ui->errorInYear->setHidden(true);
+
 
 
     serviceObject.servReadSqlCompTypes();
@@ -139,6 +142,14 @@ addnewcomputer::~addnewcomputer()
 
 void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 {
+
+    bool goodInput = false;
+
+    if ((on_lineEdit_insertName_editingFinished() == false)&&(on_lineEdit_enterYear_editingFinished() == false))
+    {
+        goodInput = true;
+    }
+
     string name = ui->lineEdit_insertName->text().toStdString();
     int year = ui->lineEdit_enterYear->text().toInt();
     int type = ui->comboBox_type->currentIndex();
@@ -146,7 +157,7 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
     bool built = ui->checkBox_built->checkState();
     string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
 
-    if(name != "")
+    if(goodInput)
     {
         computer c(name, year, type, built, descr);
         serviceObject.servAddcomputer(c);
@@ -154,8 +165,7 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
     }
     else
     {
-
-        QMessageBox::warning(this, "Error", "You have to include a name for the computer!");
+        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
     }
 }
 
@@ -175,7 +185,6 @@ void addnewcomputer::on_dateEdit_year_userDateChanged(const QDate &date)
 
 void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 {
-    //qDebug () << "button pressed ";
     string name = ui->lineEdit_insertName->text().toStdString();
     int year = ui->lineEdit_enterYear->text().toInt();
     int type = ui->comboBox_type->currentIndex();
@@ -184,9 +193,15 @@ void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
     string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
     int id = ui->label_computerID->text().toInt();
 
-    //qDebug () << "id is : " << id ;
+    bool goodInput = false;
 
-    if(name != "")
+    if ((on_lineEdit_insertName_editingFinished() == false)&&(on_lineEdit_enterYear_editingFinished() == false))
+    {
+        goodInput = true;
+    }
+
+
+    if(goodInput)
     {
         computer c(name, year, type, built, descr);
         c.setComID(id);
@@ -195,8 +210,7 @@ void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
     }
     else
     {
-
-        QMessageBox::warning(this, "Error", "You have to include a name for the computer!");
+        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
     }
 
     addnewcomputer::close();
@@ -208,7 +222,7 @@ void addnewcomputer::on_buttonBox_editComputerFinished_rejected()
     addnewcomputer::close();
 }
 
-void addnewcomputer::on_lineEdit_enterYear_editingFinished()
+bool addnewcomputer::on_lineEdit_enterYear_editingFinished()
 {
     bool badyoc = false;
     QString yoc = ui->lineEdit_enterYear->text();
@@ -217,10 +231,32 @@ void addnewcomputer::on_lineEdit_enterYear_editingFinished()
 
     if (badyoc == true)
     {
-        QMessageBox::warning(this, "Error", "Bad Year!");
+        ui->errorInYear->setHidden(false);
+        ui->errorInYear->setText("<font color='Red'>Year not properly formatted.</font>");
     }
     else
     {
         ui->lineEdit_enterYear->setText(yocf);
+        ui->errorInYear->setHidden(true);
+        badyoc = false;
     }
+
+    return badyoc;
+}
+
+bool addnewcomputer::on_lineEdit_insertName_editingFinished()
+{
+    bool badName = true;
+    if (ui->lineEdit_insertName->text().size() < 1)
+    {
+        ui->errorInName->setHidden(false);
+        ui->errorInName->setText("<font color='Red'>Name is to short!</font>");
+        badName = true;
+    }
+    else
+    {
+        ui->errorInName->setHidden(true);
+        badName = false;
+    }
+    return badName;
 }
