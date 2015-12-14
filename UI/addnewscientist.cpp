@@ -344,23 +344,25 @@ void addNewScientist::on_lineEdit_yod_editingFinished()
 {
     bool badyod = false;
     QString yod = ui->lineEdit_yod->text();
-    int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
-    yod = QString::number(syod);
 
-    int syob = ui->lineEdit_yob->text().toInt();
-    if (syod < syob)
+    if (yod.length() > 1)
     {
-        badyod = true;
-    }
+        int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
+        yod = QString::number(syod);
 
+        int syob = ui->lineEdit_yob->text().toInt();
+        if (syod < syob)
+        {
+            badyod = true;
+        }
 
-
-    if (badyod == true)
-    {
-        QMessageBox::warning(this, "Error", "Bad Year!");
-    }
-    else
-    {
-        ui->lineEdit_yod->setText(yod);
+        if (badyod == true)
+        {
+            QMessageBox::warning(this, "Error", "Bad Year!");
+        }
+        else
+        {
+            ui->lineEdit_yod->setText(yod);
+        }
     }
 }

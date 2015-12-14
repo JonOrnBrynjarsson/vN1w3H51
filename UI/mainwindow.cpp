@@ -354,10 +354,38 @@ void MainWindow::on_actionEdit_a_Computer_Type_triggered()
 
 void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
 {
-    int currentComputer = ui->databaseDisplayComputers->currentIndex().row();
-    computer selctedComputer = serviceobject.servGetComVector().at(currentComputer);
-    int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
-    qDebug() << "Remove_a_Computer_Scientist";
+
+    QString pos = getCurrentSciRowPos();
+    qDebug () << pos;
+
+    for (int i = 0; i < serviceobject.servGetSciVector().size(); i++)
+    {
+        if (serviceobject.servGetSciVector().at(i).getID() == pos.toInt())
+        {
+            qDebug () << "found i at" << i ;
+
+            int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this Scientist?",0x00400000, 0x00000400);
+
+            if(toDelete == 1024)
+            {
+                serviceobject.servDeleteScientist(i);
+                ui->statusbar->showMessage("Scientist deleted", 2000);
+                QString debugname = QString::fromStdString(serviceobject.servGetSciVector().at(i).getName());
+                qDebug () << "deleted name is : " <<debugname;
+
+                ui->databaseDisplayComSci->clear();
+                serviceobject.servReadSqlScientists();
+                printScientists();
+            }
+            else
+            {
+                ui->statusbar->showMessage("Canceled", 2000);
+                ui->databaseDisplayComSci->clear();
+                serviceobject.servReadSqlScientists();
+                printScientists();
+            }
+        }
+    }
 }
 
 void MainWindow::on_actionRemove_a_Computer_triggered()
