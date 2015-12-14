@@ -57,3 +57,8 @@ void scientistuiclass::addScientistErrorCorrection(scientist &sc)
 //    }
 }
 
+
+void scientistuiclass::on_lineEdit_name_selectionChanged()
+{
+
+}

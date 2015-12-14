@@ -7,7 +7,6 @@
 #include <QTextStream>
 #include "models/scientist.h"
 #include "Services/service.h"
-#include "scientistuiclass.h"
 
 namespace Ui {
 class addNewScientist;
@@ -34,6 +33,12 @@ private slots:
     void on_buttonBox_editScientist_accepted();
 
     void on_buttonBox_editScientist_rejected();
+
+    void on_lineEdit_name_editingFinished();
+
+    void on_lineEdit_yob_editingFinished();
+
+    void on_lineEdit_yod_editingFinished();
 
 private:
     Ui::addNewScientist *ui;

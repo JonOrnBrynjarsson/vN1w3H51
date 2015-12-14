@@ -89,33 +89,7 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
         ui->label_enterDescription->setText("Description:");
         ui->textEdit_insertDescription->setReadOnly(true);
 
-        vector<scientist> comLinkedToSci = serviceObject.servGetScientistsLinkedToComputer(currentID);
-
-        if (comLinkedToSci.size() > 0)
-        {
-            ui->label_relations->setHidden(false);
-            ui->textBrowser_relations->setHidden(false);
-            QString linkedScientists;
-            string outoffunc;
-            for (unsigned int x = 0; x < comLinkedToSci.size(); x++)
-            {
-                string space = "\n";
-                string temp;
-                temp = comLinkedToSci.at(x).getName();
-
-                if (comLinkedToSci.size() > 1)
-                {
-                    outoffunc += temp + space;
-                }
-                else
-                {
-                    outoffunc = temp;
-                }
-            }
-
-            linkedScientists = QString::fromStdString(outoffunc);
-            ui->textBrowser_relations->setText(linkedScientists);
-        }
+        neweditcomputerRelations(currentID);
 
     }
     //qDebug () << "neweditcomputer, crash 7";
@@ -125,6 +99,37 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
     //qDebug () << "neweditcomputer, crash 8";
 
 
+}
+
+void addnewcomputer::neweditcomputerRelations(int currentID)
+{
+    vector<scientist> comLinkedToSci = serviceObject.servGetScientistsLinkedToComputer(currentID);
+
+    if (comLinkedToSci.size() > 0)
+    {
+        ui->label_relations->setHidden(false);
+        ui->textBrowser_relations->setHidden(false);
+        QString linkedScientists;
+        string outoffunc;
+        for (unsigned int x = 0; x < comLinkedToSci.size(); x++)
+        {
+            string space = "\n";
+            string temp;
+            temp = comLinkedToSci.at(x).getName();
+
+            if (comLinkedToSci.size() > 1)
+            {
+                outoffunc += temp + space;
+            }
+            else
+            {
+                outoffunc = temp;
+            }
+        }
+
+        linkedScientists = QString::fromStdString(outoffunc);
+        ui->textBrowser_relations->setText(linkedScientists);
+    }
 }
 addnewcomputer::~addnewcomputer()
 {

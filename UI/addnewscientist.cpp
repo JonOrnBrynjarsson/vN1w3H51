@@ -41,8 +41,19 @@ void addNewScientist::on_buttonBox_accepted()
     sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
     sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
     sc.setGender(ui->comboBox_gender->currentIndex());
-    serviceobject.servAddscientist(sc);
-    serviceobject.servReadSqlScientists();
+
+    if (sc.getName().length() > 2)
+    {
+        serviceobject.servAddscientist(sc);
+        serviceobject.servReadSqlScientists();
+    }
+    else
+    {
+
+        QMessageBox::warning(this, "Error", "You have to include a name for the Scientist!");
+    }
+
+    addNewScientist::close();
 }
 
 void addNewScientist::addScientistToDatabase(scientist &sc)
@@ -218,10 +229,20 @@ void addNewScientist::neweditscientistRelations(int currentID)
 
 void addNewScientist::neweditscientistClickableLink(QString link)
 {
-    ui->labelEntLink->setHidden(true);
-    ui->lineEdit_link->setHidden(true);
-    ui->labelClickableLink->setHidden(false);
-    ui->labelClickableUrlReal->setHidden(false);
+    if (link.size() > 3)
+    {
+        ui->labelEntLink->setHidden(true);
+        ui->lineEdit_link->setHidden(true);
+        ui->labelClickableLink->setHidden(false);
+        ui->labelClickableUrlReal->setHidden(false);
+    }
+    else if (link.size() < 3)
+    {
+        ui->labelEntLink->setHidden(true);
+        ui->lineEdit_link->setHidden(true);
+        ui->labelClickableLink->setHidden(true);
+        ui->labelClickableUrlReal->setHidden(true);
+    }
 
     QString finalurl;
     //QString myString = "Last Name:SomeName, Day:23";
@@ -256,9 +277,9 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
     string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
     int sciid = ui->labelSciid->text().toInt();
 
-    qDebug () << "id is : " << sciid ;
+    qDebug () << "im here" << sciid ;
 
-    if(name != "")
+    if(name.length() > 2)
     {
         scientist sc(sciid, name, gender, yob, yod, descr, link);
         serviceobject.servUpdateSqlScientist(sc);
@@ -277,4 +298,69 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
 void addNewScientist::on_buttonBox_editScientist_rejected()
 {
 
+}
+
+void addNewScientist::on_lineEdit_name_editingFinished()
+{
+    bool badname = false;
+    QString name = ui->lineEdit_name->text();
+    string sname = serviceobject.nameCorrection(name.toStdString(),badname);
+    name = QString::fromStdString(sname);
+
+    if (name.length() < 2)
+    {
+        badname = true;
+    }
+
+    if (badname == true)
+    {
+        QMessageBox::warning(this, "Error", "Bad Name!");
+    }
+    else
+    {
+        ui->lineEdit_name->setText(name);
+    }
+}
+
+
+void addNewScientist::on_lineEdit_yob_editingFinished()
+{
+    bool badyob = false;
+    QString yob = ui->lineEdit_yob->text();
+    int syob = serviceobject.yearCorrection(yob.toInt(), badyob);
+    yob = QString::number(syob);
+
+    if (badyob == true)
+    {
+        QMessageBox::warning(this, "Error", "Bad Year!");
+    }
+    else
+    {
+        ui->lineEdit_yob->setText(yob);
+    }
+}
+
+void addNewScientist::on_lineEdit_yod_editingFinished()
+{
+    bool badyod = false;
+    QString yod = ui->lineEdit_yod->text();
+    int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
+    yod = QString::number(syod);
+
+    int syob = ui->lineEdit_yob->text().toInt();
+    if (syod < syob)
+    {
+        badyod = true;
+    }
+
+
+
+    if (badyod == true)
+    {
+        QMessageBox::warning(this, "Error", "Bad Year!");
+    }
+    else
+    {
+        ui->lineEdit_yod->setText(yod);
+    }
 }
