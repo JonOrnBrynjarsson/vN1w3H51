@@ -242,6 +242,7 @@ bool workingclass::updateSqlComputerType(computertype& ct)
 */
 void workingclass::deleteScientist(int sciID)
 {
+    qDebug() << sciID;
     QSqlQuery query;
 
     query.prepare("UPDATE scientists "
