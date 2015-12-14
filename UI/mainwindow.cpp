@@ -203,8 +203,6 @@ QString MainWindow::getCurrentSciRowPos()
     QStringList list;
     QAbstractItemModel *model = ui->databaseDisplayComSci->model();
 
-
-
     model->rowCount();
     QString returnID;
     for (int i = 0; i < 1; i++)
@@ -356,35 +354,26 @@ void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
 {
 
     QString pos = getCurrentSciRowPos();
-    qDebug () << pos;
 
-    for (int i = 0; i < serviceobject.servGetSciVector().size(); i++)
+    qDebug () << pos << " -  posið";
+
+    int toDelete = QMessageBox::critical(this,"About to delete",
+                                         "Are you sure you want to delete this Scientist?",0x00400000, 0x00000400);
+
+    if(toDelete == 1024)
     {
-        if (serviceobject.servGetSciVector().at(i).getID() == pos.toInt())
-        {
-            qDebug () << "found i at" << i ;
-
-            int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this Scientist?",0x00400000, 0x00000400);
-
-            if(toDelete == 1024)
-            {
-                serviceobject.servDeleteScientist(i);
-                ui->statusbar->showMessage("Scientist deleted", 2000);
-                QString debugname = QString::fromStdString(serviceobject.servGetSciVector().at(i).getName());
-                qDebug () << "deleted name is : " <<debugname;
-
-                ui->databaseDisplayComSci->clear();
-                serviceobject.servReadSqlScientists();
-                printScientists();
-            }
-            else
-            {
-                ui->statusbar->showMessage("Canceled", 2000);
-                ui->databaseDisplayComSci->clear();
-                serviceobject.servReadSqlScientists();
-                printScientists();
-            }
-        }
+        serviceobject.servDeleteScientist(pos.toUInt());
+        ui->statusbar->showMessage("Scientist deleted", 2000);
+        ui->databaseDisplayComSci->clear();
+        serviceobject.servReadSqlScientists();
+        printScientists();
+    }
+    else
+    {
+        ui->statusbar->showMessage("Canceled", 2000);
+        ui->databaseDisplayComSci->clear();
+        serviceobject.servReadSqlScientists();
+        printScientists();
     }
 }
 
