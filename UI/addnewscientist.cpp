@@ -328,7 +328,7 @@ void addNewScientist::on_lineEdit_yob_editingFinished()
     bool badyob = false;
     QString yob = ui->lineEdit_yob->text();
     int syob = serviceobject.yearCorrection(yob.toInt(), badyob);
-    yob = QString::number(syob);
+    QString yobf = QString::number(syob);
 
     if (badyob == true)
     {
@@ -336,7 +336,7 @@ void addNewScientist::on_lineEdit_yob_editingFinished()
     }
     else
     {
-        ui->lineEdit_yob->setText(yob);
+        ui->lineEdit_yob->setText(yobf);
     }
 }
 

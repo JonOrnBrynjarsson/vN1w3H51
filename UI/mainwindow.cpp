@@ -311,11 +311,11 @@ void MainWindow::on_actionAdd_New_Computer_triggered()
 
 void MainWindow::on_actionAdd_New_Computer_Type_triggered()
 {
-    addnewcomputer newcomputer;
-    newcomputer.setModal(true);
-    newcomputer.exec();
-    serviceobject.servReadSqlComputers();
-    printComputers();
+    addnewcomputertype newcomptype;
+    newcomptype.setModal(true);
+    newcomptype.exec();
+    serviceobject.servReadSqlCompTypes();
+    printComputerTypes();
 
 }
 
@@ -836,4 +836,19 @@ void MainWindow::on_pushButton_editScientist_clicked()
 void MainWindow::on_pushButton_removeScientist_clicked()
 {
     on_actionRemove_a_Computer_Scientist_triggered();
+}
+
+void MainWindow::on_pushButon_addNewCompuerTypes_clicked()
+{
+    on_actionAdd_New_Computer_Type_triggered();
+}
+
+void MainWindow::on_pushButton_editComputerTypes_clicked()
+{
+    on_actionEdit_a_Computer_Type_triggered();
+}
+
+void MainWindow::on_pushButton_removeCompuerTypes_clicked()
+{
+    on_actionRemove_a_Computer_Type_triggered();
 }

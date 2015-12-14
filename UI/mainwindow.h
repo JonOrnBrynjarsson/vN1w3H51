@@ -110,6 +110,12 @@ private slots:
 
     void on_pushButton_removeScientist_clicked();
 
+    void on_pushButon_addNewCompuerTypes_clicked();
+
+    void on_pushButton_editComputerTypes_clicked();
+
+    void on_pushButton_removeCompuerTypes_clicked();
+
 private:
     void displayRelations();
     //service service;
