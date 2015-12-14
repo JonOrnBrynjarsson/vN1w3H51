@@ -154,12 +154,12 @@ int service::yearCorrection(int year, bool &errorInYear)
     {
         tempYear += 1900;
     }
-    else if ((tempYear >= 0) && (tempYear < 20))
+    else if ((tempYear >= 1) && (tempYear < 20))
     {
         tempYear += 2000;
     }
 
-    if ((tempYear > 0) && (tempYear <= CURRENTYEAR))
+    if ((tempYear > 1) && (tempYear <= CURRENTYEAR))
     {
         errorInYear = false;
     }

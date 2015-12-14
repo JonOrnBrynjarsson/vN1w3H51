@@ -17,8 +17,8 @@ class addnewcomputer : public QDialog
 
 public:
     explicit addnewcomputer(QWidget *parent = 0);
-    void editcomputer(int i, int x, bool &itt, QString name);
     void neweditcomputer(QString id, bool edit);
+    void neweditcomputerRelations(int currentID);
     ~addnewcomputer();
 
 private slots:
@@ -28,6 +28,8 @@ private slots:
     void on_buttonBox_editComputerFinished_accepted();
 
     void on_buttonBox_editComputerFinished_rejected();
+
+    void on_lineEdit_enterYear_editingFinished();
 
 private:
     Ui::addnewcomputer *ui;

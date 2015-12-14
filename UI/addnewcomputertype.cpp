@@ -1,6 +1,5 @@
 #include "addnewcomputertype.h"
 #include "ui_addnewcomputertype.h"
-//#include "computertypeuiclass.h"
 //#include "DataLayer/workingclass.h"
 //#include <QDateEdit>
 //#include <sstream>
@@ -63,62 +62,41 @@ addnewcomputertype::~addnewcomputertype()
 
 void addnewcomputertype::on_buttonBox_accepted()
 {
+    ct.setName(ui->lineEdit_name->text().toStdString());
+    ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
+    serviceObject.servAddcomputerType(ct);
+    serviceObject.servReadSqlCompTypes();
 
-    //qDebug () << "on_buttonBox_accepted()";
-    string name = ui->lineEdit_name->text().toStdString();
-    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
+}
 
-    if(name != "")
+void addnewcomputertype::addCompTypetoDB(computertype &ct)
+{
+    serviceObject.servAddcomputerType(ct);
+}
+
+
+void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
+{
+    bool badName = false;
+
+    ct.setName(serviceObject.nameCorrection(ct.getName(), badName));
+
+    if(badName)
     {
-        computertype ct(name, descr);
-        serviceObject.servAddcomputerType(ct);
-        serviceObject.servReadSqlCompTypes();
+        qDebug() << "ERROR IN NAME!";
+
+        if(badName)
+        {
+            serviceObject.errorMessage("Name not correctly formated, please enter letters only.");
+        }
     }
     else
     {
-
-        QMessageBox::warning(this, "Error", "You have to include a name for the computer!");
+        addCompTypetoDB(ct);
+        qDebug() << "NAME ADDED TO DATABASE!";
+        serviceObject.completeMessage("Name was succesfully added to the Database!");
     }
 }
-
-//void computertypeuiclass::getComputerTypeData(string name, string desc)
-//{
-//    ct.setName(name);
-//    ct.setDesc(desc);
-
-//    addCompTypeErrCorr(ct);
-//}
-
-//void computertypeuiclass::addCompTypetoDB(computertype &ct)
-//{
-//    serviceObject.servStartDatabase();
-//    serviceObject.servAddcomputerType(ct);
-//}
-
-
-//void computertypeuiclass::addCompTypeErrCorr(computertype &ct)
-//{
-//    bool badName = false;
-
-//    ct.setName(serviceObject.nameCorrection(ct.getName(), badName));
-
-//    if(badName)
-//    {
-//        qDebug() << "ERROR IN NAME!";
-
-//        if(badName)
-//        {
-//            serviceObject.errorMessage("Name not correctly formated, please enter letters only.");
-//        }
-
-//    }
-//    else
-//    {
-//        addCompTypetoDB(ct);
-//        qDebug() << "NAME ADDED TO DATABASE!";
-//        serviceObject.completeMessage("Name was succesfully added to the Database!");
-//    }
-//}
 
 
 

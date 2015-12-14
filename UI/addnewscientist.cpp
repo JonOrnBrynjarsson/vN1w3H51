@@ -21,6 +21,9 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->lineEdit_AgeAtDeath->setHidden(true);
     ui->labelRelations->setHidden(true);
     ui->textBrowser_relations->setHidden(true);
+    ui->labelClickableLink->setHidden(true);
+    ui->labelClickableUrlReal->setHidden(true);
+
 
 }
 
@@ -38,8 +41,19 @@ void addNewScientist::on_buttonBox_accepted()
     sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
     sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
     sc.setGender(ui->comboBox_gender->currentIndex());
-    serviceobject.servAddscientist(sc);
-    serviceobject.servReadSqlScientists();
+
+    if (sc.getName().length() > 2)
+    {
+        serviceobject.servAddscientist(sc);
+        serviceobject.servReadSqlScientists();
+    }
+    else
+    {
+
+        QMessageBox::warning(this, "Error", "You have to include a name for the Scientist!");
+    }
+
+    addNewScientist::close();
 }
 
 void addNewScientist::addScientistToDatabase(scientist &sc)
@@ -161,6 +175,8 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             ui->lineEdit_yod->setHidden(true);
         }
 
+        neweditscientistRelations(currentID);
+        neweditscientistClickableLink(link);
 
 
         ui->labelEntDescr->setText("Description: ");
@@ -171,38 +187,81 @@ void addNewScientist::neweditscientist(QString id, bool edit)
         ui->lineEdit_link->setReadOnly(true);
 
 
-        vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
 
-        if (sciLinkedToCom.size() > 0)
-        {
-            ui->labelRelations->setHidden(false);
-            ui->textBrowser_relations->setHidden(false);
-            QString linkedComputers;
-            string outoffunc;
-            for (unsigned int x = 0; x < sciLinkedToCom.size(); x++)
-            {
-                string space = "\n";
-                string temp;
-                temp = sciLinkedToCom.at(x).getComName();
 
-                if (sciLinkedToCom.size() > 1)
-                {
-                    outoffunc += temp + space;
-                }
-                else
-                {
-                    outoffunc = temp;
-                }
-            }
-
-            linkedComputers = QString::fromStdString(outoffunc);
-            ui->textBrowser_relations->setText(linkedComputers);
-        }
     }
 
     setModal(true);
     exec();
 
+}
+
+void addNewScientist::neweditscientistRelations(int currentID)
+{
+    vector<computer> sciLinkedToCom = serviceobject.servGetComputersLinkedToScientists(currentID);
+
+    if (sciLinkedToCom.size() > 0)
+    {
+        ui->labelRelations->setHidden(false);
+        ui->textBrowser_relations->setHidden(false);
+        QString linkedComputers;
+        string outoffunc;
+        for (unsigned int x = 0; x < sciLinkedToCom.size(); x++)
+        {
+            string space = "\n";
+            string temp;
+            temp = sciLinkedToCom.at(x).getComName();
+
+            if (sciLinkedToCom.size() > 1)
+            {
+                outoffunc += temp + space;
+            }
+            else
+            {
+                outoffunc = temp;
+            }
+        }
+
+        linkedComputers = QString::fromStdString(outoffunc);
+        ui->textBrowser_relations->setText(linkedComputers);
+    }
+}
+
+void addNewScientist::neweditscientistClickableLink(QString link)
+{
+    if (link.size() > 3)
+    {
+        ui->labelEntLink->setHidden(true);
+        ui->lineEdit_link->setHidden(true);
+        ui->labelClickableLink->setHidden(false);
+        ui->labelClickableUrlReal->setHidden(false);
+    }
+    else if (link.size() < 3)
+    {
+        ui->labelEntLink->setHidden(true);
+        ui->lineEdit_link->setHidden(true);
+        ui->labelClickableLink->setHidden(true);
+        ui->labelClickableUrlReal->setHidden(true);
+    }
+
+    QString finalurl;
+    //QString myString = "Last Name:SomeName, Day:23";
+    QStringList myLink = link.split("//");
+    //qDebug() << "String list is:  "<< myLink.last();
+
+    QString http = "http://";
+
+    QString clickhere = "\">"+myLink.last()+"</a>";
+    QString begin = "<a href=\"";
+    //qDebug () << clickhere << " " << begin;
+    finalurl = begin + (http + myLink.last()) + clickhere;
+
+    //qDebug () << finalurl ;
+
+    ui->labelClickableUrlReal->setText(finalurl);
+    ui->labelClickableUrlReal->setTextFormat(Qt::RichText);
+    ui->labelClickableUrlReal->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    ui->labelClickableUrlReal->setOpenExternalLinks(true);
 }
 
 void addNewScientist::on_buttonBox_editScientist_accepted()
@@ -218,9 +277,9 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
     string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
     int sciid = ui->labelSciid->text().toInt();
 
-    qDebug () << "id is : " << sciid ;
+    qDebug () << "im here" << sciid ;
 
-    if(name != "")
+    if(name.length() > 2)
     {
         scientist sc(sciid, name, gender, yob, yod, descr, link);
         serviceobject.servUpdateSqlScientist(sc);
@@ -239,4 +298,71 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
 void addNewScientist::on_buttonBox_editScientist_rejected()
 {
 
+}
+
+void addNewScientist::on_lineEdit_name_editingFinished()
+{
+    bool badname = false;
+    QString name = ui->lineEdit_name->text();
+    string sname = serviceobject.nameCorrection(name.toStdString(),badname);
+    name = QString::fromStdString(sname);
+
+    if (name.length() < 2)
+    {
+        badname = true;
+    }
+
+    if (badname == true)
+    {
+        QMessageBox::warning(this, "Error", "Bad Name!");
+    }
+    else
+    {
+        ui->lineEdit_name->setText(name);
+    }
+}
+
+
+void addNewScientist::on_lineEdit_yob_editingFinished()
+{
+    bool badyob = false;
+    QString yob = ui->lineEdit_yob->text();
+    int syob = serviceobject.yearCorrection(yob.toInt(), badyob);
+    QString yobf = QString::number(syob);
+
+    if (badyob == true)
+    {
+        QMessageBox::warning(this, "Error", "Bad Year!");
+    }
+    else
+    {
+        ui->lineEdit_yob->setText(yobf);
+    }
+}
+
+void addNewScientist::on_lineEdit_yod_editingFinished()
+{
+    bool badyod = false;
+    QString yod = ui->lineEdit_yod->text();
+
+    if (yod.length() > 1)
+    {
+        int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
+        yod = QString::number(syod);
+
+        int syob = ui->lineEdit_yob->text().toInt();
+        if (syod < syob)
+        {
+            badyod = true;
+        }
+
+        if (badyod == true)
+        {
+            QMessageBox::warning(this, "Error", "Bad Year!");
+        }
+        else
+        {
+            ui->lineEdit_yod->setText(yod);
+        }
+    }
 }
