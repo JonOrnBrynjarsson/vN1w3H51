@@ -124,8 +124,6 @@ void MainWindow::printScientists()
     ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
     ui->databaseDisplayComSci->setColumnWidth(0, 200);
     ui->databaseDisplayComSci->setSortingEnabled(true);
-
-
 }
 
 void MainWindow::printComputers()

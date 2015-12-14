@@ -26,7 +26,6 @@ SOURCES += main.cpp\
     UI/addnewscientist.cpp \
     UI/addnewcomputer.cpp \
     UI/addnewcomputertype.cpp \
-#    UI/computertypeuiclass.cpp \
 	UI/addrelations.cpp\
 	Console_UI/infodisplay.cpp \
     UI/editcomputer.cpp \
@@ -41,7 +40,6 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/addnewscientist.h \
     UI/addnewcomputer.h \
     UI/addnewcomputertype.h \
-#    UI/computertypeuiclass.h \
 	UI/addrelations.h \
 	Console_UI/infodisplay.h \
     UI/editcomputer.h \
