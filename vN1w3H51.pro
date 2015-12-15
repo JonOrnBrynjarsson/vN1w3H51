@@ -59,3 +59,6 @@ FORMS    += \
 
 DISTFILES +=
     UI/computerui.ui
+
+RESOURCES += \
+    groupphotos.qrc
