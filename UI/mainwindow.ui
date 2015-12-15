@@ -1022,7 +1022,7 @@
   </widget>
   <action name="actionAdd_New_Computer_Scientist">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Add.png</normaloff>:/Icon/Icon/Add.png</iconset>
    </property>
    <property name="text">
@@ -1034,7 +1034,7 @@
   </action>
   <action name="actionAdd_New_Computer">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Add.png</normaloff>:/Icon/Icon/Add.png</iconset>
    </property>
    <property name="text">
@@ -1043,7 +1043,7 @@
   </action>
   <action name="actionAdd_New_Computer_Type">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Add.png</normaloff>:/Icon/Icon/Add.png</iconset>
    </property>
    <property name="text">
@@ -1052,7 +1052,7 @@
   </action>
   <action name="actionAdd_Relations">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Add.png</normaloff>:/Icon/Icon/Add.png</iconset>
    </property>
    <property name="text">
@@ -1061,7 +1061,7 @@
   </action>
   <action name="actionEdit_a_Computer_Scientist">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Edit.png</normaloff>:/Icon/Icon/Edit.png</iconset>
    </property>
    <property name="text">
@@ -1070,7 +1070,7 @@
   </action>
   <action name="actionEdit_a_Computer">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Edit.png</normaloff>:/Icon/Icon/Edit.png</iconset>
    </property>
    <property name="text">
@@ -1079,7 +1079,7 @@
   </action>
   <action name="actionEdit_a_Computer_Type">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Edit.png</normaloff>:/Icon/Icon/Edit.png</iconset>
    </property>
    <property name="text">
@@ -1088,7 +1088,7 @@
   </action>
   <action name="actionRemove_a_Computer_Scientist">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Delete.png</normaloff>:/Icon/Icon/Delete.png</iconset>
    </property>
    <property name="text">
@@ -1097,7 +1097,7 @@
   </action>
   <action name="actionRemove_a_Computer">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Delete.png</normaloff>:/Icon/Icon/Delete.png</iconset>
    </property>
    <property name="text">
@@ -1106,7 +1106,7 @@
   </action>
   <action name="actionRemove_a_Computer_Type">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Delete.png</normaloff>:/Icon/Icon/Delete.png</iconset>
    </property>
    <property name="text">
@@ -1115,7 +1115,7 @@
   </action>
   <action name="actionRemove_Relations">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Delete.png</normaloff>:/Icon/Icon/Delete.png</iconset>
    </property>
    <property name="text">
@@ -1139,7 +1139,7 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Help.png</normaloff>:/Icon/Icon/Help.png</iconset>
    </property>
    <property name="text">
@@ -1148,7 +1148,7 @@
   </action>
   <action name="actionAbout_Computers_and_Scientists_Database">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Help.png</normaloff>:/Icon/Icon/Help.png</iconset>
    </property>
    <property name="text">
@@ -1157,7 +1157,7 @@
   </action>
   <action name="actionView_scientist">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Information.png</normaloff>:/Icon/Icon/Information.png</iconset>
    </property>
    <property name="text">
@@ -1166,7 +1166,7 @@
   </action>
   <action name="actionView_computer">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Information.png</normaloff>:/Icon/Icon/Information.png</iconset>
    </property>
    <property name="text">
@@ -1175,7 +1175,7 @@
   </action>
   <action name="actionView_computer_type">
    <property name="icon">
-    <iconset resource="../groupphotos.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Icon/Icon/Information.png</normaloff>:/Icon/Icon/Information.png</iconset>
    </property>
    <property name="text">
@@ -1210,7 +1210,7 @@
   <tabstop>tableWidget_displayRelations</tabstop>
  </tabstops>
  <resources>
-  <include location="../groupphotos.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

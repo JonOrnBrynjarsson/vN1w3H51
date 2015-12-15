@@ -56,4 +56,4 @@ DISTFILES +=
     UI/computerui.ui
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc 
