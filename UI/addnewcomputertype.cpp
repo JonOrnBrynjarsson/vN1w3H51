@@ -155,3 +155,8 @@ bool addnewcomputertype::on_lineEdit_name_editingFinished()
 
     return badName;
 }
+
+void addnewcomputertype::on_buttonBox_Editcomtype_rejected()
+{
+    addnewcomputertype::close();
+}

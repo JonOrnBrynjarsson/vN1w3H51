@@ -34,6 +34,8 @@ private slots:
 
     bool on_lineEdit_name_editingFinished();
 
+    void on_buttonBox_Editcomtype_rejected();
+
 private:
     Ui::addnewcomputertype *ui;
     void addCompTypetoDB(computertype &ct);

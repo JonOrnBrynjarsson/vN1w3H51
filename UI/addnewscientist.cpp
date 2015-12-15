@@ -46,12 +46,6 @@ void addNewScientist::on_buttonBox_accepted()
     {
         goodInput = true;
     }
-//    qDebug () << "in accepted: ";
-//    qDebug () << on_lineEdit_name_editingFinished();
-//    qDebug () << on_lineEdit_yob_editingFinished();
-//    qDebug () << on_lineEdit_yod_editingFinished();
-//    qDebug () << "good name is: ";
-//    qDebug () << goodName;
 
     scientist sc;
     sc.setName(ui->lineEdit_name->text().toStdString());
@@ -75,10 +69,11 @@ void addNewScientist::on_buttonBox_accepted()
     }
     else
     {
-        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
+        QMessageBox::warning(this, "Error", "Name or year correctly entered!");
     }
 
-    addNewScientist::close();
+    qDebug () << "ég er hér!!!";
+    //addNewScientist::close();
 }
 
 void addNewScientist::addScientistToDatabase(scientist &sc)
@@ -324,8 +319,7 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
 
     bool goodInput = false;
 
-    //if ((on_lineEdit_name_editingFinished() == false)&&(on_lineEdit_yob_editingFinished() == false)&&(on_lineEdit_yod_editingFinished() == false))
-    if (on_lineEdit_name_editingFinished() == false)
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
     {
         goodInput = true;
     }
@@ -338,7 +332,7 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
     }
     else
     {
-        QMessageBox::warning(this, "Error", "Name not properly formatted. Try again!");
+        QMessageBox::warning(this, "Error", "Name or year not correctly entered!");
     }
 
     addNewScientist::close();
@@ -347,7 +341,8 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
 
 void addNewScientist::on_buttonBox_editScientist_rejected()
 {
-
+    ui->errorInName->setHidden(true);
+    addNewScientist::close();
 }
 bool addNewScientist::on_lineEdit_name_editingFinished()
 {
@@ -457,7 +452,7 @@ bool addNewScientist::on_dateEdit_yod_editingFinished()
 
     if (ui->checkBox->checkState() == 0) // dauður!
     {
-        if (ui->dateEdit_yob->date().year() > ui->dateEdit_yod->date().year())
+        if (ui->dateEdit_yob->date().year() >= ui->dateEdit_yod->date().year())
         {
             ui->errorInYod->setHidden(false);
             ui->errorInYod->setText("<font color='Red'>You cannot die before you have lived.</font>");
@@ -476,5 +471,6 @@ bool addNewScientist::on_dateEdit_yod_editingFinished()
         badYod = false;
     }
 
+    qDebug () << "badyod is :" <<badYod;
     return badYod;
 }
