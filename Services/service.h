@@ -36,7 +36,7 @@ class service
         int genderCorrection(string gender);
         //  Precondition:   Takes in a string for the gender correction process.
         //  Postcondition:  Returns 0 if female, 1 if male, 2 otherwise.
-        //int inputNumberToFunction(string input);    //TEKIÐ ÚR INFODISPLAY!!!
+        int inputNumberToFunction(QString input);
         //  Precondition:   Takes in a string for the number
         //  Postcondition:  Returns integer.
 
@@ -107,6 +107,16 @@ class service
         //  Calls the getScientistsLinkedToComputer function in workingclass.
         vector<computer> servGetComputersLinkedToScientists(int sciID);
         //  Calls the getComputersLinkedToScientists function in workingclass.
+
+        /*
+        ##  Sort functions
+        ##---------------------------------------------------------------------------------------##
+        */
+        vector<scientist> servClearSciVector();
+        //  Calls the clearSciVector function in workingclass.
+        vector<computer> servClearComVector();
+        //  Calls the clearComVector function in workingclass.
+
 
         /*
         ##  Sort functions

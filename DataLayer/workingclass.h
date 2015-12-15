@@ -10,7 +10,6 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <QDebug>
 
 const string DBASE = "../vN1w3H51/database/Group51_verklegt_1.sqlite";  // Locaton of the database file
 const int MAXNAMELENGTH = 44;
@@ -122,6 +121,17 @@ public:
     vector<relation> getRelationshipVector();
     //  Precondition:   A relationship exists between at least one scientist and one computer.
     //  Postcondition:  Returns a vector of relationships between scientists and computers.
+
+    /*
+    ##  Clear vector functions
+    ##---------------------------------------------------------------------------------------##
+    */
+    vector<scientist> clearSciVector();
+    //  Precondition:   The private scientists vector has been populated
+    //  Postcondition:  Clears the private vector.
+    vector<computer> clearComVector();
+    //  Precondition:   The private computers vector has been populated
+    //  Postcondition:  Clears the private vector.
 
     /*
     ##  Search functions

@@ -1,5 +1,4 @@
 #include "services/service.h"
-#include <QDebug>
 
 using namespace std;
 
@@ -95,6 +94,28 @@ int service::genderCorrection(string gender)
     {
         return 2;
     }
+}
+
+int service::inputNumberToFunction(QString input)
+{
+    bool badInput = false;
+    string test = input.toStdString();
+    int temp;
+
+    for (unsigned int i = 0; i < input.size(); i++)
+    {
+        if (!isdigit(test[i]))
+        {
+            badInput = true;
+        }
+    }
+    if(!badInput)
+    {
+        temp = input.toInt();
+        return temp;
+    }
+    return -1;
+
 }
 
 int service::yearCorrection(int year, bool &errorInYear)
@@ -213,7 +234,6 @@ bool service::servDeleteRelationSciComp(int sciID, int compID)
 vector<scientist> service::servGetSciVector()
 {
     return workingObject.getSciVector();
-    qDebug () << "getting vector..";
 }
 vector<computer> service::servGetComVector()
 {
@@ -235,6 +255,16 @@ vector<scientist> service::servGetScientistsLinkedToComputer(int compID)
 vector<computer> service::servGetComputersLinkedToScientists(int sciID)
 {
     return workingObject.getComputersLinkedToScientists(sciID);
+}
+
+vector<scientist> service::servClearSciVector()
+{
+    workingObject.clearSciVector();
+}
+
+vector<computer> service::servClearComVector()
+{
+    workingObject.clearComVector();
 }
 
 /*
