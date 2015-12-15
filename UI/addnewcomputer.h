@@ -65,6 +65,7 @@ private:
     //ui pointer
     service serviceObject;
     //object for service class
+    void viewingMode(int currentID);
 };
 
 #endif // ADDNEWCOMPUTER_H

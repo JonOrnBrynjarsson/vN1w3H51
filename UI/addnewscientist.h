@@ -64,6 +64,7 @@ private:
     //Finds relations for scientists and computers.
     void neweditscientistClickableLink(QString link);
     //Creates a clickable link for viewing scientist.
+    void viewingMode(QString yod, QString yob, int currentID, QString link);
     scientist s;
     //object for scientist model
     service serviceobject;

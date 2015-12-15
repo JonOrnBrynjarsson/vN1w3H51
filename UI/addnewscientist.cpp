@@ -160,66 +160,9 @@ void addNewScientist::neweditscientist(QString id, bool edit)
     //ui->buttonBox_editScientist->setHidden(false);
     ui->newOkCancel_Edit->setHidden(false);
 
-    bool dead = true;
-    if (yod.toInt() == 0)
-    {
-        dead = false;
-        ui->checkBox_stillAlive->setChecked(true);
-    }
-
     if (edit == false)
     {
-        ui->checkBox_stillAlive->setHidden(true);
-        this->setWindowTitle("More information about the Scientist");
-        //ui->buttonBox_editScientist->setHidden(true);
-        ui->newOkCancel_Edit->setHidden(true);
-
-        ui->labelEntName->setText("Name: ");
-        ui->lineEdit_name->setReadOnly(true);
-        ui->labelEntBirth->setText("Year of Birth: ");
-        //ui->lineEdit_yob->setReadOnly(true);
-        ui->dateEdit_yob->setReadOnly(true);
-        if (dead)
-        {
-            int ageAtDeath = yod.toInt() - yob.toInt();
-
-            ui->lineEdit_AgeAtDeath->setHidden(false);
-            ui->lineEdit_AgeAtDeath->setText(QString::number(ageAtDeath));
-            ui->lineEdit_AgeAtDeath->setReadOnly(true);
-            ui->labelAgeAtDeath->setHidden(false);
-            //ui->lineEdit_yod->setReadOnly(true);
-            ui->dateEdit_yod->setReadOnly(true);
-
-        }
-        else
-        {
-            QDate date;
-            date.currentDate();
-            int currentYear = 2015;
-            int currentAge = currentYear - yob.toInt();
-
-            ui->labelEntDeath->setText("Year of Death: ");
-            //ui->lineEdit_yod->setReadOnly(true);
-            ui->dateEdit_yod->setReadOnly(true);
-            ui->lineEdit_currentAge->setHidden(false);
-            ui->lineEdit_currentAge->setText(QString::number(currentAge));
-            ui->lineEdit_currentAge->setReadOnly(true);
-            ui->labelCurrentAge->setHidden(false);
-            ui->labelEntDeath->setHidden(true);
-            //ui->lineEdit_yod->setHidden(true);
-            ui->dateEdit_yod->setHidden(true);
-        }
-
-        neweditscientistRelations(currentID);
-        neweditscientistClickableLink(link);
-
-
-        ui->labelEntDescr->setText("Description: ");
-        ui->textEdit_descr->setReadOnly(true);
-        ui->labelEntGender->setText("Gender: ");
-        ui->comboBox_gender->setEnabled(false);
-        ui->labelEntLink->setText("Link: ");
-        ui->lineEdit_link->setReadOnly(true);
+        viewingMode(yod, yob, currentID, link);
     }
 
     setModal(true);
@@ -292,6 +235,72 @@ void addNewScientist::neweditscientistClickableLink(QString link)
     ui->labelClickableUrlReal->setTextFormat(Qt::RichText);
     ui->labelClickableUrlReal->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->labelClickableUrlReal->setOpenExternalLinks(true);
+}
+
+void addNewScientist::viewingMode(QString yod, QString yob, int currentID, QString link)
+{
+    bool dead = true;
+    if (yod.toInt() == 0)
+    {
+        dead = false;
+        ui->checkBox_stillAlive->setChecked(true);
+    }
+
+    ui->checkBox_stillAlive->setHidden(true);
+    this->setWindowTitle("More information about the Scientist");
+    ui->newOkCancel_Edit->setHidden(true);
+
+    ui->labelEntName->setText("Name: ");
+    ui->lineEdit_name->setReadOnly(true);
+    ui->labelEntBirth->setText("Year of Birth: ");
+    ui->dateEdit_yob->setReadOnly(true);
+
+    if (dead)
+    {
+        int ageAtDeath = yod.toInt() - yob.toInt();
+
+        ui->lineEdit_AgeAtDeath->setHidden(false);
+        ui->lineEdit_AgeAtDeath->setText(QString::number(ageAtDeath));
+        ui->lineEdit_AgeAtDeath->setReadOnly(true);
+        ui->labelAgeAtDeath->setHidden(false);
+        //ui->lineEdit_yod->setReadOnly(true);
+        ui->dateEdit_yod->setReadOnly(true);
+    }
+    else
+    {
+        QDate date;
+        date.currentDate();
+        int currentYear = 2015;
+        int currentAge = currentYear - yob.toInt();
+        ui->labelEntDeath->setText("Year of Death: ");
+        //ui->lineEdit_yod->setReadOnly(true);
+        ui->dateEdit_yod->setReadOnly(true);
+        ui->lineEdit_currentAge->setHidden(false);
+        ui->lineEdit_currentAge->setText(QString::number(currentAge));
+        ui->lineEdit_currentAge->setReadOnly(true);
+        ui->labelCurrentAge->setHidden(false);
+        ui->labelEntDeath->setHidden(true);
+        //ui->lineEdit_yod->setHidden(true);
+        ui->dateEdit_yod->setHidden(true);
+    }
+
+    neweditscientistRelations(currentID);
+    neweditscientistClickableLink(link);
+
+    QString descr = ui->textEdit_descr->toPlainText();
+
+    if (descr.length() == 0)
+    {
+        ui->textEdit_descr->setText(" ");
+    }
+
+
+    ui->labelEntDescr->setText("Description: ");
+    ui->textEdit_descr->setReadOnly(true);
+    ui->labelEntGender->setText("Gender: ");
+    ui->comboBox_gender->setEnabled(false);
+    ui->labelEntLink->setText("Link: ");
+    ui->lineEdit_link->setReadOnly(true);
 }
 
 //void addNewScientist::on_buttonBox_editScientist_accepted()

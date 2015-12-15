@@ -43,14 +43,7 @@ void addnewcomputertype::neweditcomputertype(QString id, bool edit)
 
     if (edit == false)
     {
-        this->setWindowTitle("More information about the Computer Type");
-        //ui->buttonBox_Editcomtype->setHidden(true);
-        ui->newOkCancel_Edit->setHidden(true);
-
-        ui->labelEntName->setText("Name: ");
-        ui->lineEdit_name->setReadOnly(true);
-        ui->labelEntDescr->setText("Description: ");
-        ui->textEdit_descr->setReadOnly(true);
+        viewingMode();
     }
 
     setModal(true);
@@ -62,79 +55,6 @@ addnewcomputertype::~addnewcomputertype()
 {
     delete ui;
 }
-
-//void addnewcomputertype::on_buttonBox_accepted()
-//{
-//    if(on_lineEdit_name_editingFinished() == false)
-//    {
-//        ct.setName(ui->lineEdit_name->text().toStdString());
-//        ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
-//        serviceObject.servAddcomputerType(ct);
-//        serviceObject.servReadSqlCompTypes();
-//    }
-//    else
-//    {
-//        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
-//    }
-//}
-
-//void addnewcomputertype::addCompTypetoDB(computertype &ct)
-//{
-//    serviceObject.servAddcomputerType(ct);
-//}
-
-
-//void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
-//{
-//    bool badName = false;
-
-//    ct.setName(serviceObject.nameCorrection(ct.getName(), badName));
-
-//    if(badName)
-//    {
-//        qDebug() << "ERROR IN NAME!";
-
-//        if(badName)
-//        {
-//            serviceObject.errorMessage("Name not correctly formated, please enter letters only.");
-//        }
-//    }
-//    else
-//    {
-//        addCompTypetoDB(ct);
-//        qDebug() << "NAME ADDED TO DATABASE!";
-//        serviceObject.completeMessage("Name was succesfully added to the Database!");
-//    }
-//}
-
-
-
-//void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
-//{
-//
-//    string name = ui->lineEdit_name->text().toStdString();
-//    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
-//    int id = ui->labelComTypeID->text().toInt();
-
-//    QString debugname = QString::fromStdString(name);
-//    QString debugdescr = QString::fromStdString(descr);
-//    QString debugid = QString::number(id);
-
-//    if(on_lineEdit_name_editingFinished() == false)
-//    {
-//        //computer c(name, year, type, built, descr);
-//        //qDebug () << "debugname is " << debugname << "debugdescr is " << debugdescr << "debugid is "  << debugid;
-//        computertype ct(id, name, descr);
-//        serviceObject.servUpdateSqlComputerType(ct);
-//        serviceObject.servReadSqlCompTypes();
-//    }
-//    else
-//    {
-//        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
-//    }
-
-//    addnewcomputertype::close();
-//}
 
 bool addnewcomputertype::on_lineEdit_name_editingFinished()
 {
@@ -208,4 +128,20 @@ void addnewcomputertype::on_newOkCancel_Edit_accepted()
 void addnewcomputertype::on_newOkCancel_Edit_rejected()
 {
     addnewcomputertype::close();
+}
+
+void addnewcomputertype::viewingMode()
+{
+    if (ui->textEdit_descr->toPlainText().length() == 0)
+    {
+        ui->textEdit_descr->setText(" ");
+    }
+
+    this->setWindowTitle("More information about the Computer Type");
+    ui->newOkCancel_Edit->setHidden(true);
+
+    ui->labelEntName->setText("Name: ");
+    ui->lineEdit_name->setReadOnly(true);
+    ui->labelEntDescr->setText("Description: ");
+    ui->textEdit_descr->setReadOnly(true);
 }
