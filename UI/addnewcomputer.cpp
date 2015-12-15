@@ -228,7 +228,7 @@ void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 
 void addnewcomputer::on_buttonBox_editComputerFinished_rejected()
 {
-    qDebug () << "close button press ";
+    //qDebug () << "close button press ";
     addnewcomputer::close();
 }
 
