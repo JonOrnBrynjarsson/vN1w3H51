@@ -678,18 +678,13 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
             printComputers();
         }
     }
+    ui->databaseDisplayComputers->clear();
     if(isFound)
     {
-        ui->databaseDisplayComputers->clear();
-        printComputers();
+        ui->statusbar->showMessage("Nothing found", 2000);
+
     }
-    else
-    {
-        if(ui->comboBox_filterComputers->currentIndex() != 2)
-        {
-            ui->statusbar->showMessage("Nothing found", 2000);
-        }
-    }
+    printComputers();
 }
 
 
@@ -715,19 +710,12 @@ void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)
     string filterText = arg1.toStdString();
     serviceobject.servSearchRelations(ui->comboBox_filterRelations
                                           ->currentIndex(), filterText, isFound);
-    if(isFound)
+    ui->tableWidget_displayRelations->clear();
+    if(!isFound)
     {
-        ui->tableWidget_displayRelations->clear();
-        displayRelations();
+        ui->statusbar->showMessage("Nothing found", 2000);
     }
-    else
-    {
-        if(ui->comboBox_filterRelations->currentIndex() < 2)
-        {
-            ui->statusbar->showMessage("Nothing found", 2000);
-        }
-        displayRelations();
-    }
+    displayRelations();
 }
 void MainWindow::on_comboBox_filterComputerTypes_currentIndexChanged(const QString &arg1)
 {
@@ -738,25 +726,17 @@ void MainWindow::on_comboBox_filterComputerTypes_currentIndexChanged(const QStri
 
 void MainWindow::on_lineEdit_filterComputerTypes_textEdited(const QString &arg1)
 {
-    {
         bool isFound = false;
         string filterText = arg1.toStdString();
         serviceobject.servSearchComputerTypes(ui->comboBox_filterRelations
                                               ->currentIndex(), filterText, isFound);
-        if(isFound)
+        ui->databaseDisplayComTypes->clear();
+        if(!isFound)
         {
-            ui->databaseDisplayComTypes->clear();
+            ui->statusbar->showMessage("Nothing found", 2000);
             printComputerTypes();
         }
-        else
-        {
-            if(ui->comboBox_filterComputerTypes->currentIndex() < 2)
-            {
-                ui->statusbar->showMessage("Nothing found", 2000);
-            }
-            printComputerTypes();
-        }
-    }
+        printComputerTypes();
 }
 
 
@@ -807,20 +787,12 @@ void MainWindow::on_lineEdit_filterScientist_textEdited(const QString &arg1)
             printScientists();
         }
     }
-
-    if(isFound)
+    ui->databaseDisplayComSci->clear();
+    if(!isFound)
     {
-        ui->databaseDisplayComSci->clear();
-        printScientists();
+        ui->statusbar->showMessage("Nothing found", 2000);
     }
-    else
-    {
-        if(ui->comboBox_filterScientist->currentIndex() < 2)
-        {
-            ui->statusbar->showMessage("Nothing found", 2000);
-            printScientists();
-        }
-    }
+    printScientists();
 }
 
 void MainWindow::on_MainMenuSelection_currentChanged(int index)
@@ -832,6 +804,7 @@ void MainWindow::on_MainMenuSelection_currentChanged(int index)
         ui->actionEdit_a_Computer_Scientist->setEnabled(true);
         ui->actionRemove_a_Computer_Scientist->setEnabled(true);
         ui->actionView_scientist->setEnabled(true);
+        ui->lineEdit_filterScientist->setText("");
         serviceobject.servReadSqlScientists();
         printScientists();
     }
@@ -841,6 +814,8 @@ void MainWindow::on_MainMenuSelection_currentChanged(int index)
         ui->actionEdit_a_Computer->setEnabled(true);
         ui->actionRemove_a_Computer->setEnabled(true);
         ui->actionView_computer->setEnabled(true);
+        ui->lineEdit_filterComputers->setText("");
+        serviceobject.servReadSqlCompTypes();
         serviceobject.servReadSqlComputers();
         printComputers();
     }
@@ -850,6 +825,7 @@ void MainWindow::on_MainMenuSelection_currentChanged(int index)
         ui->actionEdit_a_Computer_Type->setEnabled(true);
         ui->actionRemove_a_Computer_Type->setEnabled(true);
         ui->actionView_computer_type->setEnabled(true);
+        ui->lineEdit_filterComputerTypes->setText("");
         serviceobject.servReadSqlCompTypes();
         printComputerTypes();
     }
@@ -857,6 +833,7 @@ void MainWindow::on_MainMenuSelection_currentChanged(int index)
     {
         ui->actionAdd_Relations->setEnabled(true);
         ui->actionRemove_Relations->setEnabled(true);
+        ui->lineEdit_filterRelations->setText("");
         serviceobject.servReadSqlRelations();
         displayRelations();
     }

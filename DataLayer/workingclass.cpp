@@ -111,10 +111,6 @@ void workingclass::readSqlRelations()
 */
 bool workingclass::addscientist(scientist& s)
 {
-    //QDebug << "adding scientist in workingclass";
-
-
-
     QSqlQuery query;
 
     query.prepare("INSERT INTO scientists (name, gender, yob, yod, description, link) "
@@ -245,7 +241,6 @@ bool workingclass::updateSqlComputerType(computertype& ct)
 */
 void workingclass::deleteScientist(int sciID)
 {
-    qDebug() << sciID;
     QSqlQuery query;
 
     query.prepare("UPDATE scientists "
@@ -376,6 +371,16 @@ vector<relation> workingclass::getRelationshipVector()
     return relationVector;
 }
 
+vector<scientist> workingclass::clearSciVector()
+{
+    scientistVector.clear();
+}
+
+vector<computer> workingclass::clearComVector()
+{
+    computerVector.clear();
+}
+
 /*
 ##  Search functions
 ##---------------------------------------------------------------------------------------##
@@ -390,7 +395,6 @@ void workingclass::searchScientistByName(string subName, bool& isFound)
     
     ss << "SELECT * FROM scientists as s WHERE s.name LIKE '%"
        << subName << "%' AND deleted = 'FALSE'";
-    qDebug() << QString::fromStdString(ss.str());
 
     query.exec(QString::fromStdString(ss.str()));
 
@@ -408,14 +412,8 @@ void workingclass::searchScientistByName(string subName, bool& isFound)
         returnVector.push_back(s);
         isFound = true;
     }
-    if( returnVector.size() > 0)
-    {
-        scientistVector = returnVector;
-    }
-    else
-    {
-        readSqlScientists();
-    }
+    scientistVector.clear();
+    scientistVector = returnVector;
 }
 void workingclass::searchScientistByGender(int sex, bool& isFound)
 {
@@ -443,14 +441,8 @@ void workingclass::searchScientistByGender(int sex, bool& isFound)
         returnVector.push_back(s);
         isFound = true;
     }
-    if(isFound)
-    {
+        scientistVector.clear();
         scientistVector = returnVector;
-    }
-    else
-    {
-        readSqlScientists();
-    }
 }
 void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
 {
@@ -474,13 +466,11 @@ void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
         isFound = false;
         return;
     }
-	
 
     ss << "SELECT * FROM scientists as s WHERE s." <<  col
        <<" LIKE '%"  << yr << "%' AND deleted = 'FALSE'";
 
     query.exec(QString::fromStdString(ss.str()));
-    scientistVector.clear();
 	
     while(query.next())
     {
@@ -496,14 +486,8 @@ void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
         returnVector.push_back(s);
         isFound = true;
     }
-    if( returnVector.size() > 0)
-    {
-        scientistVector = returnVector;
-    }
-    else
-    {
-        readSqlScientists();
-    }
+    scientistVector.clear();
+    scientistVector = returnVector;
 }
 
 void workingclass::searchComputerByName(string subName, bool& isFound)
@@ -512,8 +496,6 @@ void workingclass::searchComputerByName(string subName, bool& isFound)
     vector<computer> returnVector;
     stringstream ss;
     ss << "SELECT * FROM computers as c WHERE c.name LIKE '%" << subName << "%' AND deleted = 'FALSE'";
-
-    string s = ss.str() ;
 
     QSqlQuery query;
 
@@ -530,11 +512,8 @@ void workingclass::searchComputerByName(string subName, bool& isFound)
         returnVector.push_back(c);
         isFound = true;
     }
-    if( returnVector.size() > 0)
-    {
         computerVector.clear();
         computerVector = returnVector;
-    }
 }
 void workingclass::searchComputerByType(string& type, bool& isFound)
 {
@@ -548,7 +527,7 @@ void workingclass::searchComputerByType(string& type, bool& isFound)
     query.exec(QString::fromStdString(ss.str()));
 
     readSqlComputers();
-    while(query.next())  // Hleyp í gegnum comptype sem fundust.
+    while(query.next())
     {
         for(unsigned int item = 0; item < computerVector.size(); item++)
         {
@@ -560,11 +539,8 @@ void workingclass::searchComputerByType(string& type, bool& isFound)
             }
         }
     }
-    if( returnVector.size() > 0)
-    {
         computerVector.clear();
         computerVector = returnVector;
-    }
 }
 void workingclass::searchComputerByYear(int& yr, bool& isFound)
 {
@@ -574,7 +550,6 @@ void workingclass::searchComputerByYear(int& yr, bool& isFound)
 
     ss << "SELECT * FROM computers as c WHERE c.year LIKE '%" << yr << "%' AND deleted = 'FALSE'";
     query.exec(QString::fromStdString(ss.str()));
-    computerVector.clear();
     while(query.next())
     {
         int i = 1;
@@ -588,19 +563,11 @@ void workingclass::searchComputerByYear(int& yr, bool& isFound)
         returnVector.push_back(c);
 
         isFound = true;
-        qDebug() << i << " " << QString::fromStdString(c.getComName());
         i++;
 
     }
-    if( returnVector.size() > 0)
-    {
-        //computerVector.clear();
-        computerVector = returnVector;
-    }
-    else
-    {
-        readSqlComputers();
-    }
+    computerVector.clear();
+    computerVector = returnVector;
 }
 
 void workingclass::searchRelations(int column, string searchstr, bool& isFound)
@@ -622,7 +589,6 @@ void workingclass::searchRelations(int column, string searchstr, bool& isFound)
        << " ON sc.scientist_id = s.id AND sc.computer_id = c.id "
        << " WHERE " << col << " LIKE '%" << searchstr << "%' AND sc.deleted = 'FALSE';";
 
-    qDebug() << QString::fromStdString(ss.str());
     query.exec(QString::fromStdString(ss.str()));
     returnVector.clear();
     while(query.next())
@@ -633,19 +599,10 @@ void workingclass::searchRelations(int column, string searchstr, bool& isFound)
         r.scientistName = query.value("sname").toString().toStdString();
         r.computerName = query.value("cname").toString().toStdString();
         returnVector.push_back(r);
-        qDebug() << r.scientistID << " - "<< r.computerID;
         isFound = true;
     }
-    qDebug() << returnVector.size();
-    if( returnVector.size() > 0)
-    {
-        relationVector = returnVector;
-    }
-    else
-    {
-        readSqlRelations();
-        isFound = false;
-    }
+    relationVector.clear();
+    relationVector = returnVector;
 }
 
 void workingclass::searchComputerTypes(int column, string searchstr, bool& isFound)
@@ -680,16 +637,9 @@ void workingclass::searchComputerTypes(int column, string searchstr, bool& isFou
         returnVector.push_back(ct);
         isFound = true;
     }
-    qDebug() << returnVector.size();
-    if( returnVector.size() > 0)
-    {
-        compTypeVector= returnVector;
-    }
-    else
-    {
-        readSqlCompTypes();
-        isFound = false;
-    }
+    compTypeVector.clear();
+    compTypeVector= returnVector;
+
 }
 
 /*
