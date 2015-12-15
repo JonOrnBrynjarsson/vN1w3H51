@@ -27,7 +27,6 @@ SOURCES += main.cpp\
     UI/addnewcomputer.cpp \
     UI/addnewcomputertype.cpp \
 	UI/addrelations.cpp\
-	Console_UI/infodisplay.cpp \
     UI/aboutcreators.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
@@ -40,7 +39,6 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/addnewcomputer.h \
     UI/addnewcomputertype.h \
 	UI/addrelations.h \
-	Console_UI/infodisplay.h \
     UI/aboutcreators.h
 
 FORMS    += \
