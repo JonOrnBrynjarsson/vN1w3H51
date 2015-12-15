@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMenu>
 #include <QMouseEvent>
+#include "aboutcreators.h"
 #include "addnewscientist.h"
 #include "addnewcomputer.h"
 #include "addnewcomputertype.h"

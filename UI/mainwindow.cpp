@@ -520,8 +520,10 @@ void MainWindow::on_actionHelp_triggered()
 
 void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()
 {
-    QMessageBox::information(this, "About the program", "A program created as a solution for the 3. week in the course "" T-113-VLN1, Verklegt namskeid 1."" A solution by Group 51.");
-    qDebug() << "About_Computers_and_Scientists_Database";
+   AboutCreators showCreators;
+   showCreators.exec();
+//    QMessageBox::information(this, "About the program", "A program created as a solution for the 3. week in the course "" T-113-VLN1, Verklegt namskeid 1."" A solution by Group 51.");
+//    qDebug() << "About_Computers_and_Scientists_Database";
 }
 
 //void MainWindow::on_MainMenuSelection_tabBarClicked(int index)
