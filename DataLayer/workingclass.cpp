@@ -84,12 +84,6 @@ void workingclass::readSqlRelations()
 {
     QSqlQuery query;
 
-//    query.prepare(" SELECT DISTINCT s.id as sid, s.name as sname, c.id as cid, c.name as cname "
-//                  " FROM scientists AS s, computers AS c "
-//                  " JOIN scientists_and_computers AS sc "
-//                  " ON sc.scientist_id = s.id AND sc.computer_id = c.id "
-//                  " WHERE sc.deleted = 'FALSE';");
-
     query.prepare(" SELECT DISTINCT s.id as sid, s.name as sname, c.id as cid, c.name as cname "
                   " FROM scientists AS s, computers AS c "
                   " JOIN scientists_and_computers AS sc "
@@ -382,40 +376,20 @@ vector<relation> workingclass::getRelationshipVector()
     return relationVector;
 }
 
-
-
-
 /*
-##  Erase vector functions
-##---------------------------------------------------------------------------------------##
-*/
-void workingclass::eraseScientistVector()
-{
-    scientistVector.clear();
-}
-void workingclass::eraseComputerVector()
-{
-    computerVector.clear();
-}
-void workingclass::eraseCompTypeVector()
-{
-    compTypeVector.clear();
-}
-
-/*
-##  Search scientist functions
+##  Search functions
 ##---------------------------------------------------------------------------------------##
 */
 void workingclass::searchScientistByName(string subName, bool& isFound)
 {
     vector<scientist> returnVector;
     //scientist s;
-	QSqlQuery query;
+    QSqlQuery query;
     stringstream ss;
     isFound = false;
     
-	ss << "SELECT * FROM scientists as s WHERE s.name LIKE '%" 
-	   << subName << "%' AND deleted = 'FALSE'";
+    ss << "SELECT * FROM scientists as s WHERE s.name LIKE '%"
+       << subName << "%' AND deleted = 'FALSE'";
     qDebug() << QString::fromStdString(ss.str());
 
     query.exec(QString::fromStdString(ss.str()));
@@ -438,7 +412,7 @@ void workingclass::searchScientistByName(string subName, bool& isFound)
     {
         scientistVector = returnVector;
     }
-	else
+    else
     {
         readSqlScientists();
     }
@@ -447,15 +421,15 @@ void workingclass::searchScientistByGender(int sex, bool& isFound)
 {
     vector<scientist> returnVector;
     scientist s;
-	stringstream ss;
+    stringstream ss;
     QSqlQuery query;
 	
     isFound = false;
     ss << "SELECT * FROM scientists as s WHERE s.gender = " <<  sex << " AND deleted = 'FALSE'";
     query.exec(QString::fromStdString(ss.str()));
-	scientistVector.clear();
+    scientistVector.clear();
 	
-	while(query.next())
+    while(query.next())
     {
         int id = query.value("id").toUInt();
         string nam = query.value("name").toString().toStdString();
@@ -473,29 +447,11 @@ void workingclass::searchScientistByGender(int sex, bool& isFound)
     {
         scientistVector = returnVector;
     }
-	else
+    else
     {
         readSqlScientists();
     }
 }
-
-// {
-    // vector<scientist> returnVector;
-    // scientist s;
-
-    // for(unsigned int i = 0; i < scientistVector.size(); i++)
-    // {
-        // if(scientistVector.at(i).getGender() == sex)
-       // {
-            // s = scientistVector.at(i);
-            // returnVector.push_back(s);
-            // isFound = true;
-       // }
-    // }
-    // scientistVector.clear();
-    // scientistVector = returnVector;
-// }
-
 void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
 {
 
@@ -505,28 +461,28 @@ void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
     QSqlQuery query;
     stringstream ss;
 	
-	if(bORd == 'b')
-	{
+    if(bORd == 'b')
+    {
          col = "yob";
-	}
-	else if(bORd == 'd')
-	{
+    }
+    else if(bORd == 'd')
+    {
          col = "yod";
-	}
-	else
-	{
+    }
+    else
+    {
         isFound = false;
-		return;
-	}
+        return;
+    }
 	
 
     ss << "SELECT * FROM scientists as s WHERE s." <<  col
-	   <<" LIKE '%"  << yr << "%' AND deleted = 'FALSE'";
+       <<" LIKE '%"  << yr << "%' AND deleted = 'FALSE'";
 
     query.exec(QString::fromStdString(ss.str()));
-	scientistVector.clear();
+    scientistVector.clear();
 	
-	while(query.next())
+    while(query.next())
     {
         int id = query.value("id").toUInt();
         string nam = query.value("name").toString().toStdString();
@@ -544,16 +500,12 @@ void workingclass::searchScientistByYear(int& yr, char bORd, bool& isFound)
     {
         scientistVector = returnVector;
     }
-	else
+    else
     {
         readSqlScientists();
     }
 }
 
-/*
-##  Search computer functions
-##---------------------------------------------------------------------------------------##
-*/
 void workingclass::searchComputerByName(string subName, bool& isFound)
 {
     computer c;
@@ -753,73 +705,3 @@ QSqlDatabase workingclass::startDatabase()
     db.open();
     return db;
 }
-bool workingclass::checkDatabaseExists()
-{
-    QFile db;
-    return db.exists(QString::fromStdString(DBASE)) ;
-}
-void workingclass::closeDatabase()
-{
-    QSqlDatabase db;
-    db.close();
-}
-void workingclass::createEmptyDatabase()
-{
-    startDatabase();
-    createTableComputerTypes();
-    createTableScientists();
-    createTableComputers();
-    createTableScientistsAndComputers();
-}
-
-/*
-##  Private functions
-##---------------------------------------------------------------------------------------##
-*/
-void workingclass::createTableScientistsAndComputers()
-{
-    QSqlQuery query;
-    query.exec(" CREATE TABLE scientists_and_computers "
-               " (scientist_id INTEGER NOT NULL, "
-               " computer_id INTEGER NOT NULL, "
-               " deleted BOOLEAN DEFAULT 'FALSE', "
-               " FOREIGN KEY (scientist_id) REFERENCES scientists(id), "
-               " FOREIGN KEY (computer_id) REFERENCES computers(id) "
-               " PRIMARY KEY (scientist_id,computer_id));");
-}
-void workingclass::createTableComputers()
-{
-    QSqlQuery query;
-    query.exec("CREATE TABLE computers "
-               "(id INTEGER PRIMARY KEY  AUTOINCREMENT NOT NULL UNIQUE, "
-               " name TEXT NOT NULL, "
-               " year INTEGER, "
-               " type INTEGER NOT NULL, "
-               " built BOOL NOT NULL DEFAULT 'FALSE', "
-               " description TEXT, "
-               " deleted DEFAULT 'FALSE',"
-               " FOREIGN KEY(type) REFERENCES computer_types(id));");
-}
-void workingclass::createTableScientists()
-{
-    QSqlQuery query;
-    query.exec("CREATE TABLE scientists "
-               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
-               " name TEXT NOT NULL, "
-               " gender INTEGER NOT NULL  DEFAULT 2, "
-               " yob INTEGER NOT NULL, "
-               " yod INTEGER, "
-               " description TEXT, "
-               " link TEXT, "
-               " deleted DEFAULT 'FALSE');");
-}
-void workingclass::createTableComputerTypes()
-{
-    QSqlQuery query;
-    query.exec("CREATE TABLE computer_types "
-               "(id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "
-               " name TEXT NOT NULL, "
-               " description TEXT, "
-               " deleted DEFAULT 'FALSE');");
-}
-

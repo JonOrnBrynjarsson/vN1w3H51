@@ -25,9 +25,6 @@ string service::nameCorrection(string name, bool& badName)
     for (unsigned int i = 0; i < name.length(); i++)
     {
         name[i] = (tolower(name[i]));
-
-
-
         if ((i < MAXNAMELENGTH) && (i > 1))
         {
            spaceCount = (name.find(" ", i));
@@ -63,7 +60,6 @@ string service::nameCorrection(string name, bool& badName)
         badName = true;
         cout<<"\tName is too long! "<<endl;
     }
-
     return name;
 }
 int service::genderCorrection(string gender)
@@ -91,7 +87,6 @@ int service::genderCorrection(string gender)
     {
         return 1;
     }
-
     else if (isFemale == true)
     {
         return 0;
@@ -102,49 +97,6 @@ int service::genderCorrection(string gender)
     }
 }
 
-//int service::inputNumberToFunction(string input)
-//{
-//    unsigned int temp;
-//    unsigned int digitCounter = 0;
-
-//    for (unsigned int i = 0; i < input.size(); i++)
-//    {
-//        if (isdigit(input[i]))
-//        {
-//            digitCounter++;
-//        }
-//    }
-
-//    stringstream stringToInt (input);
-//    stringToInt >> temp;
-
-//    return temp;
-//}
-
-void service::errorMessage(string errorMessage)
-{
-    QString qstr = QString::fromStdString(errorMessage);
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Warning");
-    msgBox.setText(qstr);
-//    msgBox.setStandardButtons(QMessageBox::Yes);
-//    msgBox.addButton(QMessageBox::No);
-//    msgBox.setDefaultButton(QMessageBox::No);
-    msgBox.exec();
-}
-
-void service::completeMessage(string completeMessage)
-{
-    QString qstr = QString::fromStdString(completeMessage);
-     QMessageBox msgBox;
-     msgBox.setWindowTitle("Success");
-     msgBox.setText(qstr);
- //    msgBox.setStandardButtons(QMessageBox::Yes);
- //    msgBox.addButton(QMessageBox::No);
- //    msgBox.setDefaultButton(QMessageBox::No);
-     msgBox.exec();
-
-}
 int service::yearCorrection(int year, bool &errorInYear)
 {
 
@@ -158,7 +110,6 @@ int service::yearCorrection(int year, bool &errorInYear)
     {
         tempYear += 2000;
     }
-
     if ((tempYear > 0) && (tempYear <= CURRENTYEAR))
     {
         errorInYear = false;
@@ -167,12 +118,10 @@ int service::yearCorrection(int year, bool &errorInYear)
     {
         errorInYear = true;
     }
-
     if ((year == 0)||(tempYear < 1000))
     {
         errorInYear = true;
     }
-
     return tempYear;
 }
 
@@ -289,70 +238,6 @@ vector<computer> service::servGetComputersLinkedToScientists(int sciID)
 }
 
 /*
-##  Erase vector functions
-##---------------------------------------------------------------------------------------##
-*/
-void service::servEraseScientistVector()
-{
-    workingObject.eraseScientistVector();
-}
-void service::servEraseComputerVector()
-{
-    workingObject.eraseComputerVector();
-}
-void service::servEraseCompTypeVector()
-{
-    workingObject.eraseCompTypeVector();
-}
-
-/*
-##  Sort functions
-##---------------------------------------------------------------------------------------##
-*/
-void service::servSortScientists(int choice)
-{
-    switch(choice)
-    {
-        case 1:
-            workingObject.readSqlScientists("name ASC;");
-            break;
-        case 2:
-            workingObject.readSqlScientists("name DESC;");
-            break;
-        case 3:
-            workingObject.readSqlScientists("yob ASC;");
-            break;
-        case 4:
-            workingObject.readSqlScientists("yob DESC;");
-            break;
-        default:
-            break;
-      }
-}
-void service::servSortComputers(int choice)
-{
-      switch(choice)
-      {
-            case 1:
-                workingObject.readSqlComputers("name;");
-                break;
-            case 2:
-                workingObject.readSqlComputers("name DESC;");
-                break;
-            case 3:
-                workingObject.readSqlComputers("year;");
-                break;
-            case 4:
-                workingObject.readSqlComputers("type, name;");
-                break;
-            default:
-                break;
-          cout<<"test4 "<<endl;
-
-      }
-}
-
-/*
 ##  Search scientists functions
 ##---------------------------------------------------------------------------------------##
 */
@@ -406,21 +291,3 @@ void service::servStartDatabase()
 {
     workingObject.startDatabase();
 }
-bool service::servCheckDatabaseExists()
-{
-    return workingObject.checkDatabaseExists();
-}
-void service::servCreateEmptyDatabase()
-{
-    workingObject.createEmptyDatabase();
-}
-void service::servCloseDatabase()
-{
-    workingObject.closeDatabase();
-}
-
-
-
-
-
-
