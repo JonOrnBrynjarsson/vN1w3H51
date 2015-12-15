@@ -1,21 +1,21 @@
 #ifndef ADDRELATIONS_H
 #define ADDRELATIONS_H
 
-#include <QDialog>
+//#include <QDialog>
 #include <vector>
 #include "Services/service.h"
-#include <QDebug>
-#include <QMenu>
-#include <QMouseEvent>
-#include "DataLayer/workingclass.h"
-#include "addnewscientist.h"
-#include "addnewcomputer.h"
-#include "addnewcomputertype.h"
-#include "addrelations.h"
+//#include <QDebug>
+//#include <QMenu>
+//#include <QMouseEvent>
+//#include "DataLayer/workingclass.h"
+//#include "addnewscientist.h"
+//#include "addnewcomputer.h"
+//#include "addnewcomputertype.h"
+//#include "addrelations.h"
 #include "mainwindow.h"
-#include <vector>
-#include <QTableWidget>
-#include <QActionGroup>
+//#include <vector>
+//#include <QTableWidget>
+//#include <QActionGroup>
 
 using namespace std;
 

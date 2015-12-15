@@ -3,11 +3,11 @@
 
 #include <QDialog>
 //#include <QDebug>
-#include <QVariant>
+//#include <QVariant>
 #include <Services/service.h>
 #include <qmessagebox.h>
-#include <QDebug>
-#include "mainwindow.h"
+//#include <QDebug>
+//#include "mainwindow.h"
 
 namespace Ui {
 class addnewcomputer;

@@ -2,10 +2,10 @@
 #define ADDNEWSCIENTIST_H
 
 #include <QDialog>
-#include <string>
+//#include <string>
 #include <QMessageBox>
-#include <QTextStream>
-#include "models/scientist.h"
+//#include <QTextStream>
+//#include "models/scientist.h"
 #include "Services/service.h"
 
 namespace Ui {

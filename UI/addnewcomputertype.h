@@ -2,10 +2,10 @@
 #define ADDNEWCOMPUTERTYPE_H
 
 #include <QDialog>
-#include <string>
+//#include <string>
 #include <QMessageBox>
-#include <QTextStream>
-#include "models/computertype.h"
+//#include <QTextStream>
+//#include "models/computertype.h"
 #include "Services/service.h"
 //#include "computertypeuiclass.h"
 
