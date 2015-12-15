@@ -37,6 +37,10 @@ private slots:
    // void on_actionDisplay_a_List_of_Computers_triggered();
     void on_buttonBox_accepted();
 
+    void on_lineEdit_filterScieentistAddRelation_textEdited(const QString &arg1);
+
+    void on_lineEdit_filteComputersAddRelation_textEdited(const QString &arg1);
+
 private:
     void displayAllScientists();
     void printScientists();//(std::vector<scientist> returnSciVector());
