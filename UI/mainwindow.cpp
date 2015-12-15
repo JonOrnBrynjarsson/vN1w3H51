@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
-#include <QModelIndex>
-#include <math.h>
-//FORCE UPDATE!
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -211,7 +209,6 @@ QString MainWindow::getCurrentSciRowPos()
     for (int i = 0; i < 1; i++)
     {
         QModelIndex index = model->index(row, 7);
-        QString temp = (index.data().toString());
         returnID = index.data().toString();
     }
 
@@ -230,9 +227,6 @@ QString MainWindow::getCurrentComRowPos()
     for (int i = 0; i < 1; i++)
     {
         QModelIndex index = model->index(row, 5);
-        qDebug () << (index.data().toString());
-        qDebug () << " ";
-        QString temp = (index.data().toString());
         returnID = index.data().toString();
     }
 
@@ -250,9 +244,6 @@ QString MainWindow::getCurrentComTypeRowPos()
     for (int i = 0; i < 1; i++)
     {
         QModelIndex index = model->index(row, 2);
-        qDebug () << (index.data().toString());
-        qDebug () << " ";
-        QString temp = (index.data().toString());
         returnID = index.data().toString();
 
     }
@@ -276,26 +267,26 @@ void MainWindow::getCurrentRelationsRowPos(int &compos, int &scipos)
         compos = indexCom.data().toInt();
     }
 }
-vector<scientist> MainWindow::returnSciVector()
-{
-    serviceobject.servStartDatabase();
-    return serviceobject.servGetSciVector();
-    //qDebug () << "fetching...";
-}
+//vector<scientist> MainWindow::returnSciVector()
+//{
+//    serviceobject.servStartDatabase();
+//    return serviceobject.servGetSciVector();
+//    //qDebug () << "fetching...";
+//}
 
-vector<computer> MainWindow::returnComVector()
-{
-    serviceobject.servStartDatabase();
-    return serviceobject.servGetComVector();
-    //qDebug () << "fetching...";
-}
+//vector<computer> MainWindow::returnComVector()
+//{
+//    serviceobject.servStartDatabase();
+//    return serviceobject.servGetComVector();
+//    //qDebug () << "fetching...";
+//}
 
-vector<computertype> MainWindow::returnComTypeVector()
-{
-    serviceobject.servStartDatabase();
-    return serviceobject.servGetCompTypeVector();
-    //qDebug () << "fetching...";
-}
+//vector<computertype> MainWindow::returnComTypeVector()
+//{
+//    serviceobject.servStartDatabase();
+//    return serviceobject.servGetCompTypeVector();
+//    //qDebug () << "fetching...";
+//}
 
 bool MainWindow::computerTypeCanBeDeleted(int compTypeID)
 {
@@ -347,7 +338,6 @@ void MainWindow::on_actionAdd_New_Computer_Type_triggered()
     newcomptype.exec();
     serviceobject.servReadSqlCompTypes();
     printComputerTypes();
-
 }
 
 void MainWindow::on_actionAdd_Relations_triggered()
@@ -648,7 +638,6 @@ void MainWindow::on_databaseDisplayComSci_doubleClicked()//const QModelIndex &in
 
 
 void MainWindow::on_comboBox_filterComputers_currentIndexChanged(int index)
-
 {
     ui->lineEdit_filterComputers->setText("");
     serviceobject.servReadSqlComputers();
@@ -673,7 +662,7 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
     else if(ui->comboBox_filterComputers->currentIndex() == 2)
     {
         int yr = arg1.toUInt();
-        qDebug() << yr;
+        //qDebug() << yr;
         if(yr != 0)
         {
             serviceobject.servSearchComputerByYear(yr, isFound);
@@ -713,7 +702,6 @@ void MainWindow::on_comboBox_filterRelations_currentIndexChanged(const QString &
     ui->lineEdit_filterRelations->setText("");
     serviceobject.servReadSqlRelations();
     displayRelations();
-
 }
 
 void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)

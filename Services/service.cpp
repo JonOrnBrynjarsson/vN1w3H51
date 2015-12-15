@@ -102,24 +102,24 @@ int service::genderCorrection(string gender)
     }
 }
 
-int service::inputNumberToFunction(string input)
-{
-    unsigned int temp;
-    unsigned int digitCounter = 0;
+//int service::inputNumberToFunction(string input)
+//{
+//    unsigned int temp;
+//    unsigned int digitCounter = 0;
 
-    for (unsigned int i = 0; i < input.size(); i++)
-    {
-        if (isdigit(input[i]))
-        {
-            digitCounter++;
-        }
-    }
+//    for (unsigned int i = 0; i < input.size(); i++)
+//    {
+//        if (isdigit(input[i]))
+//        {
+//            digitCounter++;
+//        }
+//    }
 
-    stringstream stringToInt (input);
-    stringToInt >> temp;
+//    stringstream stringToInt (input);
+//    stringToInt >> temp;
 
-    return temp;
-}
+//    return temp;
+//}
 
 void service::errorMessage(string errorMessage)
 {

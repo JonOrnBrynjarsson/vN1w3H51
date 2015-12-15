@@ -1,9 +1,5 @@
 #include "addnewcomputertype.h"
 #include "ui_addnewcomputertype.h"
-//#include "DataLayer/workingclass.h"
-//#include <QDateEdit>
-//#include <sstream>
-//#include <QDebug>
 
 
 //FORCE UPDATE!
@@ -88,34 +84,34 @@ void addnewcomputertype::addCompTypetoDB(computertype &ct)
 }
 
 
-void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
-{
-    bool badName = false;
+//void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
+//{
+//    bool badName = false;
 
-    ct.setName(serviceObject.nameCorrection(ct.getName(), badName));
+//    ct.setName(serviceObject.nameCorrection(ct.getName(), badName));
 
-    if(badName)
-    {
-        qDebug() << "ERROR IN NAME!";
+//    if(badName)
+//    {
+//        qDebug() << "ERROR IN NAME!";
 
-        if(badName)
-        {
-            serviceObject.errorMessage("Name not correctly formated, please enter letters only.");
-        }
-    }
-    else
-    {
-        addCompTypetoDB(ct);
-        qDebug() << "NAME ADDED TO DATABASE!";
-        serviceObject.completeMessage("Name was succesfully added to the Database!");
-    }
-}
+//        if(badName)
+//        {
+//            serviceObject.errorMessage("Name not correctly formated, please enter letters only.");
+//        }
+//    }
+//    else
+//    {
+//        addCompTypetoDB(ct);
+//        qDebug() << "NAME ADDED TO DATABASE!";
+//        serviceObject.completeMessage("Name was succesfully added to the Database!");
+//    }
+//}
 
 
 
-void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
-{
-
+//void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
+//{
+//
 //    string name = ui->lineEdit_name->text().toStdString();
 //    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
 //    int id = ui->labelComTypeID->text().toInt();
@@ -138,7 +134,7 @@ void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
 //    }
 
 //    addnewcomputertype::close();
-}
+//}
 
 bool addnewcomputertype::on_lineEdit_name_editingFinished()
 {
@@ -158,10 +154,10 @@ bool addnewcomputertype::on_lineEdit_name_editingFinished()
     return badName;
 }
 
-void addnewcomputertype::on_buttonBox_Editcomtype_rejected()
-{
-    addnewcomputertype::close();
-}
+//void addnewcomputertype::on_buttonBox_Editcomtype_rejected()
+//{
+//    addnewcomputertype::close();
+//}
 
 void addnewcomputertype::on_newOkCancel_New_accepted()
 {

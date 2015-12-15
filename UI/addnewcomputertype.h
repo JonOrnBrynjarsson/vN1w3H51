@@ -22,26 +22,19 @@ public:
     explicit addnewcomputertype(QWidget *parent = 0);
     computertype ct;
     service serviceObject;
-    int inputNumberToFunction(string input);
+    //int inputNumberToFunction(string input);
     void neweditcomputertype(QString id, bool edit);
 
     ~addnewcomputertype();
 
 private slots:
     //void on_buttonBox_accepted();
-    void on_buttonBox_Editcomtype_accepted();
-
-
+    //void on_buttonBox_Editcomtype_accepted();
     bool on_lineEdit_name_editingFinished();
-
-    void on_buttonBox_Editcomtype_rejected();
-
+    //void on_buttonBox_Editcomtype_rejected();
     void on_newOkCancel_New_accepted();
-
     void on_newOkCancel_New_rejected();
-
     void on_newOkCancel_Edit_accepted();
-
     void on_newOkCancel_Edit_rejected();
 
 private:

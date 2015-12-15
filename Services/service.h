@@ -40,7 +40,7 @@ class service
         int genderCorrection(string gender);
         //  Precondition:   Takes in a string for the gender correction process.
         //  Postcondition:  Returns 0 if female, 1 if male, 2 otherwise.
-        int inputNumberToFunction(string input);    //TEKIÐ ÚR INFODISPLAY!!!
+        //int inputNumberToFunction(string input);    //TEKIÐ ÚR INFODISPLAY!!!
         //  Precondition:   Takes in a string for the number
         //  Postcondition:  Returns integer.
         void errorMessage(string errorMessage);
