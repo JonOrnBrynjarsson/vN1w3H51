@@ -24,7 +24,7 @@ public:
     ~addnewcomputer();
 
 private slots:
-    void on_buttonBox_addNewComputerFinished_accepted();
+    //void on_buttonBox_addNewComputerFinished_accepted();
     void on_dateEdit_year_userDateChanged();//const QDate &date);
     //void on_buttonBox_editComputerFinished_accepted();
     //void on_buttonBox_editComputerFinished_rejected();

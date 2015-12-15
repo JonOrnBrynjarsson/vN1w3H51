@@ -618,9 +618,7 @@ void MainWindow::on_pushButton_editCompuer_clicked()
 
 void MainWindow::on_databaseDisplayComSci_doubleClicked()//const QModelIndex &index)
 {
-//    qDebug () << "column is : " << index.row();
     addNewScientist newscientist;
-//    qDebug () << "getCurrentSciRowPos is : " << getCurrentSciRowPos();
     newscientist.neweditscientist(getCurrentSciRowPos(), false);
     serviceobject.servReadSqlScientists();
     printScientists();
@@ -662,7 +660,6 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
     else if(ui->comboBox_filterComputers->currentIndex() == 2)
     {
         int yr = arg1.toUInt();
-        //qDebug() << yr;
         if(yr != 0)
         {
             serviceobject.servSearchComputerByYear(yr, isFound);

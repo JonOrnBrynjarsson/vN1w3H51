@@ -26,7 +26,7 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->labelClickableLink->setHidden(true);
     ui->labelClickableUrlReal->setHidden(true);
     ui->errorInName->setHidden(true);
-    //ui->errorInYob->setHidden(true);
+    ui->errorInYob->setHidden(true);
     ui->errorInYod->setHidden(true);
     //ui->checkBox_stillAlive->setHidden(true);
     //ui->lineEdit_yob->setHidden(true);
@@ -447,7 +447,7 @@ bool addNewScientist::on_dateEdit_yod_editingFinished()
         if (ui->dateEdit_yob->date().year() >= ui->dateEdit_yod->date().year())
         {
             ui->errorInYod->setHidden(false);
-            ui->errorInYod->setText("<font color='Red'>You cannot die before you have lived.</font>");
+            ui->errorInYod->setText("<font color='Red'>A Scientist cannot die before he is born.</font>");
             badYod = true;
         }
         else
@@ -472,10 +472,13 @@ void addNewScientist::on_newOkCancel_New_accepted()
 
     bool goodInput = false;
 
-    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false)
+            &&(on_dateEdit_yob_editingFinished() == false))
     {
         goodInput = true;
     }
+
+    //qDebug () << "yob check: "<<on_dateEdit_yob_editingFinished();
 
     scientist sc;
     sc.setName(ui->lineEdit_name->text().toStdString());
@@ -536,7 +539,8 @@ void addNewScientist::on_newOkCancel_Edit_accepted()
 
     bool goodInput = false;
 
-    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false)
+            &&(on_dateEdit_yob_editingFinished() == false))
     {
         goodInput = true;
     }
@@ -570,4 +574,26 @@ void addNewScientist::on_checkBox_stillAlive_toggled(bool checked)
     {
         ui->dateEdit_yod->setDisabled(false);
     }
+}
+
+bool addNewScientist::on_dateEdit_yob_editingFinished()
+{
+    bool badYob;
+
+    if (ui->dateEdit_yob->date().year() > CURRENTYEAR)
+    {
+        ui->errorInYob->setHidden(false);
+        ui->errorInYob->setText("<font color='Red'>Scientist can't be born in the future.</font>");
+        badYob = true;
+        //qDebug () << "Future man";
+    }
+    else
+    {
+        ui->errorInYob->setHidden(true);
+        badYob = false;
+        //qDebug () << "NOT Future man";
+    }
+
+    //qDebug () << "badyod is :" <<badYod;
+    return badYob;
 }

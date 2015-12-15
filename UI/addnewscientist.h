@@ -41,6 +41,8 @@ private slots:
     void on_newOkCancel_Edit_rejected();
     void on_checkBox_stillAlive_toggled(bool checked);
 
+    bool on_dateEdit_yob_editingFinished();
+
 private:
     Ui::addNewScientist *ui;
 

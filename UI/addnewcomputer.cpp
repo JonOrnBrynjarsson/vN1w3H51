@@ -147,8 +147,8 @@ addnewcomputer::~addnewcomputer()
 }
 
 
-void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
-{
+//void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
+//{
 //    bool goodInput = false;
 
 //    if (on_lineEdit_insertName_editingFinished() == false)
@@ -174,7 +174,7 @@ void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 //    {
 //        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
 //    }
-}
+//}
 
 
 void addnewcomputer::on_dateEdit_year_userDateChanged()//const QDate &date)
