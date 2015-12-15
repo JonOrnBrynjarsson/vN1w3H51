@@ -91,7 +91,6 @@ void addrelations::printScientists()
 
 void addrelations::printComputers()
 {
-
     ui->tableWidget_chooseComputer->setRowCount(serviceobject.servGetComVector().size());
     ui->tableWidget_chooseComputer->setSortingEnabled(false); // To be able to display headers and all column data - bugfix for qt.
 
@@ -117,7 +116,6 @@ void addrelations::on_buttonBox_accepted()
 {
     QString sciName, comName;
 
-
     int scipos = getCurrentSciRowPos(sciName).toInt();
     int compos = getCurrentComRowPos(comName).toInt();
 
@@ -135,6 +133,31 @@ void addrelations::on_buttonBox_accepted()
     {
         QMessageBox::information(this,"Adding relations","Cancelled",0);
     }
-
 }
 
+void addrelations::on_lineEdit_filterScieentistAddRelation_textEdited(const QString &arg1)
+{
+
+    bool isFound = false;
+    string filterText = arg1.toStdString();
+    serviceobject.servSearchScientistByName(filterText, isFound);
+
+    if(isFound)
+    {
+        ui->tableWidget_chooseScientist->clear();
+        printScientists();
+    }
+}
+
+void addrelations::on_lineEdit_filteComputersAddRelation_textEdited(const QString &arg1)
+{
+    bool isFound = false;
+    string filterText = arg1.toStdString();
+
+    serviceobject.servSearchComputerByName(filterText, isFound);
+    if(isFound)
+    {
+        ui->tableWidget_chooseComputer->clear();
+        printComputers();
+    }
+}
