@@ -5,4 +5,11 @@
         <file>CreatorPics/Isak.jpg</file>
         <file>CreatorPics/Jon.jpg</file>
     </qresource>
+    <qresource prefix="/Icon">
+        <file>Icon/Add.png</file>
+        <file>Icon/Delete.png</file>
+        <file>Icon/Edit.png</file>
+        <file>Icon/Help.png</file>
+        <file>Icon/Information.png</file>
+    </qresource>
 </RCC>
