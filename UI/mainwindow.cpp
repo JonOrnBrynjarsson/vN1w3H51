@@ -342,7 +342,7 @@ void MainWindow::on_actionAdd_Relations_triggered()
     relations.setModal(true);
     relations.exec();
     serviceobject.servReadSqlRelations();
-    displayRelations();
+    printRelations();
 }
 
 void MainWindow::on_actionEdit_a_Computer_Scientist_triggered()
@@ -505,7 +505,7 @@ void MainWindow::on_actionRemove_Relations_triggered()
             ui->statusbar->showMessage("Canceled", 2000);
         }
         serviceobject.servReadSqlRelations();
-        displayRelations();
+        printRelations();
     }
 }
 
@@ -583,7 +583,7 @@ void MainWindow::on_pushButton_removeCompuer_clicked()
 //    }
 }
 
-void MainWindow::displayRelations()
+void MainWindow::printRelations()
 {
 
     ui-> tableWidget_displayRelations->setRowCount(serviceobject.servGetRelationshipVector().size());
@@ -695,13 +695,13 @@ void MainWindow::on_databaseDisplayComTypes_doubleClicked()//const QModelIndex &
     addnewcomputertype newcomputertype;
     newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
     serviceobject.servReadSqlCompTypes();
-    displayRelations();
+    printRelations();
 }
 void MainWindow::on_comboBox_filterRelations_currentIndexChanged(const QString &arg1)
 {
     ui->lineEdit_filterRelations->setText("");
     serviceobject.servReadSqlRelations();
-    displayRelations();
+    printRelations();
 }
 
 void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)
@@ -715,7 +715,7 @@ void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)
     {
         ui->statusbar->showMessage("Nothing found", 2000);
     }
-    displayRelations();
+    printRelations();
 }
 void MainWindow::on_comboBox_filterComputerTypes_currentIndexChanged(const QString &arg1)
 {
@@ -835,7 +835,7 @@ void MainWindow::on_MainMenuSelection_currentChanged(int index)
         ui->actionRemove_Relations->setEnabled(true);
         ui->lineEdit_filterRelations->setText("");
         serviceobject.servReadSqlRelations();
-        displayRelations();
+        printRelations();
     }
 
 }
