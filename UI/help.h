@@ -34,6 +34,8 @@ private slots:
 
 private:
     Ui::help *ui;
+    //ui pointer
+
 };
 
 #endif // HELP_H

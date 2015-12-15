@@ -612,10 +612,17 @@ void MainWindow::displayRelations()
 
 void MainWindow::on_databaseDisplayComputers_doubleClicked()
 {
-    addnewcomputer newcomputer;
-    newcomputer.neweditcomputer(getCurrentComRowPos(), false);
-    serviceobject.servReadSqlComputers("NAME");
-    printComputers();
+    if (getCurrentComRowPos().toInt() == 0)
+    {
+        ui->statusbar->showMessage("Nothing selected...", 2000);
+    }
+    else
+    {
+        addnewcomputer newcomputer;
+        newcomputer.neweditcomputer(getCurrentComRowPos(), false);
+        serviceobject.servReadSqlComputers("NAME");
+        printComputers();
+    }
 }
 
 void MainWindow::on_pushButton_editCompuer_clicked()
@@ -626,10 +633,17 @@ void MainWindow::on_pushButton_editCompuer_clicked()
 
 void MainWindow::on_databaseDisplayComSci_doubleClicked()//const QModelIndex &index)
 {
-    addNewScientist newscientist;
-    newscientist.neweditscientist(getCurrentSciRowPos(), false);
-    serviceobject.servReadSqlScientists();
-    printScientists();
+    if (getCurrentSciRowPos().toInt() == 0)
+    {
+        ui->statusbar->showMessage("Nothing selected...", 2000);
+    }
+    else
+    {
+        addNewScientist newscientist;
+        newscientist.neweditscientist(getCurrentSciRowPos(), false);
+        serviceobject.servReadSqlScientists();
+        printScientists();
+    }
 }
 
 //void MainWindow::on_pushButton_addnewType_clicked()
@@ -690,12 +704,18 @@ void MainWindow::on_lineEdit_filterComputers_textEdited(const QString &arg1)
 
 void MainWindow::on_databaseDisplayComTypes_doubleClicked()//const QModelIndex &index)
 {
-//    qDebug () << "on_databaseDisplayComTypes_doubleClicked" << index;
-//    qDebug () << "getCurrentComTypeRowPos() is " << getCurrentComTypeRowPos();
-    addnewcomputertype newcomputertype;
-    newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
-    serviceobject.servReadSqlCompTypes();
-    displayRelations();
+
+    if (getCurrentComTypeRowPos().toInt() == 0)
+    {
+        ui->statusbar->showMessage("Nothing selected...", 2000);
+    }
+    else
+    {
+        addnewcomputertype newcomputertype;
+        newcomputertype.neweditcomputertype(getCurrentComTypeRowPos(), false);
+        serviceobject.servReadSqlCompTypes();
+        displayRelations();
+    }
 }
 void MainWindow::on_comboBox_filterRelations_currentIndexChanged(const QString &arg1)
 {
@@ -708,7 +728,7 @@ void MainWindow::on_lineEdit_filterRelations_textEdited(const QString &arg1)
 {
     bool isFound = false;
     string filterText = arg1.toStdString();
-    serviceobject.servSearchRelations(ui->comboBox_filterRelations
+    serviceobject.servSearchRelations(ui->comboBox_filterComputerTypes
                                           ->currentIndex(), filterText, isFound);
     ui->tableWidget_displayRelations->clear();
     if(!isFound)

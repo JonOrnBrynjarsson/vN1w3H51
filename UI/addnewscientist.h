@@ -18,10 +18,6 @@ class addNewScientist : public QDialog
 
 public:
     explicit addNewScientist(QWidget *parent = 0);
-    scientist s;
-    //object for scientist model
-    service serviceobject;
-    //object for service class
     void neweditscientist(QString id, bool edit);
     //Facilitates viewing and editing of scientist information.
     ~addNewScientist();
@@ -40,6 +36,7 @@ private slots:
     bool on_dateEdit_yob_editingFinished();
     //  Precondition:  User has clicked / year of birth the name box.
     //  Postcondition:  Returns error if year is not properly formatted.
+
     /*
     ##  Buttons and Boxes
     ##---------------------------------------------------------------------------------------##
@@ -62,10 +59,15 @@ private slots:
 
 private:
     Ui::addNewScientist *ui;
+    //ui pointer
     void neweditscientistRelations(int currentID);
     //Finds relations for scientists and computers.
     void neweditscientistClickableLink(QString link);
     //Creates a clickable link for viewing scientist.
+    scientist s;
+    //object for scientist model
+    service serviceobject;
+    //object for service class
 };
 
 #endif // ADDNEWSCIENTIST_H

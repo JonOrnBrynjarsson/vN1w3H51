@@ -10,13 +10,12 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    //ui->buttonBox_editComputerFinished->setHidden(true);
     ui->newOkCancel_Edit->setHidden(true);
     ui->label_computerID->setHidden(true);
     ui->label_relations->setHidden(true);
     ui->textBrowser_relations->setHidden(true);
     ui->errorInName->setHidden(true);
-    //ui->errorInYear->setHidden(true);
+    ui->errorInYear->setHidden(true);
 
     serviceObject.servReadSqlCompTypes();
 
@@ -176,24 +175,6 @@ addnewcomputer::~addnewcomputer()
 //    }
 //}
 
-
-void addnewcomputer::on_dateEdit_year_userDateChanged()//const QDate &date)
-{
-    //QString year = ui->lineEdit_enterYear->text();
-//    QString year = QString::number(ui->dateEdit_yoc->date().year());
-//    int yearint = year.toInt();
-
-    int yearint = ui->dateEdit_yoc->date().year();
-
-    //qDebug () << ui->dateEdit_year->date();
-    if (yearint > CURRENTYEAR)
-    {
-
-        QMessageBox::information(this,"Wrong year","It is not possible to enter a futuristic computer",0);
-
-    }
-}
-
 //void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 //{
 //    string name = ui->lineEdit_insertName->text().toStdString();
@@ -277,7 +258,7 @@ void addnewcomputer::on_newOkCancel_New_accepted()
 {
     bool goodInput = false;
 
-    if (on_lineEdit_insertName_editingFinished() == false)
+    if (on_lineEdit_insertName_editingFinished() == false && on_dateEdit_yoc_editingFinished() == false)
     {
         goodInput = true;
     }
@@ -299,7 +280,7 @@ void addnewcomputer::on_newOkCancel_New_accepted()
     }
     else
     {
-        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+        QMessageBox::warning(this, "Error", "Name or year not incorrectly entered!");
     }
 }
 
@@ -321,7 +302,7 @@ void addnewcomputer::on_newOkCancel_Edit_accepted()
 
     bool goodInput = false;
 
-    if (on_lineEdit_insertName_editingFinished() == false)
+    if (on_lineEdit_insertName_editingFinished() == false && on_dateEdit_yoc_editingFinished() == false)
     {
         goodInput = true;
     }
@@ -337,11 +318,29 @@ void addnewcomputer::on_newOkCancel_Edit_accepted()
     }
     else
     {
-        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+        QMessageBox::warning(this, "Error", "Name or year not incorrectly entered!");
     }
 }
 
 void addnewcomputer::on_newOkCancel_Edit_rejected()
 {
     addnewcomputer::close();
+}
+
+bool addnewcomputer::on_dateEdit_yoc_editingFinished()
+{
+    bool badYoc;
+
+    if (ui->dateEdit_yoc->date().year() > CURRENTYEAR)
+    {
+        ui->errorInYear->setHidden(false);
+        ui->errorInYear->setText("<font color='Red'>Computer can't be built in the future.</font>");
+        badYoc = true;
+    }
+    else
+    {
+        ui->errorInYear->setHidden(true);
+        badYoc = false;
+    }
+    return badYoc;
 }

@@ -13,13 +13,17 @@ class AboutCreators : public QDialog
 
 public:
     explicit AboutCreators(QWidget *parent = 0);
+    //constructor
     ~AboutCreators();
 
 private slots:
     void on_pushButton_clicked();
+    //  Precondition:   User is viewing about section
+    //  Postcondition:  modal is closed.
 
 private:
     Ui::AboutCreators *ui;
+    //ui pointer
 };
 
 #endif // ABOUTCREATORS_H

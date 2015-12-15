@@ -206,12 +206,16 @@ private:
     ##---------------------------------------------------------------------------------------##
     */
     void displayRelations();
+    //constructor
     Ui::MainWindow *ui;
+    //ui pointer
+
     /*
     ##  Objects
     ##---------------------------------------------------------------------------------------##
     */
     service serviceobject;
+    //object for service class
 
     /*
     ##  Display

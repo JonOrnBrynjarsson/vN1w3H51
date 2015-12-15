@@ -56,6 +56,7 @@ private:
     //  Precondition:  User is about to view list of computers
     //  Postcondition:  Reads computers from SQL database and prints it on screen.
     Ui::addrelations *ui;
+    //ui pointer
     service serviceobject;
     //Object for serviceclass.
 };
