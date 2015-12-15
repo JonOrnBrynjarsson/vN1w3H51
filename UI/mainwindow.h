@@ -27,11 +27,16 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
+    /*
+    ##  Constructers
+    ##---------------------------------------------------------------------------------------##
+    */
     explicit MainWindow(QWidget *parent = 0);
-    //Constructor
 
     ~MainWindow();
-
+    Ui::MainWindow *ui;
+    //ui pointer
 private slots:
     /*
     ##  Scientists Slots
@@ -200,23 +205,6 @@ private slots:
 
 private:
 
-
-    /*
-    ##  Constructers
-    ##---------------------------------------------------------------------------------------##
-    */
-
-
-    Ui::MainWindow *ui;
-    //ui pointer
-
-    /*
-    ##  Objects
-    ##---------------------------------------------------------------------------------------##
-    */
-    service serviceobject;
-    //object for service class
-
     /*
     ##  Display
     ##---------------------------------------------------------------------------------------##
@@ -231,10 +219,8 @@ private:
     //  Precondition:  User is about to view list of computer types
     //  Postcondition:  Reads computer types from SQL database and prints it on screen.
     void printRelations();
-    //
-    //
-    void displayRelations();
-    //constructor
+    //  Precondition:  User is about to view list of relations
+    //  Postcondition:  Reads relations from SQL database and prints it on screen.
 
     /*
     ##  Miscellaneous
@@ -252,17 +238,13 @@ private:
     //  Precondition:  Computer type is about to be deleted.
     //  Postcondition:  Returns if computer is in use or not, and could therefor
     //                  be deleted.
+
+    /*
+    ##  Objects
+    ##---------------------------------------------------------------------------------------##
+    */
+    service serviceobject;
+    //object for service class
 };
 
 #endif // MAINWINDOW_H
-
-//void on_MainMenuSelection_tabBarClicked(int index);
-//void on_pushButton_addnewType_clicked();
-//service service;
-//addNewScientist *anscientist;
-//vector<scientist> returnSciVector();
-//vector<computer> returnComVector();
-//vector<computertype> returnComTypeVector();
-
-//QTableWidget* m_pTableWidget;
-//QStringList m_TableHeader;
