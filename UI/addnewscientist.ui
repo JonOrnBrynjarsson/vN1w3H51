@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>442</width>
-    <height>482</height>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -195,9 +195,6 @@
      </property>
     </widget>
    </item>
-   <item row="17" column="1" colspan="3">
-    <widget class="QTextBrowser" name="textBrowser_relations"/>
-   </item>
    <item row="12" column="1" colspan="3">
     <widget class="QLineEdit" name="lineEdit_AgeAtDeath"/>
    </item>
@@ -267,6 +264,9 @@
       <string>errorinyob</string>
      </property>
     </widget>
+   </item>
+   <item row="17" column="1" colspan="3">
+    <widget class="QTextBrowser" name="textBrowser_relations"/>
    </item>
   </layout>
  </widget>

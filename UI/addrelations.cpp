@@ -118,19 +118,26 @@ void addrelations::on_buttonBox_accepted()
     int scipos = getCurrentSciRowPos(sciName).toInt();
     int compos = getCurrentComRowPos(comName).toInt();
 
-    QString comformtext = "Are you sure you want to add relations "
-                          "between " + sciName + " and " + comName + " ? ";
-
-    int toAdd = QMessageBox::question(this,"Adding relations",
-                                         comformtext,0x00400000, 0x00000400);
-
-    if(toAdd == 1024)
+    if (scipos == 0 || compos == 0)
     {
-        serviceobject.servAddRelationSciComp(scipos,compos);
+        QMessageBox::warning(this, "Error", "Nothing selected...");
     }
     else
     {
-        QMessageBox::information(this,"Adding relations","Cancelled",0);
+        QString comformtext = "Are you sure you want to add relations "
+                              "between " + sciName + " and " + comName + " ? ";
+
+        int toAdd = QMessageBox::question(this,"Adding relations",
+                                             comformtext,0x00400000, 0x00000400);
+
+        if(toAdd == 1024)
+        {
+            serviceobject.servAddRelationSciComp(scipos,compos);
+        }
+        else
+        {
+            QMessageBox::information(this,"Adding relations","Cancelled",0);
+        }
     }
 }
 

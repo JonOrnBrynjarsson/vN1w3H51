@@ -60,6 +60,7 @@ private:
     //object for computertype model
     service serviceObject;
     //object for service class
+    void viewingMode();
 
 };
 
