@@ -205,8 +205,8 @@ private:
     ##  Constructers
     ##---------------------------------------------------------------------------------------##
     */
-    void displayRelations();
-    //constructor
+
+
     Ui::MainWindow *ui;
     //ui pointer
 
@@ -230,6 +230,11 @@ private:
     void printComputerTypes();
     //  Precondition:  User is about to view list of computer types
     //  Postcondition:  Reads computer types from SQL database and prints it on screen.
+    void printRelations();
+    //
+    //
+    void displayRelations();
+    //constructor
 
     /*
     ##  Miscellaneous
