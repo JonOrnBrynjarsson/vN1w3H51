@@ -25,6 +25,7 @@ public:
     //int inputNumberToFunction(string input);
     void neweditcomputertype(QString id, bool edit);
 
+
     ~addnewcomputertype();
 
 private slots:
@@ -39,8 +40,8 @@ private slots:
 
 private:
     Ui::addnewcomputertype *ui;
-    void addCompTypetoDB(computertype &ct);
-    void addCompTypeErrCorr(computertype &ct);
+    //void addCompTypetoDB(computertype &ct);
+    //void addCompTypeErrCorr(computertype &ct);
 };
 
 #endif // ADDNEWCOMPUTERTYPE_H

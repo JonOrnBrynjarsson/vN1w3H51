@@ -220,15 +220,10 @@ void addNewScientist::neweditscientist(QString id, bool edit)
         ui->comboBox_gender->setEnabled(false);
         ui->labelEntLink->setText("Link: ");
         ui->lineEdit_link->setReadOnly(true);
-
-
-
-
     }
 
     setModal(true);
     exec();
-
 }
 
 void addNewScientist::neweditscientistRelations(int currentID)
@@ -450,18 +445,25 @@ bool addNewScientist::on_dateEdit_yod_editingFinished()
             ui->errorInYod->setText("<font color='Red'>A Scientist cannot die before he is born.</font>");
             badYod = true;
         }
+        else if (ui->dateEdit_yod->date().year() > CURRENTYEAR)
+        {
+            ui->errorInYod->setHidden(false);
+            ui->errorInYod->setText("<font color='Red'>A Scientist cannot die in the future.</font>");
+            badYod = true;
+        }
         else
         {
             ui->errorInYod->setHidden(true);
             badYod = false;
-
         }
     }
-    else
-    {
-        ui->errorInYod->setHidden(true);
-        badYod = false;
-    }
+//    else
+//    {
+//        ui->errorInYod->setHidden(true);
+//        badYod = false;
+//        qDebug () << "YOD4";
+
+//    }
 
     //qDebug () << "badyod is :" <<badYod;
     return badYod;
@@ -513,7 +515,6 @@ void addNewScientist::on_newOkCancel_New_accepted()
 void addNewScientist::on_newOkCancel_New_rejected()
 {
     addNewScientist::close();
-
 }
 
 void addNewScientist::on_newOkCancel_Edit_accepted()

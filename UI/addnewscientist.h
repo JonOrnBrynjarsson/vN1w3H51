@@ -20,11 +20,9 @@ public:
     explicit addNewScientist(QWidget *parent = 0);
     scientist s;
     service serviceobject;
+    void neweditscientist(QString id, bool edit);
     //int inputNumberToFunction(string input);
     //void addScientistToDatabase(scientist &sc);
-    void neweditscientist(QString id, bool edit);
-    void neweditscientistRelations(int currentID);
-    void neweditscientistClickableLink(QString link);
     ~addNewScientist();
 
 private slots:
@@ -45,7 +43,8 @@ private slots:
 
 private:
     Ui::addNewScientist *ui;
-
+    void neweditscientistRelations(int currentID);
+    void neweditscientistClickableLink(QString link);
     //void addScientistErrorCorrection(scientist &s);
 };
 

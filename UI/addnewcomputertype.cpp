@@ -78,10 +78,10 @@ addnewcomputertype::~addnewcomputertype()
 //    }
 //}
 
-void addnewcomputertype::addCompTypetoDB(computertype &ct)
-{
-    serviceObject.servAddcomputerType(ct);
-}
+//void addnewcomputertype::addCompTypetoDB(computertype &ct)
+//{
+//    serviceObject.servAddcomputerType(ct);
+//}
 
 
 //void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
