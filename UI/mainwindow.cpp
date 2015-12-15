@@ -125,7 +125,7 @@ void MainWindow::printScientists()
     ui->databaseDisplayComSci->setColumnHidden(5, true); // FELUR auka uppl.
     ui->databaseDisplayComSci->setColumnHidden(6, true); // FELUR auka uppl.
     ui->databaseDisplayComSci->setColumnHidden(7, true); // FELUR ID!!!!
-    ui->databaseDisplayComSci->setColumnWidth(0, 200);
+    ui->databaseDisplayComSci->setColumnWidth(0, 170);
     ui->databaseDisplayComSci->setSortingEnabled(true);
 }
 
@@ -634,15 +634,15 @@ void MainWindow::on_databaseDisplayComSci_doubleClicked()//const QModelIndex &in
     printScientists();
 }
 
-void MainWindow::on_pushButton_addnewType_clicked()
-{
-       qDebug () << "addnnewcomputertypeclicked";
-       addnewcomputertype newtype;
-       newtype.setModal(true);
-       newtype.exec();
-       serviceobject.servReadSqlCompTypes();
-       printComputerTypes();
-}
+//void MainWindow::on_pushButton_addnewType_clicked()
+//{
+//       qDebug () << "addnnewcomputertypeclicked";
+//       addnewcomputertype newtype;
+//       newtype.setModal(true);
+//       newtype.exec();
+//       serviceobject.servReadSqlCompTypes();
+//       printComputerTypes();
+//}
 
 
 void MainWindow::on_comboBox_filterComputers_currentIndexChanged(int index)

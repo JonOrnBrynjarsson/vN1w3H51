@@ -25,8 +25,11 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->labelClickableLink->setHidden(true);
     ui->labelClickableUrlReal->setHidden(true);
     ui->errorInName->setHidden(true);
-    ui->errorInYob->setHidden(true);
+    //ui->errorInYob->setHidden(true);
     ui->errorInYod->setHidden(true);
+    //ui->checkBox->setHidden(true);
+    //ui->lineEdit_yob->setHidden(true);
+    //ui->lineEdit_yod->setHidden(true);
 }
 
 addNewScientist::~addNewScientist()
@@ -39,7 +42,7 @@ void addNewScientist::on_buttonBox_accepted()
 
     bool goodInput = false;
 
-    if ((on_lineEdit_name_editingFinished() == false)&&(on_lineEdit_yob_editingFinished() == false)&&(on_lineEdit_yod_editingFinished() == false))
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
     {
         goodInput = true;
     }
@@ -50,14 +53,19 @@ void addNewScientist::on_buttonBox_accepted()
 //    qDebug () << "good name is: ";
 //    qDebug () << goodName;
 
-
-
     scientist sc;
     sc.setName(ui->lineEdit_name->text().toStdString());
     sc.setDescription(ui->textEdit_descr->toPlainText().toStdString());
     sc.setLink(ui->lineEdit_link->text().toStdString());
-    sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
-    sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
+    //sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
+    //sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
+    sc.setYearOfBirth(ui->dateEdit_yob->date().year());
+
+    if (ui->checkBox->checkState() == 0)
+    {
+        sc.setYearOfDeath(ui->dateEdit_yod->date().year());
+    }
+
     sc.setGender(ui->comboBox_gender->currentIndex());
 
     if (goodInput)
@@ -75,40 +83,39 @@ void addNewScientist::on_buttonBox_accepted()
 
 void addNewScientist::addScientistToDatabase(scientist &sc)
 {
-
     serviceobject.servAddscientist(sc);
 }
 
-void addNewScientist::addScientistErrorCorrection(scientist &sc)
-{
-    bool badName = false;
-    bool errorInYOB = false;
-    bool errorInYOD = false;
-    sc.setName(serviceobject.nameCorrection(sc.getName(), badName));
-    sc.setYearOfBirth(serviceobject.yearCorrection(sc.getYearOfBirth(), errorInYOB));
-    sc.setYearOfDeath(serviceobject.yearCorrection(sc.getYearOfDeath(), errorInYOD));
+//void addNewScientist::addScientistErrorCorrection(scientist &sc)
+//{
+//    bool badName = false;
+//    bool errorInYOB = false;
+//    bool errorInYOD = false;
+//    sc.setName(serviceobject.nameCorrection(sc.getName(), badName));
+//    sc.setYearOfBirth(serviceobject.yearCorrection(sc.getYearOfBirth(), errorInYOB));
+//    sc.setYearOfDeath(serviceobject.yearCorrection(sc.getYearOfDeath(), errorInYOD));
 
-    if (badName||errorInYOB||errorInYOD)
-    {
-        qDebug () << "ERROR IN NAME!" ;
+//    if (badName||errorInYOB||errorInYOD)
+//    {
+//        qDebug () << "ERROR IN NAME!" ;
 
-        if (badName)
-        {
-            serviceobject.errorMessage("Name not correctly formatted. Please enter letters only.");
-        }
-        if (errorInYOB||errorInYOD)
-        {
-            serviceobject.errorMessage("Year not correctly formatted. Please enter valid years only.");
-        }
-    }
-    else
-    {
-        addScientistToDatabase(sc);
-        qDebug () << "NAME ADDED TO DATABASE!" ;
-        serviceobject.completeMessage("Name was successfully added to the Database!");
-        //FÆRA ÚR SERVICE CLASS.
-    }
-}
+//        if (badName)
+//        {
+//            serviceobject.errorMessage("Name not correctly formatted. Please enter letters only.");
+//        }
+//        if (errorInYOB||errorInYOD)
+//        {
+//            serviceobject.errorMessage("Year not correctly formatted. Please enter valid years only.");
+//        }
+//    }
+//    else
+//    {
+//        addScientistToDatabase(sc);
+//        qDebug () << "NAME ADDED TO DATABASE!" ;
+//        serviceobject.completeMessage("Name was successfully added to the Database!");
+//        //FÆRA ÚR SERVICE CLASS.
+//    }
+//}
 
 void addNewScientist::neweditscientist(QString id, bool edit)
 {
@@ -137,10 +144,17 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             qDebug () << name;
         }
     }
+
+    QDate dYob, dYod;
+    dYob.setDate(yob.toInt(),1,1);
+    dYod.setDate(yod.toInt(),1,1);
+
     ui->lineEdit_name->setText(name);
     ui->lineEdit_link->setText(link);
-    ui->lineEdit_yob->setText(yob);
-    ui->lineEdit_yod->setText(yod);
+    ui->dateEdit_yob->setDate(dYob);
+    ui->dateEdit_yod->setDate(dYod);
+//    ui->lineEdit_yob->setText(yob);
+//    ui->lineEdit_yod->setText(yod);
     ui->comboBox_gender->setCurrentIndex(gender);
     ui->textEdit_descr->setText(descr);
     ui->labelSciid->setText(sciid);
@@ -152,18 +166,20 @@ void addNewScientist::neweditscientist(QString id, bool edit)
     if (yod.toInt() == 0)
     {
         dead = false;
+        ui->checkBox->setChecked(true);
     }
 
     if (edit == false)
     {
+        ui->checkBox->setHidden(true);
         this->setWindowTitle("More information about the Scientist");
         ui->buttonBox_editScientist->setHidden(true);
 
         ui->labelEntName->setText("Name: ");
         ui->lineEdit_name->setReadOnly(true);
         ui->labelEntBirth->setText("Year of Birth: ");
-        ui->lineEdit_yob->setReadOnly(true);
-
+        //ui->lineEdit_yob->setReadOnly(true);
+        ui->dateEdit_yob->setReadOnly(true);
         if (dead)
         {
             int ageAtDeath = yod.toInt() - yob.toInt();
@@ -172,7 +188,8 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             ui->lineEdit_AgeAtDeath->setText(QString::number(ageAtDeath));
             ui->lineEdit_AgeAtDeath->setReadOnly(true);
             ui->labelAgeAtDeath->setHidden(false);
-            ui->lineEdit_yod->setReadOnly(true);
+            //ui->lineEdit_yod->setReadOnly(true);
+            ui->dateEdit_yod->setReadOnly(true);
 
         }
         else
@@ -183,13 +200,15 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             int currentAge = currentYear - yob.toInt();
 
             ui->labelEntDeath->setText("Year of Death: ");
-            ui->lineEdit_yod->setReadOnly(true);
+            //ui->lineEdit_yod->setReadOnly(true);
+            ui->dateEdit_yod->setReadOnly(true);
             ui->lineEdit_currentAge->setHidden(false);
             ui->lineEdit_currentAge->setText(QString::number(currentAge));
             ui->lineEdit_currentAge->setReadOnly(true);
             ui->labelCurrentAge->setHidden(false);
             ui->labelEntDeath->setHidden(true);
-            ui->lineEdit_yod->setHidden(true);
+            //ui->lineEdit_yod->setHidden(true);
+            ui->dateEdit_yod->setHidden(true);
         }
 
         neweditscientistRelations(currentID);
@@ -287,8 +306,17 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
 
 
     string name = ui->lineEdit_name->text().toStdString();
-    int yob = ui->lineEdit_yob->text().toInt();
-    int yod = ui->lineEdit_yod->text().toInt();
+    //int yob = ui->lineEdit_yob->text().toInt();
+    //int yod = ui->lineEdit_yod->text().toInt();
+
+    int yob = ui->dateEdit_yob->date().year();
+    int yod = 0;
+
+    if (ui->checkBox->checkState() == 0)
+    {
+        yod = ui->dateEdit_yod->date().year();
+    }
+
     string link = ui->lineEdit_link->text().toStdString();
     int gender = ui->comboBox_gender->currentIndex();
     string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
@@ -296,7 +324,8 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
 
     bool goodInput = false;
 
-    if ((on_lineEdit_name_editingFinished() == false)&&(on_lineEdit_yob_editingFinished() == false)&&(on_lineEdit_yod_editingFinished() == false))
+    //if ((on_lineEdit_name_editingFinished() == false)&&(on_lineEdit_yob_editingFinished() == false)&&(on_lineEdit_yod_editingFinished() == false))
+    if (on_lineEdit_name_editingFinished() == false)
     {
         goodInput = true;
     }
@@ -309,7 +338,7 @@ void addNewScientist::on_buttonBox_editScientist_accepted()
     }
     else
     {
-        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
+        QMessageBox::warning(this, "Error", "Name not properly formatted. Try again!");
     }
 
     addNewScientist::close();
@@ -348,57 +377,104 @@ bool addNewScientist::on_lineEdit_name_editingFinished()
 }
 
 
-bool addNewScientist::on_lineEdit_yob_editingFinished()
-{
-    bool badyob = false;
-    QString yob = ui->lineEdit_yob->text();
-    int syob = serviceobject.yearCorrection(yob.toInt(), badyob);
-    QString yobf = QString::number(syob);
+//bool addNewScientist::on_lineEdit_yob_editingFinished()
+//{
+//    bool badyob = false;
+//    QString yob = ui->lineEdit_yob->text();
+//    int syob = serviceobject.yearCorrection(yob.toInt(), badyob);
+//    QString yobf = QString::number(syob);
 
-    if (badyob == true)
+//    if (badyob == true)
+//    {
+//        ui->errorInYob->setHidden(false);
+//        ui->errorInYob->setText("<font color='Red'>Year not properly formatted.</font>");
+//    }
+//    else
+//    {
+//        ui->lineEdit_yob->setText(yobf);
+//        ui->errorInYob->setHidden(true);
+//        badyob = false;
+//    }
+
+//    return badyob;
+//}
+
+//bool addNewScientist::on_lineEdit_yod_editingFinished()
+//{
+//    bool badyod = false;
+//    QString yod = ui->lineEdit_yod->text();
+//    ui->errorInYod->setHidden(true);
+
+//    if (yod == "0")
+//    {
+//        badyod = false;
+//        //ui->errorInYod->setHidden(true);
+//    }
+
+//    if ((yod.length() != 0)&&((yod != "0")))
+//    {
+
+//        int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
+//        yod = QString::number(syod);
+
+//        int syob = ui->lineEdit_yob->text().toInt();
+//        if (syod < syob)
+//        {
+//            badyod = true;
+//        }
+
+//        if (badyod == true)
+//        {
+//            ui->errorInYod->setHidden(false);
+//            ui->errorInYod->setText("<font color='Red'>Year not properly formatted.</font>");
+//        }
+//        else
+//        {
+//            ui->lineEdit_yod->setText(yod);
+//            ui->errorInYod->setHidden(true);
+//            badyod = false;
+//        }
+//    }
+//    return badyod;
+//}
+
+void addNewScientist::on_checkBox_toggled(bool checked)
+{
+    if (checked)
     {
-        ui->errorInYob->setHidden(false);
-        ui->errorInYob->setText("<font color='Red'>Year not properly formatted.</font>");
+        ui->dateEdit_yod->setDisabled(true);
+        ui->errorInYod->setHidden(true);
     }
     else
     {
-        ui->lineEdit_yob->setText(yobf);
-        ui->errorInYob->setHidden(true);
-        badyob = false;
+        ui->dateEdit_yod->setDisabled(false);
     }
-
-    return badyob;
 }
 
-bool addNewScientist::on_lineEdit_yod_editingFinished()
+bool addNewScientist::on_dateEdit_yod_editingFinished()
 {
-    bool badyod = false;
-    QString yod = ui->lineEdit_yod->text();
-    ui->errorInYod->setHidden(true);
+    bool badYod;
 
-    if (yod.length() != 0)
+    if (ui->checkBox->checkState() == 0) // dauður!
     {
-
-        int syod = serviceobject.yearCorrection(yod.toInt(), badyod);
-        yod = QString::number(syod);
-
-        int syob = ui->lineEdit_yob->text().toInt();
-        if (syod < syob)
-        {
-            badyod = true;
-        }
-
-        if (badyod == true)
+        if (ui->dateEdit_yob->date().year() > ui->dateEdit_yod->date().year())
         {
             ui->errorInYod->setHidden(false);
-            ui->errorInYod->setText("<font color='Red'>Year not properly formatted.</font>");
+            ui->errorInYod->setText("<font color='Red'>You cannot die before you have lived.</font>");
+            badYod = true;
         }
         else
         {
-            ui->lineEdit_yod->setText(yod);
             ui->errorInYod->setHidden(true);
-            badyod = false;
+            badYod = false;
+
         }
     }
-    return badyod;
+    else
+    {
+        ui->errorInYod->setHidden(true);
+        badYod = false;
+    }
+
+    return badYod;
 }

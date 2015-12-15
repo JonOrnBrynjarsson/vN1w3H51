@@ -79,7 +79,7 @@ private slots:
 
     void on_databaseDisplayComSci_doubleClicked();//const QModelIndex &index);
 
-    void on_pushButton_addnewType_clicked();
+    //void on_pushButton_addnewType_clicked();
 
     void on_comboBox_filterRelations_currentIndexChanged(const QString &arg1);
 

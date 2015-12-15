@@ -29,7 +29,7 @@ private slots:
 
     void on_buttonBox_editComputerFinished_rejected();
 
-    bool on_lineEdit_enterYear_editingFinished();
+    //bool on_lineEdit_enterYear_editingFinished();
 
     bool on_lineEdit_insertName_editingFinished();
 

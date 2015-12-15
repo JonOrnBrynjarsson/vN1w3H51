@@ -36,14 +36,18 @@ private slots:
 
     bool on_lineEdit_name_editingFinished();
 
-    bool on_lineEdit_yob_editingFinished();
+    //bool on_lineEdit_yob_editingFinished();
 
-    bool on_lineEdit_yod_editingFinished();
+    //bool on_lineEdit_yod_editingFinished();
+
+    void on_checkBox_toggled(bool checked);
+
+    bool on_dateEdit_yod_editingFinished();
 
 private:
     Ui::addNewScientist *ui;
 
-    void addScientistErrorCorrection(scientist &s);
+    //void addScientistErrorCorrection(scientist &s);
 };
 
 #endif // ADDNEWSCIENTIST_H

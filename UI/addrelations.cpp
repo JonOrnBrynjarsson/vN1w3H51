@@ -76,7 +76,7 @@ void addrelations::printScientists()
         QString name = QString::fromStdString(serviceobject.servGetSciVector().at(i).getName());
         ui->tableWidget_chooseScientist->setItem(i, 0, new QTableWidgetItem(name));
 
-        int currentID = serviceobject.servGetSciVector().at(i).getID();
+        //int currentID = serviceobject.servGetSciVector().at(i).getID();
 
         QString sciID = QString::number(serviceobject.servGetSciVector().at(i).getID());
         ui->tableWidget_chooseScientist->setItem(i, 1, new QTableWidgetItem(sciID));
@@ -124,13 +124,17 @@ void addrelations::on_buttonBox_accepted()
     QString comformtext = "Are you sure you want to add relations "
                           "between " + sciName + " and " + comName + " ? ";
 
-    bool yes = QMessageBox::warning(this, "Adding relations", comformtext);
+    int toAdd = QMessageBox::question(this,"Adding relations",
+                                         comformtext,0x00400000, 0x00000400);
 
-    if (yes)
+    if(toAdd == 1024)
     {
         serviceobject.servAddRelationSciComp(scipos,compos);
     }
+    else
+    {
+        QMessageBox::information(this,"Adding relations","Cancelled",0);
+    }
 
-    //qDebug () << sciName << comName;
 }
 
