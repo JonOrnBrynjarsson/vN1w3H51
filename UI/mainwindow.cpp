@@ -40,11 +40,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::printScientists()
 {
-    //serviceobject.servStartDatabase();
-    //ui->databaseDisplayComSci->clear();
-
-
-    //serviceobject.servReadSqlScientists("NAME");
 
     ui->databaseDisplayComSci->setSortingEnabled(false);
     ui->databaseDisplayComSci->setRowCount(serviceobject.servGetSciVector().size());
@@ -389,10 +384,13 @@ void MainWindow::on_actionEdit_a_Computer_Type_triggered()
 
 void MainWindow::on_actionRemove_a_Computer_Scientist_triggered()
 {
-
     QString pos = getCurrentSciRowPos();
 
-    if (pos.length() > 0)
+    if (pos.length() == 0)
+    {
+        ui->statusbar->showMessage("Nothing selected...", 2000);
+    }
+    else
     {
         int toDelete = QMessageBox::critical(this,"About to delete",
                                              "Are you sure you want to delete this Scientist?",0x00400000, 0x00000400);
@@ -420,7 +418,11 @@ void MainWindow::on_actionRemove_a_Computer_triggered()
 
     QString pos = getCurrentComRowPos();
 
-    if (pos.length() > 0)
+    if (pos.length() == 0)
+    {
+        ui->statusbar->showMessage("Nothing selected...", 2000);
+    }
+    else
     {
         int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer?",0x00400000, 0x00000400);
 
@@ -442,70 +444,75 @@ void MainWindow::on_actionRemove_a_Computer_triggered()
     }
 }
 
-
-
 void MainWindow::on_actionRemove_a_Computer_Type_triggered()
 {
     QString pos = getCurrentComTypeRowPos();
 
-
-    if (pos.length() > 0 && computerTypeCanBeDeleted(pos.toUInt()))
+    if (pos.length() == 0)
     {
-        int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
-
-        if(toDelete == 1024)
-        {
-            serviceobject.servDeleteComputerType(pos.toUInt());
-            ui->statusbar->showMessage("Computer Type deleted", 2000);
-            ui->databaseDisplayComTypes->clear();
-            serviceobject.servReadSqlCompTypes();
-            printComputerTypes();
-        }
-        else
-        {
-            ui->statusbar->showMessage("Canceled", 2000);
-            ui->databaseDisplayComTypes->clear();
-            serviceobject.servReadSqlCompTypes();
-            printComputerTypes();
-        }
+        ui->statusbar->showMessage("Nothing selected...", 2000);
     }
     else
     {
-        ui->statusbar->showMessage("Computer type in use!", 2000);
+        if (computerTypeCanBeDeleted(pos.toUInt()))
+        {
+            int toDelete = QMessageBox::critical(this,"About to delete", "Are you sure you want to delete this computer type?",0x00400000, 0x00000400);
+
+            if(toDelete == 1024)
+            {
+                serviceobject.servDeleteComputerType(pos.toUInt());
+                ui->statusbar->showMessage("Computer Type deleted", 2000);
+                ui->databaseDisplayComTypes->clear();
+                serviceobject.servReadSqlCompTypes();
+                printComputerTypes();
+            }
+            else
+            {
+                ui->statusbar->showMessage("Canceled", 2000);
+                ui->databaseDisplayComTypes->clear();
+                serviceobject.servReadSqlCompTypes();
+                printComputerTypes();
+            }
+        }
+        else
+        {
+            ui->statusbar->showMessage("Computer type in use!", 2000);
+        }
     }
 }
 
 void MainWindow::on_actionRemove_Relations_triggered()
 {
-    qDebug() << "Remove_Relations";
-
     int compos, scipos;
     getCurrentRelationsRowPos(compos, scipos);
 
-    qDebug () << compos << scipos;
-
-    int toDelete = QMessageBox::critical(this,"About to delete",
-                                         "Are you sure you want to delete these Relations?",0x00400000, 0x00000400);
-
-    if(toDelete == 1024)
+    if (compos == 0&&scipos == 0)
     {
-        serviceobject.servDeleteRelationSciComp(scipos,compos);
-        ui->statusbar->showMessage("Relations deleted", 2000);
-        qDebug () << "success";
+        ui->statusbar->showMessage("Nothing selected...", 2000);
     }
     else
     {
-        ui->statusbar->showMessage("Canceled", 2000);
-        qDebug () << "failure";
+        int toDelete = QMessageBox::critical(this,"About to delete",
+                                             "Are you sure you want to delete these Relations?",0x00400000, 0x00000400);
+
+        if(toDelete == 1024)
+        {
+            serviceobject.servDeleteRelationSciComp(scipos,compos);
+            ui->statusbar->showMessage("Relations deleted", 2000);
+        }
+        else
+        {
+            ui->statusbar->showMessage("Canceled", 2000);
+        }
+        serviceobject.servReadSqlRelations();
+        displayRelations();
     }
-    serviceobject.servReadSqlRelations();
-    displayRelations();
 }
 
 void MainWindow::on_actionHelp_triggered()
 {
-    QMessageBox::information(this, "Help", "Unfortunately the help file was lost during translation - please contact one of the group member; Anna Dis, Bardi Freyr, Isak Snaer or Jon Orn");
-    qDebug() << "Help";
+    help helpwindow;
+    helpwindow.exec();
 }
 
 void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()

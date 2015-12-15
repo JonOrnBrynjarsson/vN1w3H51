@@ -3,15 +3,11 @@
 
 #include "datalayer/workingclass.h"
 
-#include <iostream>
 #include <string>
 #include <unistd.h>
 #include <sstream>
-#include <QMessageBox>
-
 
 const int CURRENTYEAR = 2015;
-
 
 using namespace std;
 
@@ -43,8 +39,6 @@ class service
         //int inputNumberToFunction(string input);    //TEKIÐ ÚR INFODISPLAY!!!
         //  Precondition:   Takes in a string for the number
         //  Postcondition:  Returns integer.
-        void errorMessage(string errorMessage);
-        void completeMessage(string completeMessage);
 
         /*
         ##  Read functions
@@ -114,18 +108,6 @@ class service
         vector<computer> servGetComputersLinkedToScientists(int sciID);
         //  Calls the getComputersLinkedToScientists function in workingclass.
 
-
-        /*
-        ##  Erase vector functions
-        ##---------------------------------------------------------------------------------------##
-        */
-        void servEraseScientistVector();
-        //  Calls the eraseScientistVector function in workingclass.
-        void servEraseComputerVector();
-        //  Calls the eraseComputerVector function in workingclass.
-        void servEraseCompTypeVector();
-        //  Calls the eraseCompTypeVector function in workingclass.
-
         /*
         ##  Sort functions
         ##---------------------------------------------------------------------------------------##
@@ -140,7 +122,7 @@ class service
         //                  returns to main menu otherwise.
 
         /*
-        ##  Search scientists functions
+        ##  Search functions
         ##---------------------------------------------------------------------------------------##
         */
         void servSearchScientistByName(string subName, bool& isFound);
@@ -149,21 +131,16 @@ class service
         //  Calls the searchByGender function in workingclass.
         void servSearchScientistByYear(int& yr, char bORd, bool& isFound);
         //  Calls the searchByYear function in workingclass.
-
-        /*
-        ##  Search computers functions
-        ##---------------------------------------------------------------------------------------##
-        */
         void servSearchComputerByName(string subName, bool& isFound);
         //  Calls the searchComputerByName function in workingclass.
         void servSearchComputerByType(string& type, bool& isFound);
         //  Calls the searchComputerByName function in workingclass.
         void servSearchComputerByYear(int& yr, bool& isFound);
         //  Calls the searchComputerByYear function in workingclass.
-
-
         void servSearchRelations(int column, string searchstr, bool& isFound);
+        //  Calls the searchRelations function in workingclass.
         void servSearchComputerTypes(int column, string searchstr, bool& isFound);
+        //  Calls the searchComputerTypes function in workingclass.
 
 
         /*
@@ -171,13 +148,6 @@ class service
         ##---------------------------------------------------------------------------------------##
         */
         void servStartDatabase();
-        //  Calls the startDatabase function in workingclass.
-        bool servCheckDatabaseExists();
-        //  Calls the checkDatabaseExists function in workingclass.
-        void servCreateEmptyDatabase();
-        //  Calls the createEmptyDatabase function in workingclass.
-        void servCloseDatabase();
-        //  Calls the CloseDatabase function in workingclass.
 
         workingclass workingObject;
         // A object of the data layer class.

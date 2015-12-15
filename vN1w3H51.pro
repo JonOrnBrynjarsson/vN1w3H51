@@ -27,8 +27,8 @@ SOURCES += main.cpp\
     UI/addnewcomputer.cpp \
     UI/addnewcomputertype.cpp \
 	UI/addrelations.cpp\
-	Console_UI/infodisplay.cpp \
-    UI/aboutcreators.cpp
+    UI/aboutcreators.cpp \
+    UI/help.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
 			models/scientist.h \
@@ -40,8 +40,8 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/addnewcomputer.h \
     UI/addnewcomputertype.h \
 	UI/addrelations.h \
-	Console_UI/infodisplay.h \
-    UI/aboutcreators.h
+    UI/aboutcreators.h \
+    UI/help.h
 
 FORMS    += \
     UI/mainwindow.ui \
@@ -49,10 +49,11 @@ FORMS    += \
     UI/addnewcomputer.ui \
     UI/addnewcomputertype.ui \
     UI/addrelations.ui \
-    UI/aboutcreators.ui
+    UI/aboutcreators.ui \
+    UI/help.ui
 
 DISTFILES +=
     UI/computerui.ui
 
 RESOURCES += \
-    groupphotos.qrc
+    resources.qrc

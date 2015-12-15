@@ -12,13 +12,10 @@
 #include <vector>
 #include <QDebug>
 
+const string DBASE = "../vN1w3H51/database/Group51_verklegt_1.sqlite";  // Locaton of the database file
+const int MAXNAMELENGTH = 44;
 
 using namespace std;
-
-
-const string DBASE = "../vN1w3H51/database/Group51_verklegt_1.sqlite";
-// Locaton of the database file
-const int MAXNAMELENGTH = 44;
 
 struct relation{
     int scientistID;
@@ -126,23 +123,8 @@ public:
     //  Precondition:   A relationship exists between at least one scientist and one computer.
     //  Postcondition:  Returns a vector of relationships between scientists and computers.
 
-
     /*
-    ##  Erase vector functions
-    ##---------------------------------------------------------------------------------------##
-    */
-    void eraseScientistVector();
-    //  Precondition:   A new or changed vector is about to be created.
-    //  Postcondition:  The privat vector is clear of all scientists.
-    void eraseComputerVector();
-    //  Precondition:   A new or changed vector is about to be created.
-    //  Postcondition:  The privat vector is clear of all computers.
-    void eraseCompTypeVector();
-    //  Precondition:   A new or changed vector is about to be created.
-    //  Postcondition:  The privat vector is clear of all computer types.
-
-    /*
-    ##  Search scientist functions
+    ##  Search functions
     ##---------------------------------------------------------------------------------------##
     */
     void searchScientistByName(string subName, bool& isFound);
@@ -158,26 +140,29 @@ public:
     //                  whether to look for the year of birth or year of death and a boolean
     //                  variable to indicate if found.
     //  Postcondition:  Returns a vector of the scientist matching the criteria.
-
-    /*
-    ##  Search computer functions
-    ##---------------------------------------------------------------------------------------##
-    */
     void searchComputerByName(string subName, bool& isFound);
     //  Precondition:   Takes in the parameter subName to be searched for and a boolean variable
     //                  to indicate if found.
-    //  Postcondition:  Returns a vector of the computers matching the criteria.
+    //  Postcondition:  Fills the private computers vector if found.
     void searchComputerByType(string& type, bool& isFound);
     //  Precondition:   Takes in the parameter type to be searched for and a boolean variable
     //                  to indicate if found.
-    //  Postcondition:  Returns a vector of the computers matching the criteria.
+    //  Postcondition:  Fills the private computers vector if found.
     void searchComputerByYear(int& yr, bool& isFound);
     //  Precondition:   Takes in the parameter year to be searched for and a boolean variable
     //                  to indicate if found.
-    //  Postcondition:  Returns a vector of the computers matching the criteria.
+    //  Postcondition:  Fills the private computers vector if found.
 
     void searchRelations(int column, string searchstr, bool& isFound);
+    //  Precondition:   Takes in the parameters column ( 0 for scientist name, 1 for computer name) to be searched
+    //                  for and a boolean variable to indicate if found.
+    //  Postcondition:  Fills the private relations vector if found.
+
     void searchComputerTypes(int column, string searchstr, bool& isFound);
+    //  Precondition:   Takes in the parameters column ( 0 for name, 1 for description) to be searched
+    //                  for and a boolean variable to indicate if found.
+    //  Postcondition:  Fills the private computers vector if found.
+
     /*
     ##  Database functions
     ##---------------------------------------------------------------------------------------##
@@ -185,29 +170,9 @@ public:
     QSqlDatabase startDatabase();
     //  Precondition:   The database is present in the build directory of the program.
     //  Postconditinon: A link to the database has been established.
-    bool checkDatabaseExists();
-    //  Precondition:   A name for the database has been declered.
-    //  Postcondition:  Returns true if database exits, false otherwise.
-    void closeDatabase();
-    //  Precondition:   The database is open.
-    //  Postconditinon: The database has been closed.
-    void createEmptyDatabase();
-    //  Precondition:   There is no database present directory of choice.
-    //  Postconditinon: A new database with empty tables is created.
+
 
 private:
-    void createTableScientistsAndComputers();
-    //  Precondition:   A new database has just been created.
-    //  Postconditinon: A new table for relation between scientists and computers is created.
-    void createTableComputers();
-    //  Precondition:   A new database has just been created.
-    //  Postconditinon: A new table for computers is created.
-    void createTableScientists();
-    //  Precondition:   A new database has just been created.
-    //  Postconditinon: A new table for scientists is created.
-    void createTableComputerTypes();
-    //  Precondition:   A new database has just been created.
-    //  Postconditinon: A new table for computer types is created.
 
     vector<scientist> scientistVector;
     vector<computer> computerVector;

@@ -12,6 +12,7 @@
 #include "addrelations.h"
 //#include "editcomputer.h"
 #include "Services/service.h"
+#include "help.h"
 #include <QModelIndex>
 #include <math.h>
 #include <QTableWidget>
@@ -187,9 +188,14 @@ private slots:
     */
 
     void on_actionHelp_triggered();
-    void on_MainMenuSelection_currentChanged(int index);
-    void setAllMainMenuSelectionDisabled();
+    //  Postcondition:  displays help.
     void on_actionAbout_Computers_and_Scientists_Database_triggered();
+    //  Postcondition:  displays about.
+    void setAllMainMenuSelectionDisabled();
+    //  Postcondition:  sets all toolbar selections as disabled by default.
+    void on_MainMenuSelection_currentChanged(int index);
+    //  Precondition:  main window tab is about to be changed.
+    //  Postcondition:  enables toolbars and prints for selected tab.
 
 private:
     void displayRelations();
@@ -202,8 +208,14 @@ private:
     ##---------------------------------------------------------------------------------------##
     */
     void printScientists();
+    //  Precondition:  User is about to view list of scientists
+    //  Postcondition:  Reads scientists from SQL database and prints it on screen.
     void printComputers();
+    //  Precondition:  User is about to view list of computers
+    //  Postcondition:  Reads computers from SQL database and prints it on screen.
     void printComputerTypes();
+    //  Precondition:  User is about to view list of computer types
+    //  Postcondition:  Reads computer types from SQL database and prints it on screen.
 
     /*
     ##  Miscellaneous
@@ -211,10 +223,17 @@ private:
     */
 
     QString getCurrentSciRowPos();
+    //  Postcondition:  Returns the real ID number of selected scientist.
     QString getCurrentComRowPos();
+    //  Postcondition:  Returns the real ID number of selected computer.
     QString getCurrentComTypeRowPos();
+    //  Postcondition:  Returns the real ID number of selected computer type.
     void getCurrentRelationsRowPos(int &compos, int &scipos);
+    //  Postcondition:  Computer id and Science id is returned as a variable.
     bool computerTypeCanBeDeleted(int compTypeID);
+    //  Precondition:  Computer type is about to be deleted.
+    //  Postcondition:  Returns if computer is in use or not, and could therefor
+    //                  be deleted.
 };
 
 #endif // MAINWINDOW_H
