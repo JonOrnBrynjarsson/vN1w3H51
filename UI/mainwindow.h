@@ -28,6 +28,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    //Constructor
 
     ~MainWindow();
 
@@ -198,9 +199,18 @@ private slots:
     //  Postcondition:  enables toolbars and prints for selected tab.
 
 private:
+
+
+    /*
+    ##  Constructers
+    ##---------------------------------------------------------------------------------------##
+    */
     void displayRelations();
     Ui::MainWindow *ui;
-
+    /*
+    ##  Objects
+    ##---------------------------------------------------------------------------------------##
+    */
     service serviceobject;
 
     /*
@@ -221,7 +231,6 @@ private:
     ##  Miscellaneous
     ##---------------------------------------------------------------------------------------##
     */
-
     QString getCurrentSciRowPos();
     //  Postcondition:  Returns the real ID number of selected scientist.
     QString getCurrentComRowPos();

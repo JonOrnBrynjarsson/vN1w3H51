@@ -136,7 +136,6 @@ void addrelations::on_buttonBox_accepted()
 
 void addrelations::on_lineEdit_filterScieentistAddRelation_textEdited(const QString &arg1)
 {
-
     bool isFound = false;
     string filterText = arg1.toStdString();
     serviceobject.servSearchScientistByName(filterText, isFound);

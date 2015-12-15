@@ -19,6 +19,8 @@ class help : public QDialog
 public:
     explicit help(QWidget *parent = 0);
     void run();
+    //  Precondition:   User is about to view help file
+    //  Postcondition:  if file is present then text is shown, otherwise cancel.
 
     ~help();
 
