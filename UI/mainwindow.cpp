@@ -512,7 +512,8 @@ void MainWindow::on_actionRemove_Relations_triggered()
 void MainWindow::on_actionHelp_triggered()
 {
     help helpwindow;
-    helpwindow.exec();
+    //helpwindow.exec();
+    helpwindow.run();
 }
 
 void MainWindow::on_actionAbout_Computers_and_Scientists_Database_triggered()

@@ -8,8 +8,6 @@ help::help(QWidget *parent) :
     ui(new Ui::help)
 {
     ui->setupUi(this);
-    //ui->infoBox->setText();
-    readme();
 }
 
 help::~help()
@@ -22,23 +20,29 @@ void help::on_closeButton_clicked()
     help::close();
 }
 
-void help::readme()
+bool help::readme()
 {
-    //RESOURCES += groupphotos.qrc;
-
     QString fileName = "://nfo.txt";
     if (!fileName.isEmpty())
     {
         QFile file(fileName);
         if (!file.open(QIODevice::ReadOnly))
         {
-            //qDebug()<<"Error. File not found";
-            return;
+            QMessageBox::warning(this, "Error", "File not found.");
+            return false;
         }
         QTextStream in(&file);
-        //ui->TextArea->setText(in.readAll());
         ui->infoBox->setText(in.readAll());
-        //ui->infoBox->setText("hello");
         file.close();
+    }
+
+    return true;
+}
+
+void help::run()
+{
+    if (readme())
+    {
+        exec();
     }
 }

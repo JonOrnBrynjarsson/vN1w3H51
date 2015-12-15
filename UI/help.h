@@ -5,6 +5,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QIODevice>
+#include <QMessageBox>
+
 
 namespace Ui {
 class help;
@@ -16,11 +18,17 @@ class help : public QDialog
 
 public:
     explicit help(QWidget *parent = 0);
+    void run();
+
     ~help();
 
 private slots:
     void on_closeButton_clicked();
-    void readme();
+    //  Precondition:   User is viewing help file
+    //  Postcondition:  modal is closed.
+    bool readme();
+    //  Precondition:   User is about to view help file
+    //  Postcondition:  help file is read from resource, and printed on screen.
 
 private:
     Ui::help *ui;
