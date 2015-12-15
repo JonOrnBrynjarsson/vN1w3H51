@@ -1,0 +1,57 @@
+Welcome to the computer and scientists database.
+
+What is this?
+-------------
+
+In this program you will find lists of famous computer scientists, computers and computer types.
+You should be able to get more information on all of them. Also edit, add and remove anyone or anything in these lists.
+
+
+How to use the program
+----------------------
+
+On top of the program you will find 5 toolbars, Add Data, Edit Data, Remove Data, Detail and Help.
+If we first take a look at the Lists of the scientists, computers and computer types which is the first thing you see when opening the program.
+In all these tabs you can double click the person, computer or computertype to take a closer look and see more informations about them.
+At the right side of the screen are 3 buttons New, Edit and delete.
+
+First take a look at the add Data toolbar/ New button. 
+Scientists: 	When adding a scientist be sure to use only letters and no digits in the name.
+	   	You can choose the gender, year of birth, year of death (or check the Still Alive box)
+	   	Description and link is optional.
+Computers: 	You can use both digits and letters in the name.
+	   	Enter the year of creation, select the computer type and check the box if it was ever built.
+	   	Description is optional.
+Computer type: 	You can use both digits and letters in the name.
+		Descriotion is optional.
+
+Edit Data toolbar/ edit button
+Scientists: 	Click on the scientist you want to edit, push the edit button, or the edit data toolbar.
+Computers: 	Click on the computer you want to edit, push the edit button or the edit data toolbar.
+Computer type: 	Click on the computer type you want to edit, push the edit button or the edit data toolbar.
+
+Same goes for remove data toolbar/ delete button. 
+See above.
+
+Relation tab
+There you can pair a scientist with the computer/s he was involved with designing or building.
+In this tab we have 2 buttons New and Delete. If New button is pushed you should get a new window
+with two lists, scientists and computers. There you can pair them by clicking on each one and then pressing ok.
+
+
+Filtering list (in the right lower corner)
+Scientists:	Can be sorted by Name/ part of a name, Gender, Year of birth and Year of death..
+Computers: 	Can be sorted by Name/ part of a name, type or Year built.
+Computer type: 	Can be sorted by Name/ part of a name and Description.
+Relations: 	Can be sorted by scientists and computers.
+
+
+Help toolbar.
+About Computers and Scientists Database: There you should find pictures and informations about the members of group 51.
+
+Credits
+-------
+Barði Freyr Þorsteinsson
+Jón Örn Brynjarsson
+Ísak Snær Sigmarsson
+Anna Dís Arnarsdóttir
