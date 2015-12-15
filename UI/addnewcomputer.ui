@@ -161,9 +161,11 @@
  </widget>
  <tabstops>
   <tabstop>lineEdit_insertName</tabstop>
+  <tabstop>dateEdit_yoc</tabstop>
   <tabstop>comboBox_type</tabstop>
   <tabstop>checkBox_built</tabstop>
   <tabstop>textEdit_insertDescription</tabstop>
+  <tabstop>textBrowser_relations</tabstop>
  </tabstops>
  <resources/>
  <connections/>

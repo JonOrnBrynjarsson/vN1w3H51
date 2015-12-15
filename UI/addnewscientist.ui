@@ -266,8 +266,12 @@
  <tabstops>
   <tabstop>lineEdit_name</tabstop>
   <tabstop>comboBox_gender</tabstop>
+  <tabstop>dateEdit_yob</tabstop>
+  <tabstop>dateEdit_yod</tabstop>
+  <tabstop>checkBox_stillAlive</tabstop>
   <tabstop>lineEdit_currentAge</tabstop>
   <tabstop>lineEdit_AgeAtDeath</tabstop>
+  <tabstop>textEdit_descr</tabstop>
   <tabstop>lineEdit_link</tabstop>
   <tabstop>textBrowser_relations</tabstop>
  </tabstops>
