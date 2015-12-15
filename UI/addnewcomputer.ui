@@ -14,6 +14,13 @@
    <string>Add new Computer to Database</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="label_enterYear">
+     <property name="text">
+      <string>Enter Year of Creation:</string>
+     </property>
+    </widget>
+   </item>
    <item row="6" column="2">
     <widget class="QCheckBox" name="checkBox_built">
      <property name="accessibleName">
@@ -28,23 +35,6 @@
     <widget class="QLabel" name="label_enterName">
      <property name="text">
       <string>Enter Name:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="18" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox_addNewComputerFinished">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="label_enterYear">
-     <property name="text">
-      <string>Enter Year of Creation:</string>
      </property>
     </widget>
    </item>
@@ -68,20 +58,6 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QLabel" name="label_chooseType">
-     <property name="text">
-      <string>Select Computer Type:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="19" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox_editComputerFinished">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_computerID">
      <property name="text">
@@ -89,10 +65,10 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0">
-    <widget class="QLabel" name="label_enterDescription">
+   <item row="5" column="0" colspan="2">
+    <widget class="QLabel" name="label_chooseType">
      <property name="text">
-      <string>Description:</string>
+      <string>Select Computer Type:</string>
      </property>
     </widget>
    </item>
@@ -106,6 +82,13 @@
      </property>
     </widget>
    </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_enterDescription">
+     <property name="text">
+      <string>Description:</string>
+     </property>
+    </widget>
+   </item>
    <item row="5" column="2" colspan="2">
     <widget class="QComboBox" name="comboBox_type">
      <property name="statusTip">
@@ -116,22 +99,15 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="0" colspan="4">
-    <widget class="QTextBrowser" name="textBrowser_relations"/>
-   </item>
-   <item row="10" column="0">
-    <widget class="QLabel" name="label_relations">
-     <property name="text">
-      <string>Associated Scientists:</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="1" colspan="3">
     <widget class="QLabel" name="errorInName">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;errorinname&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
+   </item>
+   <item row="11" column="0" colspan="4">
+    <widget class="QTextBrowser" name="textBrowser_relations"/>
    </item>
    <item row="3" column="2" colspan="2">
     <widget class="QDateEdit" name="dateEdit_yoc">
@@ -160,6 +136,27 @@
      </property>
     </widget>
    </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_relations">
+     <property name="text">
+      <string>Associated Scientists:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="3">
+    <widget class="QDialogButtonBox" name="newOkCancel_Edit">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1" colspan="3">
+    <widget class="QDialogButtonBox" name="newOkCancel_New">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
@@ -169,38 +166,5 @@
   <tabstop>textEdit_insertDescription</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox_addNewComputerFinished</sender>
-   <signal>accepted()</signal>
-   <receiver>addnewcomputer</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox_addNewComputerFinished</sender>
-   <signal>rejected()</signal>
-   <receiver>addnewcomputer</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

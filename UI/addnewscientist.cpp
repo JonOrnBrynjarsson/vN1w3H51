@@ -14,7 +14,8 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui(new Ui::addNewScientist)
 {
     ui->setupUi(this);
-    ui->buttonBox_editScientist->setHidden(true);
+    //ui->buttonBox_editScientist->setHidden(true);
+    ui->newOkCancel_Edit->setHidden(true);
     ui->labelSciid->setHidden(true);
     ui->labelCurrentAge->setHidden(true);
     ui->lineEdit_currentAge->setHidden(true);
@@ -27,7 +28,7 @@ addNewScientist::addNewScientist(QWidget *parent) :
     ui->errorInName->setHidden(true);
     //ui->errorInYob->setHidden(true);
     ui->errorInYod->setHidden(true);
-    //ui->checkBox->setHidden(true);
+    //ui->checkBox_stillAlive->setHidden(true);
     //ui->lineEdit_yob->setHidden(true);
     //ui->lineEdit_yod->setHidden(true);
 }
@@ -40,40 +41,40 @@ addNewScientist::~addNewScientist()
 void addNewScientist::on_buttonBox_accepted()
 {
 
-    bool goodInput = false;
+//    bool goodInput = false;
 
-    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
-    {
-        goodInput = true;
-    }
+//    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
+//    {
+//        goodInput = true;
+//    }
 
-    scientist sc;
-    sc.setName(ui->lineEdit_name->text().toStdString());
-    sc.setDescription(ui->textEdit_descr->toPlainText().toStdString());
-    sc.setLink(ui->lineEdit_link->text().toStdString());
-    //sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
-    //sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
-    sc.setYearOfBirth(ui->dateEdit_yob->date().year());
+//    scientist sc;
+//    sc.setName(ui->lineEdit_name->text().toStdString());
+//    sc.setDescription(ui->textEdit_descr->toPlainText().toStdString());
+//    sc.setLink(ui->lineEdit_link->text().toStdString());
+//    //sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
+//    //sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
+//    sc.setYearOfBirth(ui->dateEdit_yob->date().year());
 
-    if (ui->checkBox->checkState() == 0)
-    {
-        sc.setYearOfDeath(ui->dateEdit_yod->date().year());
-    }
+//    if (ui->checkBox_stillAlive->checkState() == 0)
+//    {
+//        sc.setYearOfDeath(ui->dateEdit_yod->date().year());
+//    }
 
-    sc.setGender(ui->comboBox_gender->currentIndex());
+//    sc.setGender(ui->comboBox_gender->currentIndex());
 
-    if (goodInput)
-    {
-        serviceobject.servAddscientist(sc);
-        serviceobject.servReadSqlScientists();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Name or year correctly entered!");
-    }
+//    if (goodInput)
+//    {
+//        serviceobject.servAddscientist(sc);
+//        serviceobject.servReadSqlScientists();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Name or year incorrectly entered!");
+//    }
 
-    qDebug () << "ég er hér!!!";
-    //addNewScientist::close();
+//    qDebug () << "ég er hér!!!";
+//    //addNewScientist::close();
 }
 
 void addNewScientist::addScientistToDatabase(scientist &sc)
@@ -154,21 +155,24 @@ void addNewScientist::neweditscientist(QString id, bool edit)
     ui->textEdit_descr->setText(descr);
     ui->labelSciid->setText(sciid);
     this->setWindowTitle("Edit Computer Scientist in the Database");
-    ui->buttonBox->setHidden(true);
-    ui->buttonBox_editScientist->setHidden(false);
+    //ui->buttonBox->setHidden(true);
+    ui->newOkCancel_New->setHidden(true);
+    //ui->buttonBox_editScientist->setHidden(false);
+    ui->newOkCancel_Edit->setHidden(false);
 
     bool dead = true;
     if (yod.toInt() == 0)
     {
         dead = false;
-        ui->checkBox->setChecked(true);
+        ui->checkBox_stillAlive->setChecked(true);
     }
 
     if (edit == false)
     {
-        ui->checkBox->setHidden(true);
+        ui->checkBox_stillAlive->setHidden(true);
         this->setWindowTitle("More information about the Scientist");
-        ui->buttonBox_editScientist->setHidden(true);
+        //ui->buttonBox_editScientist->setHidden(true);
+        ui->newOkCancel_Edit->setHidden(true);
 
         ui->labelEntName->setText("Name: ");
         ui->lineEdit_name->setReadOnly(true);
@@ -295,55 +299,55 @@ void addNewScientist::neweditscientistClickableLink(QString link)
     ui->labelClickableUrlReal->setOpenExternalLinks(true);
 }
 
-void addNewScientist::on_buttonBox_editScientist_accepted()
-{
-    qDebug () << "button edit pressed ";
+//void addNewScientist::on_buttonBox_editScientist_accepted()
+//{
+//    qDebug () << "button edit pressed ";
 
 
-    string name = ui->lineEdit_name->text().toStdString();
-    //int yob = ui->lineEdit_yob->text().toInt();
-    //int yod = ui->lineEdit_yod->text().toInt();
+//    string name = ui->lineEdit_name->text().toStdString();
+//    //int yob = ui->lineEdit_yob->text().toInt();
+//    //int yod = ui->lineEdit_yod->text().toInt();
 
-    int yob = ui->dateEdit_yob->date().year();
-    int yod = 0;
+//    int yob = ui->dateEdit_yob->date().year();
+//    int yod = 0;
 
-    if (ui->checkBox->checkState() == 0)
-    {
-        yod = ui->dateEdit_yod->date().year();
-    }
+//    if (ui->checkBox_stillAlive->checkState() == 0)
+//    {
+//        yod = ui->dateEdit_yod->date().year();
+//    }
 
-    string link = ui->lineEdit_link->text().toStdString();
-    int gender = ui->comboBox_gender->currentIndex();
-    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
-    int sciid = ui->labelSciid->text().toInt();
+//    string link = ui->lineEdit_link->text().toStdString();
+//    int gender = ui->comboBox_gender->currentIndex();
+//    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
+//    int sciid = ui->labelSciid->text().toInt();
 
-    bool goodInput = false;
+//    bool goodInput = false;
 
-    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
-    {
-        goodInput = true;
-    }
+//    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
+//    {
+//        goodInput = true;
+//    }
 
-    if(goodInput)
-    {
-        scientist sc(sciid, name, gender, yob, yod, descr, link);
-        serviceobject.servUpdateSqlScientist(sc);
-        serviceobject.servReadSqlScientists();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Name or year not correctly entered!");
-    }
+//    if(goodInput)
+//    {
+//        scientist sc(sciid, name, gender, yob, yod, descr, link);
+//        serviceobject.servUpdateSqlScientist(sc);
+//        serviceobject.servReadSqlScientists();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Name or year not correctly entered!");
+//    }
 
-    addNewScientist::close();
+//    addNewScientist::close();
 
-}
+//}
 
-void addNewScientist::on_buttonBox_editScientist_rejected()
-{
-    ui->errorInName->setHidden(true);
-    addNewScientist::close();
-}
+//void addNewScientist::on_buttonBox_editScientist_rejected()
+//{
+////    ui->errorInName->setHidden(true);
+////    addNewScientist::close();
+//}
 bool addNewScientist::on_lineEdit_name_editingFinished()
 {
     bool badname = false;
@@ -433,24 +437,12 @@ bool addNewScientist::on_lineEdit_name_editingFinished()
 //    return badyod;
 //}
 
-void addNewScientist::on_checkBox_toggled(bool checked)
-{
-    if (checked)
-    {
-        ui->dateEdit_yod->setDisabled(true);
-        ui->errorInYod->setHidden(true);
-    }
-    else
-    {
-        ui->dateEdit_yod->setDisabled(false);
-    }
-}
 
 bool addNewScientist::on_dateEdit_yod_editingFinished()
 {
     bool badYod;
 
-    if (ui->checkBox->checkState() == 0) // dauður!
+    if (ui->checkBox_stillAlive->checkState() == 0) // dauður!
     {
         if (ui->dateEdit_yob->date().year() >= ui->dateEdit_yod->date().year())
         {
@@ -473,4 +465,109 @@ bool addNewScientist::on_dateEdit_yod_editingFinished()
 
     qDebug () << "badyod is :" <<badYod;
     return badYod;
+}
+
+void addNewScientist::on_newOkCancel_New_accepted()
+{
+
+    bool goodInput = false;
+
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
+    {
+        goodInput = true;
+    }
+
+    scientist sc;
+    sc.setName(ui->lineEdit_name->text().toStdString());
+    sc.setDescription(ui->textEdit_descr->toPlainText().toStdString());
+    sc.setLink(ui->lineEdit_link->text().toStdString());
+    //sc.setYearOfBirth(ui->lineEdit_yob->text().toInt());
+    //sc.setYearOfDeath(ui->lineEdit_yod->text().toInt());
+    sc.setYearOfBirth(ui->dateEdit_yob->date().year());
+
+    if (ui->checkBox_stillAlive->checkState() == 0)
+    {
+        sc.setYearOfDeath(ui->dateEdit_yod->date().year());
+    }
+
+    sc.setGender(ui->comboBox_gender->currentIndex());
+
+    if (goodInput)
+    {
+        serviceobject.servAddscientist(sc);
+        serviceobject.servReadSqlScientists();
+        qDebug () << "added to database!";
+        addNewScientist::close();
+
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Name or year incorrectly entered!");
+    }
+
+}
+
+void addNewScientist::on_newOkCancel_New_rejected()
+{
+    addNewScientist::close();
+
+}
+
+void addNewScientist::on_newOkCancel_Edit_accepted()
+{
+    qDebug () << "button edit pressed ";
+
+    string name = ui->lineEdit_name->text().toStdString();
+    //int yob = ui->lineEdit_yob->text().toInt();
+    //int yod = ui->lineEdit_yod->text().toInt();
+
+    int yob = ui->dateEdit_yob->date().year();
+    int yod = 0;
+
+    if (ui->checkBox_stillAlive->checkState() == 0)
+    {
+        yod = ui->dateEdit_yod->date().year();
+    }
+
+    string link = ui->lineEdit_link->text().toStdString();
+    int gender = ui->comboBox_gender->currentIndex();
+    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
+    int sciid = ui->labelSciid->text().toInt();
+
+    bool goodInput = false;
+
+    if ((on_lineEdit_name_editingFinished() == false)&&(on_dateEdit_yod_editingFinished() == false))
+    {
+        goodInput = true;
+    }
+
+    if(goodInput)
+    {
+        scientist sc(sciid, name, gender, yob, yod, descr, link);
+        serviceobject.servUpdateSqlScientist(sc);
+        serviceobject.servReadSqlScientists();
+        addNewScientist::close();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Name or year not incorrectly entered!");
+    }
+}
+
+void addNewScientist::on_newOkCancel_Edit_rejected()
+{
+    addNewScientist::close();
+}
+
+void addNewScientist::on_checkBox_stillAlive_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->dateEdit_yod->setDisabled(true);
+        ui->errorInYod->setHidden(true);
+    }
+    else
+    {
+        ui->dateEdit_yod->setDisabled(false);
+    }
 }

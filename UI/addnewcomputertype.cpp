@@ -11,7 +11,8 @@
 addnewcomputertype::addnewcomputertype(QWidget *parent) :QDialog(parent),ui(new Ui::addnewcomputertype)
 {
     ui->setupUi(this);
-    ui->buttonBox_Editcomtype->setHidden(true);
+    //ui->buttonBox_Editcomtype->setHidden(true);
+    ui->newOkCancel_Edit->setHidden(true);
     ui->labelComTypeID->setHidden(true);
     ui->errorInName->setHidden(true);
 }
@@ -39,13 +40,16 @@ void addnewcomputertype::neweditcomputertype(QString id, bool edit)
     ui->labelComTypeID->setText(comtypeid);
 
     this->setWindowTitle("Edit Computer Type in the Database");
-    ui->buttonBox->setHidden(true);
-    ui->buttonBox_Editcomtype->setHidden(false);
+    //ui->buttonBox->setHidden(true);
+    ui->newOkCancel_New->setHidden(true);
+    //ui->buttonBox_Editcomtype->setHidden(false);
+    ui->newOkCancel_Edit->setHidden(false);
 
     if (edit == false)
     {
         this->setWindowTitle("More information about the Computer Type");
-        ui->buttonBox_Editcomtype->setHidden(true);
+        //ui->buttonBox_Editcomtype->setHidden(true);
+        ui->newOkCancel_Edit->setHidden(true);
 
         ui->labelEntName->setText("Name: ");
         ui->lineEdit_name->setReadOnly(true);
@@ -63,22 +67,20 @@ addnewcomputertype::~addnewcomputertype()
     delete ui;
 }
 
-void addnewcomputertype::on_buttonBox_accepted()
-{
-    if(on_lineEdit_name_editingFinished() == false)
-    {
-        ct.setName(ui->lineEdit_name->text().toStdString());
-        ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
-        serviceObject.servAddcomputerType(ct);
-        serviceObject.servReadSqlCompTypes();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
-    }
-
-
-}
+//void addnewcomputertype::on_buttonBox_accepted()
+//{
+//    if(on_lineEdit_name_editingFinished() == false)
+//    {
+//        ct.setName(ui->lineEdit_name->text().toStdString());
+//        ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
+//        serviceObject.servAddcomputerType(ct);
+//        serviceObject.servReadSqlCompTypes();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
+//    }
+//}
 
 void addnewcomputertype::addCompTypetoDB(computertype &ct)
 {
@@ -114,28 +116,28 @@ void addnewcomputertype::addCompTypeErrCorr(computertype &ct)
 void addnewcomputertype::on_buttonBox_Editcomtype_accepted()
 {
 
-    string name = ui->lineEdit_name->text().toStdString();
-    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
-    int id = ui->labelComTypeID->text().toInt();
+//    string name = ui->lineEdit_name->text().toStdString();
+//    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
+//    int id = ui->labelComTypeID->text().toInt();
 
-    QString debugname = QString::fromStdString(name);
-    QString debugdescr = QString::fromStdString(descr);
-    QString debugid = QString::number(id);
+//    QString debugname = QString::fromStdString(name);
+//    QString debugdescr = QString::fromStdString(descr);
+//    QString debugid = QString::number(id);
 
-    if(on_lineEdit_name_editingFinished() == false)
-    {
-        //computer c(name, year, type, built, descr);
-        //qDebug () << "debugname is " << debugname << "debugdescr is " << debugdescr << "debugid is "  << debugid;
-        computertype ct(id, name, descr);
-        serviceObject.servUpdateSqlComputerType(ct);
-        serviceObject.servReadSqlCompTypes();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
-    }
+//    if(on_lineEdit_name_editingFinished() == false)
+//    {
+//        //computer c(name, year, type, built, descr);
+//        //qDebug () << "debugname is " << debugname << "debugdescr is " << debugdescr << "debugid is "  << debugid;
+//        computertype ct(id, name, descr);
+//        serviceObject.servUpdateSqlComputerType(ct);
+//        serviceObject.servReadSqlCompTypes();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Input not properly formatted. Try again!");
+//    }
 
-    addnewcomputertype::close();
+//    addnewcomputertype::close();
 }
 
 bool addnewcomputertype::on_lineEdit_name_editingFinished()
@@ -157,6 +159,57 @@ bool addnewcomputertype::on_lineEdit_name_editingFinished()
 }
 
 void addnewcomputertype::on_buttonBox_Editcomtype_rejected()
+{
+    addnewcomputertype::close();
+}
+
+void addnewcomputertype::on_newOkCancel_New_accepted()
+{
+    if(on_lineEdit_name_editingFinished() == false)
+    {
+        ct.setName(ui->lineEdit_name->text().toStdString());
+        ct.setDesc(ui->textEdit_descr->toPlainText().toStdString());
+        serviceObject.servAddcomputerType(ct);
+        serviceObject.servReadSqlCompTypes();
+        addnewcomputertype::close();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+    }
+}
+
+void addnewcomputertype::on_newOkCancel_New_rejected()
+{
+    addnewcomputertype::close();
+}
+
+void addnewcomputertype::on_newOkCancel_Edit_accepted()
+{
+    string name = ui->lineEdit_name->text().toStdString();
+    string descr = ui->textEdit_descr->document()->toPlainText().toStdString();
+    int id = ui->labelComTypeID->text().toInt();
+
+    QString debugname = QString::fromStdString(name);
+    QString debugdescr = QString::fromStdString(descr);
+    QString debugid = QString::number(id);
+
+    if(on_lineEdit_name_editingFinished() == false)
+    {
+        //computer c(name, year, type, built, descr);
+        //qDebug () << "debugname is " << debugname << "debugdescr is " << debugdescr << "debugid is "  << debugid;
+        computertype ct(id, name, descr);
+        serviceObject.servUpdateSqlComputerType(ct);
+        serviceObject.servReadSqlCompTypes();
+        addnewcomputertype::close();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+    }
+}
+
+void addnewcomputertype::on_newOkCancel_Edit_rejected()
 {
     addnewcomputertype::close();
 }

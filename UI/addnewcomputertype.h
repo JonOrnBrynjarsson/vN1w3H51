@@ -28,13 +28,21 @@ public:
     ~addnewcomputertype();
 
 private slots:
-    void on_buttonBox_accepted();
+    //void on_buttonBox_accepted();
     void on_buttonBox_Editcomtype_accepted();
 
 
     bool on_lineEdit_name_editingFinished();
 
     void on_buttonBox_Editcomtype_rejected();
+
+    void on_newOkCancel_New_accepted();
+
+    void on_newOkCancel_New_rejected();
+
+    void on_newOkCancel_Edit_accepted();
+
+    void on_newOkCancel_Edit_rejected();
 
 private:
     Ui::addnewcomputertype *ui;

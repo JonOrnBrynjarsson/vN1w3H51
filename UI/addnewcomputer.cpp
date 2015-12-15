@@ -11,7 +11,8 @@ addnewcomputer::addnewcomputer(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    ui->buttonBox_editComputerFinished->setHidden(true);
+    //ui->buttonBox_editComputerFinished->setHidden(true);
+    ui->newOkCancel_Edit->setHidden(true);
     ui->label_computerID->setHidden(true);
     ui->label_relations->setHidden(true);
     ui->textBrowser_relations->setHidden(true);
@@ -75,14 +76,17 @@ void addnewcomputer::neweditcomputer(QString id, bool edit)
     //qDebug () << "neweditcomputer, crash 5";
 
     this->setWindowTitle("Edit Computer in the Database");
-    ui->buttonBox_editComputerFinished->setHidden(false);
-    ui->buttonBox_addNewComputerFinished->setHidden(true);
+    //ui->buttonBox_editComputerFinished->setHidden(false);
+    ui->newOkCancel_Edit->setHidden(false);
+    //ui->buttonBox_addNewComputerFinished->setHidden(true);
+    ui->newOkCancel_New->setHidden(true);
     //qDebug () << "neweditcomputer, crash 6";
 
     if (edit == false)
     {
         this->setWindowTitle("More information about the Computer");
-        ui->buttonBox_editComputerFinished->setHidden(true);
+        //ui->buttonBox_editComputerFinished->setHidden(true);
+        ui->newOkCancel_Edit->setHidden(true);
 
         ui->label_enterName->setText("Name: ");
         ui->lineEdit_insertName->setReadOnly(true);
@@ -146,32 +150,31 @@ addnewcomputer::~addnewcomputer()
 
 void addnewcomputer::on_buttonBox_addNewComputerFinished_accepted()
 {
+//    bool goodInput = false;
 
-    bool goodInput = false;
+//    if (on_lineEdit_insertName_editingFinished() == false)
+//    {
+//        goodInput = true;
+//    }
 
-    if (on_lineEdit_insertName_editingFinished() == false)
-    {
-        goodInput = true;
-    }
+//    string name = ui->lineEdit_insertName->text().toStdString();
+//    //int year = ui->lineEdit_enterYear->text().toInt();
+//    int year = ui->dateEdit_yoc->date().year();
+//    int type = ui->comboBox_type->currentIndex();
+//    type = serviceObject.servGetCompTypeVector().at(type).getid();
+//    bool built = ui->checkBox_built->checkState();
+//    string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
 
-    string name = ui->lineEdit_insertName->text().toStdString();
-    //int year = ui->lineEdit_enterYear->text().toInt();
-    int year = ui->dateEdit_yoc->date().year();
-    int type = ui->comboBox_type->currentIndex();
-    type = serviceObject.servGetCompTypeVector().at(type).getid();
-    bool built = ui->checkBox_built->checkState();
-    string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
-
-    if(goodInput)
-    {
-        computer c(name, year, type, built, descr);
-        serviceObject.servAddcomputer(c);
-        serviceObject.servReadSqlComputers();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
-    }
+//    if(goodInput)
+//    {
+//        computer c(name, year, type, built, descr);
+//        serviceObject.servAddcomputer(c);
+//        serviceObject.servReadSqlComputers();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+//    }
 }
 
 
@@ -194,42 +197,42 @@ void addnewcomputer::on_dateEdit_year_userDateChanged()//const QDate &date)
 
 void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 {
-    string name = ui->lineEdit_insertName->text().toStdString();
-    //int year = ui->lineEdit_enterYear->text().toInt();
-    int year = ui->dateEdit_yoc->date().year();
-    int type = ui->comboBox_type->currentIndex();
-    type = serviceObject.servGetCompTypeVector().at(type).getid();
-    bool built = ui->checkBox_built->checkState();
-    string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
-    int id = ui->label_computerID->text().toInt();
+//    string name = ui->lineEdit_insertName->text().toStdString();
+//    //int year = ui->lineEdit_enterYear->text().toInt();
+//    int year = ui->dateEdit_yoc->date().year();
+//    int type = ui->comboBox_type->currentIndex();
+//    type = serviceObject.servGetCompTypeVector().at(type).getid();
+//    bool built = ui->checkBox_built->checkState();
+//    string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
+//    int id = ui->label_computerID->text().toInt();
 
-    bool goodInput = false;
+//    bool goodInput = false;
 
-    if (on_lineEdit_insertName_editingFinished() == false)
-    {
-        goodInput = true;
-    }
+//    if (on_lineEdit_insertName_editingFinished() == false)
+//    {
+//        goodInput = true;
+//    }
 
 
-    if(goodInput)
-    {
-        computer c(name, year, type, built, descr);
-        c.setComID(id);
-        serviceObject.servUpdateSqlComputer(c);
-        serviceObject.servReadSqlComputers();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
-    }
+//    if(goodInput)
+//    {
+//        computer c(name, year, type, built, descr);
+//        c.setComID(id);
+//        serviceObject.servUpdateSqlComputer(c);
+//        serviceObject.servReadSqlComputers();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+//    }
 
-    addnewcomputer::close();
+//    addnewcomputer::close();
 }
 
 void addnewcomputer::on_buttonBox_editComputerFinished_rejected()
 {
     //qDebug () << "close button press ";
-    addnewcomputer::close();
+    //addnewcomputer::close();
 }
 
 //bool addnewcomputer::on_lineEdit_enterYear_editingFinished()
@@ -269,4 +272,77 @@ bool addnewcomputer::on_lineEdit_insertName_editingFinished()
         badName = false;
     }
     return badName;
+}
+
+void addnewcomputer::on_newOkCancel_New_accepted()
+{
+    bool goodInput = false;
+
+    if (on_lineEdit_insertName_editingFinished() == false)
+    {
+        goodInput = true;
+    }
+
+    string name = ui->lineEdit_insertName->text().toStdString();
+    //int year = ui->lineEdit_enterYear->text().toInt();
+    int year = ui->dateEdit_yoc->date().year();
+    int type = ui->comboBox_type->currentIndex();
+    type = serviceObject.servGetCompTypeVector().at(type).getid();
+    bool built = ui->checkBox_built->checkState();
+    string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
+
+    if(goodInput)
+    {
+        computer c(name, year, type, built, descr);
+        serviceObject.servAddcomputer(c);
+        serviceObject.servReadSqlComputers();
+        addnewcomputer::close();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+    }
+}
+
+void addnewcomputer::on_newOkCancel_New_rejected()
+{
+    addnewcomputer::close();
+}
+
+void addnewcomputer::on_newOkCancel_Edit_accepted()
+{
+    string name = ui->lineEdit_insertName->text().toStdString();
+    //int year = ui->lineEdit_enterYear->text().toInt();
+    int year = ui->dateEdit_yoc->date().year();
+    int type = ui->comboBox_type->currentIndex();
+    type = serviceObject.servGetCompTypeVector().at(type).getid();
+    bool built = ui->checkBox_built->checkState();
+    string descr = ui->textEdit_insertDescription->document()->toPlainText().toStdString();
+    int id = ui->label_computerID->text().toInt();
+
+    bool goodInput = false;
+
+    if (on_lineEdit_insertName_editingFinished() == false)
+    {
+        goodInput = true;
+    }
+
+
+    if(goodInput)
+    {
+        computer c(name, year, type, built, descr);
+        c.setComID(id);
+        serviceObject.servUpdateSqlComputer(c);
+        serviceObject.servReadSqlComputers();
+        addnewcomputer::close();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Name is too short. Try again!");
+    }
+}
+
+void addnewcomputer::on_newOkCancel_Edit_rejected()
+{
+    addnewcomputer::close();
 }

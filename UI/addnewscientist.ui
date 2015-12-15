@@ -7,13 +7,49 @@
     <x>0</x>
     <y>0</y>
     <width>442</width>
-    <height>463</height>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Add new Computer Scientist to Database</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="12" column="1" colspan="3">
+    <widget class="QTextEdit" name="textEdit_descr">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>71</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>SSSS</string>
+     </property>
+     <property name="whatsThis">
+      <string>This is a text input, you can use it to enter the description of the computer scientist.</string>
+     </property>
+     <property name="placeholderText">
+      <string>Enter a detailed description of the life and career the scientist.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="1" colspan="3">
+    <widget class="QLabel" name="labelClickableUrlReal">
+     <property name="text">
+      <string>Website</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="labelEntBirth">
+     <property name="text">
+      <string>Year of Birth:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1" colspan="3">
+    <widget class="QLineEdit" name="lineEdit_currentAge"/>
+   </item>
    <item row="3" column="1" colspan="3">
     <widget class="QComboBox" name="comboBox_gender">
      <property name="toolTip">
@@ -39,9 +75,6 @@
      </item>
     </widget>
    </item>
-   <item row="9" column="1" colspan="3">
-    <widget class="QLineEdit" name="lineEdit_currentAge"/>
-   </item>
    <item row="1" column="1" colspan="3">
     <widget class="QLineEdit" name="lineEdit_name">
      <property name="toolTip">
@@ -64,11 +97,8 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="1" colspan="3">
-    <widget class="QLineEdit" name="lineEdit_AgeAtDeath"/>
-   </item>
    <item row="6" column="3">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="checkBox_stillAlive">
      <property name="text">
       <string>Still Alive</string>
      </property>
@@ -94,29 +124,8 @@
      </property>
     </widget>
    </item>
-   <item row="19" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="17" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox_editScientist">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1" colspan="2">
-    <widget class="QLabel" name="errorInYod">
-     <property name="text">
-      <string>errorinyod</string>
-     </property>
-    </widget>
+   <item row="11" column="1" colspan="3">
+    <widget class="QLineEdit" name="lineEdit_AgeAtDeath"/>
    </item>
    <item row="14" column="1" colspan="3">
     <widget class="QLineEdit" name="lineEdit_link">
@@ -131,15 +140,15 @@
      </property>
     </widget>
    </item>
-   <item row="16" column="1" colspan="3">
-    <widget class="QTextBrowser" name="textBrowser_relations"/>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="labelSciid">
+   <item row="7" column="1" colspan="2">
+    <widget class="QLabel" name="errorInYod">
      <property name="text">
-      <string>SciID</string>
+      <string>errorinyod</string>
      </property>
     </widget>
+   </item>
+   <item row="16" column="1" colspan="3">
+    <widget class="QTextBrowser" name="textBrowser_relations"/>
    </item>
    <item row="11" column="0">
     <widget class="QLabel" name="labelAgeAtDeath">
@@ -155,13 +164,6 @@
      </property>
     </widget>
    </item>
-   <item row="12" column="0">
-    <widget class="QLabel" name="labelEntDescr">
-     <property name="text">
-      <string>Description:</string>
-     </property>
-    </widget>
-   </item>
    <item row="16" column="0">
     <widget class="QLabel" name="labelRelations">
      <property name="text">
@@ -169,10 +171,10 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="labelEntBirth">
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelSciid">
      <property name="text">
-      <string>Year of Birth:</string>
+      <string>SciID</string>
      </property>
     </widget>
    </item>
@@ -231,29 +233,10 @@
      </property>
     </widget>
    </item>
-   <item row="15" column="1" colspan="3">
-    <widget class="QLabel" name="labelClickableUrlReal">
+   <item row="12" column="0">
+    <widget class="QLabel" name="labelEntDescr">
      <property name="text">
-      <string>Website</string>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="1" colspan="3">
-    <widget class="QTextEdit" name="textEdit_descr">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>71</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>SSSS</string>
-     </property>
-     <property name="whatsThis">
-      <string>This is a text input, you can use it to enter the description of the computer scientist.</string>
-     </property>
-     <property name="placeholderText">
-      <string>Enter a detailed description of the life and career the scientist.</string>
+      <string>Description:</string>
      </property>
     </widget>
    </item>
@@ -261,6 +244,20 @@
     <widget class="QLabel" name="labelClickableLink">
      <property name="text">
       <string>Website Link:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="1" colspan="3">
+    <widget class="QDialogButtonBox" name="newOkCancel_New">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1" colspan="3">
+    <widget class="QDialogButtonBox" name="newOkCancel_Edit">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -275,38 +272,5 @@
   <tabstop>textBrowser_relations</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>addNewScientist</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>addNewScientist</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -33,6 +33,14 @@ private slots:
 
     bool on_lineEdit_insertName_editingFinished();
 
+    void on_newOkCancel_New_accepted();
+
+    void on_newOkCancel_New_rejected();
+
+    void on_newOkCancel_Edit_accepted();
+
+    void on_newOkCancel_Edit_rejected();
+
 private:
     Ui::addnewcomputer *ui;
     service serviceObject;

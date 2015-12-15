@@ -30,9 +30,9 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
-    void on_buttonBox_editScientist_accepted();
+    //void on_buttonBox_editScientist_accepted();
 
-    void on_buttonBox_editScientist_rejected();
+    //void on_buttonBox_editScientist_rejected();
 
     bool on_lineEdit_name_editingFinished();
 
@@ -40,9 +40,18 @@ private slots:
 
     //bool on_lineEdit_yod_editingFinished();
 
-    void on_checkBox_toggled(bool checked);
 
     bool on_dateEdit_yod_editingFinished();
+
+    void on_newOkCancel_New_accepted();
+
+    void on_newOkCancel_New_rejected();
+
+    void on_newOkCancel_Edit_accepted();
+
+    void on_newOkCancel_Edit_rejected();
+
+    void on_checkBox_stillAlive_toggled(bool checked);
 
 private:
     Ui::addNewScientist *ui;
