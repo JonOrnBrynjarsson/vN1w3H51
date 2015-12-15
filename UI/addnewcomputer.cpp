@@ -1,7 +1,6 @@
 #include "addnewcomputer.h"
 #include "ui_addnewcomputer.h"
-#include <QDebug>
-#include "mainwindow.h"
+
 
 //FORCE UPDATE!
 
@@ -195,8 +194,8 @@ void addnewcomputer::on_dateEdit_year_userDateChanged()//const QDate &date)
     }
 }
 
-void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
-{
+//void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
+//{
 //    string name = ui->lineEdit_insertName->text().toStdString();
 //    //int year = ui->lineEdit_enterYear->text().toInt();
 //    int year = ui->dateEdit_yoc->date().year();
@@ -227,13 +226,13 @@ void addnewcomputer::on_buttonBox_editComputerFinished_accepted()
 //    }
 
 //    addnewcomputer::close();
-}
+//}
 
-void addnewcomputer::on_buttonBox_editComputerFinished_rejected()
-{
+//void addnewcomputer::on_buttonBox_editComputerFinished_rejected()
+//{
     //qDebug () << "close button press ";
     //addnewcomputer::close();
-}
+//}
 
 //bool addnewcomputer::on_lineEdit_enterYear_editingFinished()
 //{

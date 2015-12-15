@@ -28,8 +28,6 @@ SOURCES += main.cpp\
     UI/addnewcomputertype.cpp \
 	UI/addrelations.cpp\
 	Console_UI/infodisplay.cpp \
-    UI/editcomputer.cpp \
-    UI/editcomptype.cpp \
     UI/aboutcreators.cpp
 
 HEADERS  +=	DataLayer/workingclass.h \
@@ -43,8 +41,6 @@ HEADERS  +=	DataLayer/workingclass.h \
     UI/addnewcomputertype.h \
 	UI/addrelations.h \
 	Console_UI/infodisplay.h \
-    UI/editcomputer.h \
-    UI/editcomptype.h \
     UI/aboutcreators.h
 
 FORMS    += \
@@ -53,8 +49,6 @@ FORMS    += \
     UI/addnewcomputer.ui \
     UI/addnewcomputertype.ui \
     UI/addrelations.ui \
-    UI/editcomputer.ui \
-    UI/editcomptype.ui \
     UI/aboutcreators.ui
 
 DISTFILES +=

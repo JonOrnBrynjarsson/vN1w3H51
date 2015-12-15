@@ -20,37 +20,25 @@ public:
     explicit addNewScientist(QWidget *parent = 0);
     scientist s;
     service serviceobject;
-    int inputNumberToFunction(string input);
-    void addScientistToDatabase(scientist &sc);
+    //int inputNumberToFunction(string input);
+    //void addScientistToDatabase(scientist &sc);
     void neweditscientist(QString id, bool edit);
     void neweditscientistRelations(int currentID);
     void neweditscientistClickableLink(QString link);
     ~addNewScientist();
 
 private slots:
-    void on_buttonBox_accepted();
-
+    //void on_buttonBox_accepted();
     //void on_buttonBox_editScientist_accepted();
-
     //void on_buttonBox_editScientist_rejected();
-
     bool on_lineEdit_name_editingFinished();
-
     //bool on_lineEdit_yob_editingFinished();
-
     //bool on_lineEdit_yod_editingFinished();
-
-
     bool on_dateEdit_yod_editingFinished();
-
     void on_newOkCancel_New_accepted();
-
     void on_newOkCancel_New_rejected();
-
     void on_newOkCancel_Edit_accepted();
-
     void on_newOkCancel_Edit_rejected();
-
     void on_checkBox_stillAlive_toggled(bool checked);
 
 private:

@@ -38,8 +38,8 @@ addNewScientist::~addNewScientist()
     delete ui;
 }
 
-void addNewScientist::on_buttonBox_accepted()
-{
+//void addNewScientist::on_buttonBox_accepted()
+//{
 
 //    bool goodInput = false;
 
@@ -75,12 +75,12 @@ void addNewScientist::on_buttonBox_accepted()
 
 //    qDebug () << "ég er hér!!!";
 //    //addNewScientist::close();
-}
+//}
 
-void addNewScientist::addScientistToDatabase(scientist &sc)
-{
-    serviceobject.servAddscientist(sc);
-}
+//void addNewScientist::addScientistToDatabase(scientist &sc)
+//{
+//    serviceobject.servAddscientist(sc);
+//}
 
 //void addNewScientist::addScientistErrorCorrection(scientist &sc)
 //{
@@ -137,7 +137,7 @@ void addNewScientist::neweditscientist(QString id, bool edit)
             yob = QString::number(serviceobject.servGetSciVector().at(i).getYearOfBirth());
             yod = QString::number(serviceobject.servGetSciVector().at(i).getYearOfDeath());
             currentID = serviceobject.servGetSciVector().at(i).getID();
-            qDebug () << name;
+            //qDebug () << name;
         }
     }
 
@@ -463,7 +463,7 @@ bool addNewScientist::on_dateEdit_yod_editingFinished()
         badYod = false;
     }
 
-    qDebug () << "badyod is :" <<badYod;
+    //qDebug () << "badyod is :" <<badYod;
     return badYod;
 }
 
@@ -496,7 +496,7 @@ void addNewScientist::on_newOkCancel_New_accepted()
     {
         serviceobject.servAddscientist(sc);
         serviceobject.servReadSqlScientists();
-        qDebug () << "added to database!";
+        //qDebug () << "added to database!";
         addNewScientist::close();
 
     }
@@ -515,7 +515,7 @@ void addNewScientist::on_newOkCancel_New_rejected()
 
 void addNewScientist::on_newOkCancel_Edit_accepted()
 {
-    qDebug () << "button edit pressed ";
+    //qDebug () << "button edit pressed ";
 
     string name = ui->lineEdit_name->text().toStdString();
     //int yob = ui->lineEdit_yob->text().toInt();

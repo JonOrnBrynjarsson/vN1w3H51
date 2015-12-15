@@ -1,7 +1,6 @@
 #include "addrelations.h"
 #include "ui_addrelations.h"
-#include "mainwindow.h"
-#include <vector>
+
 //FORCE UPDATE!
 
 addrelations::addrelations(QWidget *parent) :
