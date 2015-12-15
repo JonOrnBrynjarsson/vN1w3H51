@@ -6,7 +6,7 @@
 #include "Models/computertype.h"
 
 #include <QtSql/QtSql>
-#include <qfile.h>
+//#include <qfile.h>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -126,10 +126,10 @@ public:
     ##  Clear vector functions
     ##---------------------------------------------------------------------------------------##
     */
-    vector<scientist> clearSciVector();
+    void clearSciVector();
     //  Precondition:   The private scientists vector has been populated
     //  Postcondition:  Clears the private vector.
-    vector<computer> clearComVector();
+    void clearComVector();
     //  Precondition:   The private computers vector has been populated
     //  Postcondition:  Clears the private vector.
 

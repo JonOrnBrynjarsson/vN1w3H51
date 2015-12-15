@@ -1,10 +1,10 @@
 #ifndef HELP_H
 #define HELP_H
 
-#include <QDialog>
+//#include <QDialog>
 #include <QFile>
 #include <QTextStream>
-#include <QIODevice>
+//#include <QIODevice>
 #include <QMessageBox>
 
 

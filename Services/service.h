@@ -3,9 +3,9 @@
 
 #include "datalayer/workingclass.h"
 
-#include <string>
-#include <unistd.h>
-#include <sstream>
+//#include <string>
+//#include <unistd.h>
+//#include <sstream>
 
 const int CURRENTYEAR = 2015;
 
@@ -112,9 +112,9 @@ class service
         ##  Sort functions
         ##---------------------------------------------------------------------------------------##
         */
-        vector<scientist> servClearSciVector();
+        void servClearSciVector();
         //  Calls the clearSciVector function in workingclass.
-        vector<computer> servClearComVector();
+        void servClearComVector();
         //  Calls the clearComVector function in workingclass.
 
 

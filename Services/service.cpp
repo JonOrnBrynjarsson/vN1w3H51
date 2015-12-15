@@ -57,7 +57,6 @@ string service::nameCorrection(string name, bool& badName)
     if (name.size() > MAXNAMELENGTH)
     {
         badName = true;
-        cout<<"\tName is too long! "<<endl;
     }
     return name;
 }
@@ -102,7 +101,7 @@ int service::inputNumberToFunction(QString input)
     string test = input.toStdString();
     int temp;
 
-    for (unsigned int i = 0; i < input.size(); i++)
+    for (int i = 0; i < input.size(); i++)
     {
         if (!isdigit(test[i]))
         {
@@ -257,12 +256,12 @@ vector<computer> service::servGetComputersLinkedToScientists(int sciID)
     return workingObject.getComputersLinkedToScientists(sciID);
 }
 
-vector<scientist> service::servClearSciVector()
+void service::servClearSciVector()
 {
     workingObject.clearSciVector();
 }
 
-vector<computer> service::servClearComVector()
+void service::servClearComVector()
 {
     workingObject.clearComVector();
 }

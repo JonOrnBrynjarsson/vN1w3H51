@@ -371,12 +371,12 @@ vector<relation> workingclass::getRelationshipVector()
     return relationVector;
 }
 
-vector<scientist> workingclass::clearSciVector()
+void workingclass::clearSciVector()
 {
     scientistVector.clear();
 }
 
-vector<computer> workingclass::clearComVector()
+void workingclass::clearComVector()
 {
     computerVector.clear();
 }
@@ -531,7 +531,7 @@ void workingclass::searchComputerByType(string& type, bool& isFound)
     {
         for(unsigned int item = 0; item < computerVector.size(); item++)
         {
-            if(computerVector.at(item).getComType() == query.value("id").toUInt())
+            if(computerVector.at(item).getComType() == query.value("id").toInt())
             {
                 c = computerVector.at(item);
                 returnVector.push_back(c);

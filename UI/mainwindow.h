@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QDebug>
-#include <QMenu>
-#include <QMouseEvent>
+//#include <QDebug>
+//#include <QMenu>
+//#include <QMouseEvent>
 #include "aboutcreators.h"
 #include "addnewscientist.h"
 #include "addnewcomputer.h"
@@ -13,10 +13,10 @@
 //#include "editcomputer.h"
 #include "Services/service.h"
 #include "help.h"
-#include <QModelIndex>
-#include <math.h>
-#include <QTableWidget>
-#include <QAction>
+//#include <QModelIndex>
+//#include <math.h>
+//#include <QTableWidget>
+//#include <QAction>
 
 namespace Ui {
 class MainWindow;
